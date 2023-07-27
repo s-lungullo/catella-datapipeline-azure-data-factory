@@ -156,6 +156,9 @@
 										"flächeValues": {
 											"type": "object",
 											"properties": {
+												"Grundstuecksflaeche": {
+													"type": "number"
+												},
 												"Wohnflaeche": {
 													"type": "number"
 												},
@@ -212,10 +215,61 @@
 									"properties": {
 										"BAUJAHR": {
 											"type": "integer"
+										},
+										"SANIERUNG": {
+											"type": "integer"
 										}
 									}
 								},
 								"keller": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"kommunikation": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"boden": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"aufzug": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"energieträger": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"stellplatz": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"möbliert": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"lageEinheit": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"sonstiges": {
 									"type": "array",
 									"items": {
 										"type": "string"
@@ -229,6 +283,9 @@
 						"preise": {
 							"type": "object",
 							"properties": {
+								"heizkostenInNebenkostenEnthalten": {
+									"type": "boolean"
+								},
 								"preisTexte": {
 									"type": "object",
 									"properties": {
@@ -253,10 +310,10 @@
 											"type": "number"
 										},
 										"NebenkostenProMonat": {
-											"type": "integer"
+											"type": "number"
 										},
 										"MietKaution": {
-											"type": "integer"
+											"type": "number"
 										},
 										"HeizkostenProMonat": {
 											"type": "number"
@@ -265,7 +322,10 @@
 											"type": "number"
 										},
 										"Kaufpreis": {
-											"type": "integer"
+											"type": "number"
+										},
+										"HausgeldProMonat": {
+											"type": "number"
 										}
 									}
 								}
@@ -278,6 +338,9 @@
 									"type": "string"
 								},
 								"stadtbezirk": {
+									"type": "string"
+								},
+								"kreis": {
 									"type": "string"
 								},
 								"parentIds": {
@@ -326,6 +389,12 @@
 								},
 								"stadtbezirkId": {
 									"type": "string"
+								},
+								"strasse": {
+									"type": "string"
+								},
+								"hausnummer": {
+									"type": "string"
 								}
 							}
 						}
@@ -339,6 +408,40 @@
 				},
 				"preisProQm": {
 					"type": "number"
+				},
+				"rendite": {
+					"type": "object",
+					"properties": {
+						"marktmieteProQm": {
+							"type": "number"
+						},
+						"marktmieteGebiet": {
+							"type": "string"
+						},
+						"renditeAvg": {
+							"type": "number"
+						},
+						"renditeQuelle": {
+							"type": "string"
+						},
+						"marktRendite": {
+							"type": "number"
+						},
+						"zeitraumMarktmiete": {
+							"type": "object",
+							"properties": {
+								"lt": {
+									"type": "string"
+								},
+								"gte": {
+									"type": "string"
+								}
+							}
+						},
+						"anzahlAngeboteMarktmiete": {
+							"type": "integer"
+						}
+					}
 				},
 				"onlineRanges": {
 					"type": "array",
