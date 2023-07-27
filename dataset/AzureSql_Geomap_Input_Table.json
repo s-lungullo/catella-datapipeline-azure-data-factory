@@ -118,8 +118,8 @@
 			},
 			{
 				"name": "Grundstuecksflaeche",
-				"type": "int",
-				"precision": 10
+				"type": "float",
+				"precision": 15
 			},
 			{
 				"name": "zustand",
@@ -224,43 +224,43 @@
 			},
 			{
 				"name": "MieteProMonatOhneNebenkosten",
-				"type": "int",
-				"precision": 10
+				"type": "float",
+				"precision": 15
 			},
 			{
 				"name": "MieteProMonatMitNebenkosten",
-				"type": "int",
-				"precision": 10
+				"type": "float",
+				"precision": 15
 			},
 			{
 				"name": "NebenkostenProMonat",
-				"type": "int",
-				"precision": 10
+				"type": "float",
+				"precision": 15
 			},
 			{
 				"name": "MietKaution",
-				"type": "int",
-				"precision": 10
+				"type": "float",
+				"precision": 15
 			},
 			{
 				"name": "HeizkostenProMonat",
-				"type": "int",
-				"precision": 10
+				"type": "float",
+				"precision": 15
 			},
 			{
 				"name": "MieteProMonatProStellplatz",
-				"type": "int",
-				"precision": 10
+				"type": "float",
+				"precision": 15
 			},
 			{
 				"name": "Kaufpreis",
-				"type": "int",
-				"precision": 10
+				"type": "float",
+				"precision": 15
 			},
 			{
 				"name": "HausgeldProMonat",
-				"type": "int",
-				"precision": 10
+				"type": "float",
+				"precision": 15
 			},
 			{
 				"name": "heizkostenInNebenkostenEnthalten",
