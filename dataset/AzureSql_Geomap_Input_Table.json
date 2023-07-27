@@ -1,0 +1,368 @@
+{
+	"name": "AzureSql_Geomap_Input_Table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataPipelineSQLDev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "kaufMiete",
+				"type": "nvarchar"
+			},
+			{
+				"name": "stadtteil",
+				"type": "nvarchar"
+			},
+			{
+				"name": "stadtbezirk",
+				"type": "nvarchar"
+			},
+			{
+				"name": "accuracy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ort",
+				"type": "nvarchar"
+			},
+			{
+				"name": "bundesland",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kreis",
+				"type": "nvarchar"
+			},
+			{
+				"name": "strasse",
+				"type": "nvarchar"
+			},
+			{
+				"name": "hausnummer",
+				"type": "nvarchar"
+			},
+			{
+				"name": "land",
+				"type": "nvarchar"
+			},
+			{
+				"name": "plz",
+				"type": "nvarchar"
+			},
+			{
+				"name": "geoLongitude",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "geoLatitude",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "anbieter",
+				"type": "nvarchar"
+			},
+			{
+				"name": "objektTyp",
+				"type": "nvarchar"
+			},
+			{
+				"name": "titel",
+				"type": "nvarchar"
+			},
+			{
+				"name": "portalUrl",
+				"type": "nvarchar"
+			},
+			{
+				"name": "objektTypText",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sonstiges",
+				"type": "nvarchar"
+			},
+			{
+				"name": "heizungsart",
+				"type": "nvarchar"
+			},
+			{
+				"name": "stellplatz",
+				"type": "nvarchar"
+			},
+			{
+				"name": "lageEinheit",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sanitar",
+				"type": "nvarchar"
+			},
+			{
+				"name": "saniert",
+				"type": "bit"
+			},
+			{
+				"name": "Wohnflaeche",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Nutzflaeche",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Grundstuecksflaeche",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "zustand",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ausstattungsQualitat",
+				"type": "nvarchar"
+			},
+			{
+				"name": "etage",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "ZIMMER",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "ETAGEN",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "BADEZIMMER",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "SCHLAFZIMMER",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "STELLPLAETZE",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "BAUJAHR",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SANIERUNG",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ausweisInfo",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ausweisTyp",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kennwert",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "KennwertKlasse",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kuche",
+				"type": "nvarchar"
+			},
+			{
+				"name": "balkonTerrasse",
+				"type": "nvarchar"
+			},
+			{
+				"name": "aufzug",
+				"type": "nvarchar"
+			},
+			{
+				"name": "keller",
+				"type": "nvarchar"
+			},
+			{
+				"name": "kommunikation",
+				"type": "nvarchar"
+			},
+			{
+				"name": "boden",
+				"type": "nvarchar"
+			},
+			{
+				"name": "energietrager",
+				"type": "nvarchar"
+			},
+			{
+				"name": "objektArt",
+				"type": "nvarchar"
+			},
+			{
+				"name": "currency",
+				"type": "nvarchar"
+			},
+			{
+				"name": "MieteProMonatOhneNebenkosten",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MieteProMonatMitNebenkosten",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NebenkostenProMonat",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MietKaution",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "HeizkostenProMonat",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MieteProMonatProStellplatz",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Kaufpreis",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "HausgeldProMonat",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "heizkostenInNebenkostenEnthalten",
+				"type": "bit"
+			},
+			{
+				"name": "provisionsfrei",
+				"type": "bit"
+			},
+			{
+				"name": "firstSeenDay",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "daysOnline",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "preisProQm",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "marktmieteProQm",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "marktmieteGebiet",
+				"type": "nvarchar"
+			},
+			{
+				"name": "renditeAvg",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "renditeQuelle",
+				"type": "nvarchar"
+			},
+			{
+				"name": "marktRendite",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "zeitraumMarktmiete_lt",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "zeitraumMarktmiete_gte",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "anzahlAngeboteMarktmiete",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "onlineRanges",
+				"type": "nvarchar"
+			},
+			{
+				"name": "eventDay",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "online",
+				"type": "bit"
+			},
+			{
+				"name": "state",
+				"type": "nvarchar"
+			},
+			{
+				"name": "lastOfflineDay",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "lastSeenDay",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "groupId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "JsonFilePath",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "GeoMapRawImport_2"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

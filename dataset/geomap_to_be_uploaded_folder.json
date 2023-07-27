@@ -1,0 +1,399 @@
+{
+	"name": "geomap_to_be_uploaded_folder",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datapipeline_blob_storage",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Geomap"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "de/geomap/to_upload",
+				"container": "data-pipeline-input-files"
+			},
+			"compression": {
+				"type": "ZipDeflate"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"crawlerObject": {
+					"type": "object",
+					"properties": {
+						"kaufMiete": {
+							"type": "string"
+						},
+						"lage": {
+							"type": "object",
+							"properties": {
+								"ort": {
+									"type": "string"
+								},
+								"geoLongitude": {
+									"type": "number"
+								},
+								"geoLatitude": {
+									"type": "number"
+								},
+								"bundesland": {
+									"type": "string"
+								},
+								"bezirk": {
+									"type": "string"
+								},
+								"land": {
+									"type": "string"
+								},
+								"stadtteilOrtsteil": {
+									"type": "string"
+								},
+								"plz": {
+									"type": "string"
+								}
+							}
+						},
+						"anbieter": {
+							"type": "array",
+							"items": {
+								"type": "object",
+								"properties": {
+									"name": {
+										"type": "string"
+									},
+									"anrede": {
+										"type": "string"
+									},
+									"anbieterGewerblich": {
+										"type": "boolean"
+									}
+								}
+							}
+						},
+						"objektTyp": {
+							"type": "string"
+						},
+						"angebotsInformationen": {
+							"type": "object",
+							"properties": {
+								"titel": {
+									"type": "string"
+								},
+								"portalUrl": {
+									"type": "string"
+								},
+								"medien": {
+									"type": "array",
+									"items": {
+										"type": "object",
+										"properties": {
+											"mediaArt": {
+												"type": "string"
+											},
+											"originUrl": {
+												"type": "string"
+											},
+											"mediaTyp": {
+												"type": "array",
+												"items": {
+													"type": "string"
+												}
+											}
+										}
+									}
+								},
+								"beschreibungen": {
+									"type": "object",
+									"properties": {
+										"LAGE": {
+											"type": "string"
+										},
+										"BESCHREIBUNG": {
+											"type": "string"
+										},
+										"SONSTIGES": {
+											"type": "string"
+										},
+										"AUSSTATTUNG": {
+											"type": "string"
+										}
+									}
+								}
+							}
+						},
+						"objektTypText": {
+							"type": "string"
+						},
+						"objektEigenschaften": {
+							"type": "object",
+							"properties": {
+								"heizungsart": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"etageText": {
+									"type": "string"
+								},
+								"sanitär": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"saniert": {
+									"type": "boolean"
+								},
+								"flächen": {
+									"type": "object",
+									"properties": {
+										"flächeValues": {
+											"type": "object",
+											"properties": {
+												"Wohnflaeche": {
+													"type": "number"
+												},
+												"Nutzflaeche": {
+													"type": "number"
+												}
+											}
+										}
+									}
+								},
+								"zustand": {
+									"type": "string"
+								},
+								"ausstattungsQualität": {
+									"type": "string"
+								},
+								"etage": {
+									"type": "number"
+								},
+								"anzahlen": {
+									"type": "object",
+									"properties": {
+										"ZIMMER": {
+											"type": "number"
+										},
+										"ETAGEN": {
+											"type": "number"
+										},
+										"BADEZIMMER": {
+											"type": "number"
+										},
+										"SCHLAFZIMMER": {
+											"type": "number"
+										},
+										"STELLPLAETZE": {
+											"type": "number"
+										}
+									}
+								},
+								"küche": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"balkonTerrasse": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"jahreszahlen": {
+									"type": "object",
+									"properties": {
+										"BAUJAHR": {
+											"type": "integer"
+										}
+									}
+								},
+								"keller": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								}
+							}
+						},
+						"objektArt": {
+							"type": "string"
+						},
+						"preise": {
+							"type": "object",
+							"properties": {
+								"preisTexte": {
+									"type": "object",
+									"properties": {
+										"HeizkostenProMonat": {
+											"type": "string"
+										},
+										"MieteProMonatOhneNebenkosten": {
+											"type": "string"
+										}
+									}
+								},
+								"currency": {
+									"type": "string"
+								},
+								"preisValues": {
+									"type": "object",
+									"properties": {
+										"MieteProMonatOhneNebenkosten": {
+											"type": "number"
+										},
+										"MieteProMonatMitNebenkosten": {
+											"type": "number"
+										},
+										"NebenkostenProMonat": {
+											"type": "integer"
+										},
+										"MietKaution": {
+											"type": "integer"
+										},
+										"HeizkostenProMonat": {
+											"type": "number"
+										},
+										"MieteProMonatProStellplatz": {
+											"type": "number"
+										},
+										"Kaufpreis": {
+											"type": "integer"
+										}
+									}
+								}
+							}
+						},
+						"addr": {
+							"type": "object",
+							"properties": {
+								"stadtteil": {
+									"type": "string"
+								},
+								"stadtbezirk": {
+									"type": "string"
+								},
+								"parentIds": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"accuracy": {
+									"type": "string"
+								},
+								"ort": {
+									"type": "string"
+								},
+								"stadtteilId": {
+									"type": "string"
+								},
+								"landId": {
+									"type": "string"
+								},
+								"bundesland": {
+									"type": "string"
+								},
+								"bundeslandId": {
+									"type": "string"
+								},
+								"land": {
+									"type": "string"
+								},
+								"location": {
+									"type": "object",
+									"properties": {
+										"lon": {
+											"type": "number"
+										},
+										"lat": {
+											"type": "number"
+										}
+									}
+								},
+								"ortId": {
+									"type": "string"
+								},
+								"plz": {
+									"type": "string"
+								},
+								"stadtbezirkId": {
+									"type": "string"
+								}
+							}
+						}
+					}
+				},
+				"firstSeenDay": {
+					"type": "string"
+				},
+				"daysOnline": {
+					"type": "integer"
+				},
+				"preisProQm": {
+					"type": "number"
+				},
+				"onlineRanges": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"lt": {
+								"type": "string"
+							},
+							"gte": {
+								"type": "string"
+							}
+						}
+					}
+				},
+				"crawlerIdsEntryIds": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"firstSeenDay": {
+								"type": "string"
+							},
+							"portalUrl": {
+								"type": "string"
+							},
+							"state": {
+								"type": "string"
+							}
+						}
+					}
+				},
+				"eventDay": {
+					"type": "string"
+				},
+				"preis": {
+					"type": "number"
+				},
+				"online": {
+					"type": "boolean"
+				},
+				"state": {
+					"type": "string"
+				},
+				"lastSeenDay": {
+					"type": "string"
+				},
+				"nutzflaeche": {
+					"type": "number"
+				},
+				"groupId": {
+					"type": "string"
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,370 @@
+{
+	"name": "WH_input_csv",
+	"properties": {
+		"description": "CSV file with scrapped data from Watson and Holmes",
+		"linkedServiceName": {
+			"referenceName": "DataFactoryBlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "nl/Watson_Holmes/to_upload",
+				"container": "data-pipeline-input-files"
+			},
+			"columnDelimiter": "|",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "AanmeldDatum",
+				"type": "String"
+			},
+			{
+				"name": "AantalBadkamers",
+				"type": "String"
+			},
+			{
+				"name": "AantalKamers",
+				"type": "String"
+			},
+			{
+				"name": "AantalSlaapKamers",
+				"type": "String"
+			},
+			{
+				"name": "AantalVerdiepingen",
+				"type": "String"
+			},
+			{
+				"name": "ActueleStatus",
+				"type": "String"
+			},
+			{
+				"name": "Adres",
+				"type": "String"
+			},
+			{
+				"name": "AdresId",
+				"type": "String"
+			},
+			{
+				"name": "AfwerkingGemeubileerd",
+				"type": "String"
+			},
+			{
+				"name": "AfwerkingGestoffeerd",
+				"type": "String"
+			},
+			{
+				"name": "AfwerkingKaleVerhuur",
+				"type": "String"
+			},
+			{
+				"name": "Bouwjaar",
+				"type": "String"
+			},
+			{
+				"name": "Bouwnummer",
+				"type": "String"
+			},
+			{
+				"name": "Bouwperiode",
+				"type": "String"
+			},
+			{
+				"name": "Bouwvorm",
+				"type": "String"
+			},
+			{
+				"name": "Bron",
+				"type": "String"
+			},
+			{
+				"name": "BuurtId",
+				"type": "String"
+			},
+			{
+				"name": "BuurtNaam",
+				"type": "String"
+			},
+			{
+				"name": "ConditieKostenKoper",
+				"type": "String"
+			},
+			{
+				"name": "ConditieVrijOpNaam",
+				"type": "String"
+			},
+			{
+				"name": "Energielabel",
+				"type": "String"
+			},
+			{
+				"name": "ErfPacht",
+				"type": "String"
+			},
+			{
+				"name": "ErfPachtAfgekochtTot",
+				"type": "String"
+			},
+			{
+				"name": "ErfPachtDuur",
+				"type": "String"
+			},
+			{
+				"name": "ErfPachtPerJaar",
+				"type": "String"
+			},
+			{
+				"name": "FotoUrl",
+				"type": "String"
+			},
+			{
+				"name": "GebruiksOppervlakte",
+				"type": "String"
+			},
+			{
+				"name": "GemeenteId",
+				"type": "String"
+			},
+			{
+				"name": "GemeenteNaam",
+				"type": "String"
+			},
+			{
+				"name": "Huisnummer",
+				"type": "String"
+			},
+			{
+				"name": "HuisnummerInclToevoegingen",
+				"type": "String"
+			},
+			{
+				"name": "HuurKoop",
+				"type": "String"
+			},
+			{
+				"name": "Inhoud",
+				"type": "String"
+			},
+			{
+				"name": "IsHuur",
+				"type": "String"
+			},
+			{
+				"name": "IsKoop",
+				"type": "String"
+			},
+			{
+				"name": "IsVertrouwelijk",
+				"type": "String"
+			},
+			{
+				"name": "Latitude",
+				"type": "String"
+			},
+			{
+				"name": "Longitude",
+				"type": "String"
+			},
+			{
+				"name": "Looptijd",
+				"type": "String"
+			},
+			{
+				"name": "Makelaar",
+				"type": "String"
+			},
+			{
+				"name": "ModelwaardeAVMM2",
+				"type": "String"
+			},
+			{
+				"name": "ModelwaardeGeindexeerdeM2",
+				"type": "String"
+			},
+			{
+				"name": "ModelwaardeReferentiesM2",
+				"type": "String"
+			},
+			{
+				"name": "ModifyDate",
+				"type": "String"
+			},
+			{
+				"name": "NieuwbouwProjectID",
+				"type": "String"
+			},
+			{
+				"name": "NieuwbouwProjectNaam",
+				"type": "String"
+			},
+			{
+				"name": "OnderhoudsStaatBinnen",
+				"type": "String"
+			},
+			{
+				"name": "OnderhoudsStaatBuiten",
+				"type": "String"
+			},
+			{
+				"name": "OppervlakteTuin",
+				"type": "String"
+			},
+			{
+				"name": "Overbieden",
+				"type": "String"
+			},
+			{
+				"name": "PandId",
+				"type": "String"
+			},
+			{
+				"name": "Parkeer",
+				"type": "String"
+			},
+			{
+				"name": "PerceelOppervlakte",
+				"type": "String"
+			},
+			{
+				"name": "Postcode",
+				"type": "String"
+			},
+			{
+				"name": "ServiceKosten",
+				"type": "String"
+			},
+			{
+				"name": "StatusActueelInAanbod",
+				"type": "String"
+			},
+			{
+				"name": "StatusIngetrokken",
+				"type": "String"
+			},
+			{
+				"name": "StatusOnderOptie",
+				"type": "String"
+			},
+			{
+				"name": "StatusTransactie",
+				"type": "String"
+			},
+			{
+				"name": "StatusTransactieBekend",
+				"type": "String"
+			},
+			{
+				"name": "StatusTransactieOnderVoorbehoud",
+				"type": "String"
+			},
+			{
+				"name": "Straatnaam",
+				"type": "String"
+			},
+			{
+				"name": "TransactieConditie",
+				"type": "String"
+			},
+			{
+				"name": "TransactiedatumOndertekeningAkte",
+				"type": "String"
+			},
+			{
+				"name": "TransactiedatumOnderVoorbehoud",
+				"type": "String"
+			},
+			{
+				"name": "TransactiedatumTransport",
+				"type": "String"
+			},
+			{
+				"name": "TransactieId",
+				"type": "String"
+			},
+			{
+				"name": "Transactieprijs",
+				"type": "String"
+			},
+			{
+				"name": "TransactieprijsM2",
+				"type": "String"
+			},
+			{
+				"name": "TransactieprijsM2Huur",
+				"type": "String"
+			},
+			{
+				"name": "TransactieprijsM2Koop",
+				"type": "String"
+			},
+			{
+				"name": "TransactieSpecificatie",
+				"type": "String"
+			},
+			{
+				"name": "Tuin",
+				"type": "String"
+			},
+			{
+				"name": "VerblijfsobjectId",
+				"type": "String"
+			},
+			{
+				"name": "Vraagprijs",
+				"type": "String"
+			},
+			{
+				"name": "VraagprijsConditie",
+				"type": "String"
+			},
+			{
+				"name": "VraagprijsM2",
+				"type": "String"
+			},
+			{
+				"name": "VraagprijsM2Huur",
+				"type": "String"
+			},
+			{
+				"name": "VraagprijsM2Koop",
+				"type": "String"
+			},
+			{
+				"name": "VraagprijsOorspronkelijk",
+				"type": "String"
+			},
+			{
+				"name": "VraagprijsOorspronkelijkM2",
+				"type": "String"
+			},
+			{
+				"name": "VraagprijsSpecificatie",
+				"type": "String"
+			},
+			{
+				"name": "WijkId",
+				"type": "String"
+			},
+			{
+				"name": "WijkNaam",
+				"type": "String"
+			},
+			{
+				"name": "WoningSubType",
+				"type": "String"
+			},
+			{
+				"name": "WoningType",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,282 @@
+{
+	"name": "AzureSql_Kadaster_OV15_Table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datapipeline_dev_db",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "DATUM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PTT_K",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PLTSNAAM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STRAAT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "HUISNR",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TOEV",
+				"type": "nvarchar"
+			},
+			{
+				"name": "WONINGTYPE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "X_COORD",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Y_COORD",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KULT_GEB_K",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GROOTTE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "K_SOM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IND_M_O_G",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ZAK_R",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KULT_TEKST",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJ_BEL",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ERFDIENSTBH",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KULT_GEB_K1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KULT_ONGEB_K1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INDEX_LR1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GROOTTE1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PTT_K1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PLTSNAAM1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STRAAT1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "HUISNR1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TOEV1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KULT_GEB_K2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KULT_ONGEB_K2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INDEX_LR2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GROOTTE2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PTT_K2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PLTSNAAM2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STRAAT2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "HUISNR2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TOEV2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KULT_GEB_K3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KULT_ONGEB_K3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INDEX_LR3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GROOTTE3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PTT_K3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PLTSNAAM3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STRAAT3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "HUISNR3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TOEV3",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KULT_GEB_K4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KULT_ONGEB_K4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INDEX_LR4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GROOTTE4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PTT_K4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PLTSNAAM4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STRAAT4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "HUISNR4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TOEV4",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IND_HUURDER",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BEWARINGKODE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STUK_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "MUT_SRT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BURGEM_NR",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJECT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NNP_1E_VERKR",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NNP_1E_VERVR",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FAM_TRANS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PHT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KAD_GEM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SECTIE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BAG_ID",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Kadaster_OV15_RawInput_Staging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

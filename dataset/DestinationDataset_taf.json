@@ -1,0 +1,17 @@
+{
+	"name": "DestinationDataset_taf",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "GeoMapTest",
+			"table": "results_2020-01-01_2020-04-01"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

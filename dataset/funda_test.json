@@ -1,0 +1,285 @@
+{
+	"name": "funda_test",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datapipeline_blob_storage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "real_estate_sample.json",
+				"folderPath": "nl",
+				"container": "data-pipeline-input-files"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"description": {
+					"type": "string"
+				},
+				"itemCount": {
+					"type": "integer"
+				},
+				"result": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"objectID": {
+								"type": "integer"
+							},
+							"objectUrl": {
+								"type": "string"
+							},
+							"address": {
+								"type": "string"
+							},
+							"jsondata_address_street": {
+								"type": "null"
+							},
+							"jsondata_zipcode": {
+								"type": "string"
+							},
+							"jsondata_city": {
+								"type": "string"
+							},
+							"jsondata_province": {
+								"type": "string"
+							},
+							"jsondata_address_housenumber": {
+								"type": "string"
+							},
+							"jsondata_address_housenumber_extension": {
+								"type": "string"
+							},
+							"jsondata_price_buy": {
+								"type": "null"
+							},
+							"jsondata_price_rental": {
+								"type": "number"
+							},
+							"jsondata_squaremeters": {
+								"type": "null"
+							},
+							"jsondata_energieklasse": {
+								"type": "null"
+							},
+							"zipCode": {
+								"type": "string"
+							},
+							"city": {
+								"type": "string"
+							},
+							"omschrijving": {
+								"type": "string"
+							},
+							"isExternal": {
+								"type": "integer"
+							},
+							"kenmerkenOverdracht_priceString": {
+								"type": "string"
+							},
+							"kenmerkenOverdracht_price": {
+								"type": "number"
+							},
+							"kenmerkenOverdracht_firstPrice": {
+								"type": "null"
+							},
+							"kenmerkenOverdracht_aangebodenSinds": {
+								"type": "string"
+							},
+							"kenmerkenOverdracht_status": {
+								"type": "string"
+							},
+							"kenmerkenOverdracht_acceptatie": {
+								"type": "string"
+							},
+							"bouw_soortWoonhuis": {
+								"type": "string"
+							},
+							"bouw_soortAppartement": {
+								"type": "string"
+							},
+							"bouw_soortBouw": {
+								"type": "string"
+							},
+							"bouw_bouwjaar": {
+								"type": "integer"
+							},
+							"bouw_soortDak": {
+								"type": "string"
+							},
+							"bouw_specifiek": {
+								"type": "string"
+							},
+							"oppervlakteInhoud_woonoppervlakte": {
+								"type": "integer"
+							},
+							"oppervlakteInhoud_overigeInpandigeRuimte": {
+								"type": "integer"
+							},
+							"oppervlakteInhoud_externeBergRuimte": {
+								"type": "integer"
+							},
+							"oppervlakteInhoud_perceelOppervlakte": {
+								"type": "integer"
+							},
+							"oppervlakteInhoud_inhoud": {
+								"type": "integer"
+							},
+							"indeling_aantalKamersString": {
+								"type": "string"
+							},
+							"Indeling_aantalkamers": {
+								"type": "null"
+							},
+							"Indeling_aantalSlaapkamers": {
+								"type": "null"
+							},
+							"Indeling_aantalBadkamers": {
+								"type": "null"
+							},
+							"Indeling_badkamerVoorzieningen": {
+								"type": "string"
+							},
+							"Indeling_aantalWoonlagen": {
+								"type": "null"
+							},
+							"Indeling_voorzieningen": {
+								"type": "string"
+							},
+							"VVE_bijdrage": {
+								"type": "string"
+							},
+							"VVEChecklist_inschrijving": {
+								"type": "string"
+							},
+							"VVEChecklist_jaarlijkseVergadering": {
+								"type": "string"
+							},
+							"VVEChecklist_periodiekeBijdrage": {
+								"type": "string"
+							},
+							"VVEChecklist_reservefondsAanwezig": {
+								"type": "string"
+							},
+							"VVEChecklist_onderhoudsplan": {
+								"type": "string"
+							},
+							"VVEChecklist_opstalverzekering": {
+								"type": "string"
+							},
+							"Energie_voorlopigEnergieLabel": {
+								"type": "string"
+							},
+							"Energie_isolatie": {
+								"type": "string"
+							},
+							"Energie_verwarming": {
+								"type": "string"
+							},
+							"Energy_warmWater": {
+								"type": "string"
+							},
+							"kadastraleGegevens_oppervlakte": {
+								"type": "integer"
+							},
+							"kadastraleGegevens_eigendomsSituatie": {
+								"type": "string"
+							},
+							"kadastraleGegevens_lasten": {
+								"type": "string"
+							},
+							"buitenRuimte_ligging": {
+								"type": "string"
+							},
+							"buitenRuimte_tuin": {
+								"type": "string"
+							},
+							"buitenRuimte_achtertuin": {
+								"type": "integer"
+							},
+							"buitenRuimte_voorTuin": {
+								"type": "integer"
+							},
+							"Buitenruimte_liggingTuin": {
+								"type": "string"
+							},
+							"Buitenruimte_balkonDakterras": {
+								"type": "string"
+							},
+							"parkeerGelegenheid_soortParkeerGelegenheid": {
+								"type": "string"
+							},
+							"Garage_soortGarage": {
+								"type": "string"
+							},
+							"isRental": {
+								"type": "integer"
+							},
+							"huur_huurPrijsString": {
+								"type": "string"
+							},
+							"huur_huurPrijs": {
+								"type": "number"
+							},
+							"huur_waarborgSomString": {
+								"type": "string"
+							},
+							"bouw_soortAppertement": {
+								"type": "null"
+							},
+							"Energy_cvketel": {
+								"type": "string"
+							},
+							"huur_waarborgSom": {
+								"type": "integer"
+							},
+							"adjusted": {
+								"type": "integer"
+							},
+							"priceHistory": {
+								"type": "string"
+							},
+							"statusHistory": {
+								"type": "string"
+							},
+							"huur_kostenHuurderString": {
+								"type": "string"
+							},
+							"huur_huurOvereenkomst": {
+								"type": "string"
+							},
+							"realEstateAgent_name": {
+								"type": "string"
+							},
+							"realEstateAgent_phone": {
+								"type": "string"
+							},
+							"realEstateAgent_fundaUrl": {
+								"type": "string"
+							},
+							"images": {
+								"type": "string"
+							},
+							"soldFirstForSaleDate": {
+								"type": "string"
+							},
+							"soldSoldDate": {
+								"type": "string"
+							},
+							"id": {
+								"type": "integer"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

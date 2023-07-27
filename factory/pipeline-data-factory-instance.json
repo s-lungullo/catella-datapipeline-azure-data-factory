@@ -1,0 +1,9 @@
+{
+	"name": "pipeline-data-factory-instance",
+	"location": "westeurope",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "56dfbfb2-0e55-4954-bad1-b58fb039228c",
+		"tenantId": "22a14042-b851-4372-a72b-eea1f996ac6a"
+	}
+}

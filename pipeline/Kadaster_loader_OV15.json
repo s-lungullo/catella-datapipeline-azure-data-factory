@@ -1,0 +1,1001 @@
+{
+	"name": "Kadaster_loader_OV15",
+	"properties": {
+		"activities": [
+			{
+				"name": "Upload OV15 data",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "nl/kadaster/to_upload",
+							"wildcardFileName": "Catella_OV15*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "AzureBlobStorageLogs",
+								"type": "LinkedServiceReference"
+							},
+							"path": "data-pipeline-input-files/nl/kadaster/logs"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "DATUM",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "DATUM",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PTT_K",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PTT_K",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PLTSNAAM",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PLTSNAAM",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "STRAAT",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "STRAAT",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "HUISNR",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HUISNR",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TOEV",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TOEV",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "WONINGTYPE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "WONINGTYPE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "X_COORD",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "X_COORD",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Y_COORD",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Y_COORD",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "KULT_GEB_K",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "KULT_GEB_K",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GROOTTE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GROOTTE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "K_SOM",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "K_SOM",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "IND_M_O_G",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "IND_M_O_G",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ZAK_R",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ZAK_R",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "KULT_TEKST",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "KULT_TEKST",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "OBJ_BEL",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OBJ_BEL",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ERFDIENSTBH",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ERFDIENSTBH",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "KULT_GEB_K1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "KULT_GEB_K1",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "KULT_ONGEB_K1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "KULT_ONGEB_K1",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "INDEX_LR1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "INDEX_LR1",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GROOTTE1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GROOTTE1",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PTT_K1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PTT_K1",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PLTSNAAM1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PLTSNAAM1",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "STRAAT1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "STRAAT1",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "HUISNR1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HUISNR1",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TOEV1",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TOEV1",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "KULT_GEB_K2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "KULT_GEB_K2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "KULT_ONGEB_K2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "KULT_ONGEB_K2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "INDEX_LR2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "INDEX_LR2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GROOTTE2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GROOTTE2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PTT_K2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PTT_K2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PLTSNAAM2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PLTSNAAM2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "STRAAT2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "STRAAT2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "HUISNR2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HUISNR2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TOEV2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TOEV2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "KULT_GEB_K3",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "KULT_GEB_K3",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "KULT_ONGEB_K3",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "KULT_ONGEB_K3",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "INDEX_LR3",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "INDEX_LR3",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GROOTTE3",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GROOTTE3",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PTT_K3",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PTT_K3",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PLTSNAAM3",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PLTSNAAM3",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "STRAAT3",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "STRAAT3",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "HUISNR3",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HUISNR3",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TOEV3",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TOEV3",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "KULT_GEB_K4",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "KULT_GEB_K4",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "KULT_ONGEB_K4",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "KULT_ONGEB_K4",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "INDEX_LR4",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "INDEX_LR4",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GROOTTE4",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GROOTTE4",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PTT_K4",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PTT_K4",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PLTSNAAM4",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PLTSNAAM4",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "STRAAT4",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "STRAAT4",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "HUISNR4",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HUISNR4",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TOEV4",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TOEV4",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "IND_HUURDER",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "IND_HUURDER",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BEWARINGKODE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BEWARINGKODE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "STUK_ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "STUK_ID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "MUT_SRT",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "MUT_SRT",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BURGEM_NR",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BURGEM_NR",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "OBJECT",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OBJECT",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "NNP_1E_VERKR",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "NNP_1E_VERKR",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "NNP_1E_VERVR",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "NNP_1E_VERVR",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "FAM_TRANS",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FAM_TRANS",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "PHT",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PHT",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "KAD_GEM",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "KAD_GEM",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "SECTIE",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "SECTIE",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BAG_ID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BAG_ID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "OV15_Input_files",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSql_Kadaster_OV15_Table",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Copy file_to_archive",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Copy OV15 from staging",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "nl/kadaster/to_upload",
+							"wildcardFileName": "Catella_OV15*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings",
+							"copyBehavior": "PreserveHierarchy"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "OV15_Input_files",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "Kadaster_archive",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "delete_from_toUpload_folder",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "Copy file_to_archive",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "kadaster_to_be_uploaded",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"recursive": true,
+						"wildcardFileName": "Catella_OV15*.csv",
+						"enablePartitionDiscovery": false
+					}
+				}
+			},
+			{
+				"name": "Copy OV15 from staging",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Upload OV15 data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[sp_copykadaster_OV15data_from_staging]"
+				},
+				"linkedServiceName": {
+					"referenceName": "DataPipelineSQLDev",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-07-18T20:44:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

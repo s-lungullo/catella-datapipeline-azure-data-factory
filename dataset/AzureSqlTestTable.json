@@ -1,0 +1,400 @@
+{
+	"name": "AzureSqlTestTable",
+	"properties": {
+		"description": "DB: datapipeline-test\nTable: dbo.WH_RawInput_test",
+		"linkedServiceName": {
+			"referenceName": "datapipeline_sql_server_test",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "AanmeldDatum",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "AantalBadkamers",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AantalKamers",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AantalSlaapKamers",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AantalVerdiepingen",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ActueleStatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Adres",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AdresId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AfwerkingGemeubileerd",
+				"type": "bit"
+			},
+			{
+				"name": "AfwerkingGestoffeerd",
+				"type": "bit"
+			},
+			{
+				"name": "AfwerkingKaleVerhuur",
+				"type": "bit"
+			},
+			{
+				"name": "Bouwjaar",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Bouwnummer",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Bouwperiode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Bouwvorm",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Bron",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BuurtId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BuurtNaam",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ConditieKostenKoper",
+				"type": "bit"
+			},
+			{
+				"name": "ConditieVrijOpNaam",
+				"type": "bit"
+			},
+			{
+				"name": "Energielabel",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ErfPacht",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ErfPachtAfgekochtTot",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ErfPachtDuur",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ErfPachtPerJaar",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FotoUrl",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GebruiksOppervlakte",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GemeenteId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GemeenteNaam",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Huisnummer",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "HuisnummerInclToevoegingen",
+				"type": "nvarchar"
+			},
+			{
+				"name": "HuurKoop",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Inhoud",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IsHuur",
+				"type": "bit"
+			},
+			{
+				"name": "IsKoop",
+				"type": "bit"
+			},
+			{
+				"name": "IsVertrouwelijk",
+				"type": "bit"
+			},
+			{
+				"name": "Latitude",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Longitude",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Looptijd",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Makelaar",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ModelwaardeAVMM2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ModelwaardeGeindexeerdeM2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ModelwaardeReferentiesM2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ModifyDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "NieuwbouwProjectID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NieuwbouwProjectNaam",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OnderhoudsStaatBinnen",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OnderhoudsStaatBuiten",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OppervlakteTuin",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Overbieden",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PandId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Parkeer",
+				"type": "bit"
+			},
+			{
+				"name": "PerceelOppervlakte",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Postcode",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ServiceKosten",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "StatusActueelInAanbod",
+				"type": "bit"
+			},
+			{
+				"name": "StatusIngetrokken",
+				"type": "bit"
+			},
+			{
+				"name": "StatusOnderOptie",
+				"type": "bit"
+			},
+			{
+				"name": "StatusTransactie",
+				"type": "bit"
+			},
+			{
+				"name": "StatusTransactieBekend",
+				"type": "bit"
+			},
+			{
+				"name": "StatusTransactieOnderVoorbehoud",
+				"type": "bit"
+			},
+			{
+				"name": "Straatnaam",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactieConditie",
+				"type": "nvarchar"
+			},
+			{
+				"name": "TransactiedatumOndertekeningAkte",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "TransactiedatumOnderVoorbehoud",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "TransactiedatumTransport",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "TransactieId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Transactieprijs",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TransactieprijsM2",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TransactieprijsM2Huur",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TransactieprijsM2Koop",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "TransactieSpecificatie",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Tuin",
+				"type": "bit"
+			},
+			{
+				"name": "VerblijfsobjectId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Vraagprijs",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "VraagprijsConditie",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VraagprijsM2",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "VraagprijsM2Huur",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "VraagprijsM2Koop",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "VraagprijsOorspronkelijk",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "VraagprijsOorspronkelijkM2",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "VraagprijsSpecificatie",
+				"type": "nvarchar"
+			},
+			{
+				"name": "WijkId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "WijkNaam",
+				"type": "nvarchar"
+			},
+			{
+				"name": "WoningSubType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "WoningType",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "WH_RawInput_test"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

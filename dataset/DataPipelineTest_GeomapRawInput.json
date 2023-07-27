@@ -1,0 +1,434 @@
+{
+	"name": "DataPipelineTest_GeomapRawInput",
+	"properties": {
+		"description": "Connection to your destination data store.",
+		"linkedServiceName": {
+			"referenceName": "DataPipelineSQLTest",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"sinkTableName": {
+				"type": "string",
+				"defaultValue": "GeoMapRawImport"
+			}
+		},
+		"folder": {
+			"name": "Geomap"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "ID",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "JsonFilePath",
+				"type": "nvarchar"
+			},
+			{
+				"name": "RentOrSale",
+				"type": "nvarchar"
+			},
+			{
+				"name": "City",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Longitude",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Latitude",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "FederalState",
+				"type": "nchar"
+			},
+			{
+				"name": "District",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Country",
+				"type": "nchar"
+			},
+			{
+				"name": "StadOrOrtsTeil",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PostalCode",
+				"type": "nchar"
+			},
+			{
+				"name": "Street",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DwellingType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Titel",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ResourceId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DetailedUrl",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Description_Location",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Description_Main",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Description_Other",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Description_Furnishing",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AvailableFrom",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "ImageUrls_JsonArray",
+				"type": "nvarchar"
+			},
+			{
+				"name": "WhiteGoodsQuality",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Floor",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "NumberOfRooms",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "NumberOfFloors",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "NumberOfBathrooms",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "NumberOfParkingSpots",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "NumberOfBedRooms",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "NumberOfBalconies",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "BalconyType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ConstructionYear",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EnergySource",
+				"type": "nvarchar"
+			},
+			{
+				"name": "RenovationYear",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "LivingArea",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "LandArea",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Condition",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EnergyLabel",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EnergyValue",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "IsSanitized",
+				"type": "bit"
+			},
+			{
+				"name": "IsRented",
+				"type": "bit"
+			},
+			{
+				"name": "IsMonument",
+				"type": "bit"
+			},
+			{
+				"name": "IsFirstOccupancy",
+				"type": "bit"
+			},
+			{
+				"name": "PropertyType",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IsCommisionFree",
+				"type": "bit"
+			},
+			{
+				"name": "Currency",
+				"type": "nchar"
+			},
+			{
+				"name": "PurchasePrice",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "PurchasePricePerParking",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "RentPerMonthWithAdditionalCosts",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "AdditionalCostsPerMonth",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "RentalDeposit",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "RentPerMonthPerParking",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "RentPerMonthNoAdditionalCosts",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "HeatingCostsPerMonth",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "HeatingCostsIncludedInAdditionalCosts",
+				"type": "bit"
+			},
+			{
+				"name": "Location",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CountryId",
+				"type": "nchar"
+			},
+			{
+				"name": "LocationAccuracy",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CityDistrict1",
+				"type": "nvarchar"
+			},
+			{
+				"name": "CityDistrict2",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Stadtteil",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Stadtbezirk",
+				"type": "nvarchar"
+			},
+			{
+				"name": "StadtteilId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "HouseNumber",
+				"type": "nvarchar"
+			},
+			{
+				"name": "StadtbezirkId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KreisId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Kreis",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LocationHierarchy_StringArray",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ConstructionStatus",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Brokers_JsonArray",
+				"type": "nvarchar"
+			},
+			{
+				"name": "FirstSeenDay",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "DaysOnline",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PricePerSqm",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "Commision",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "GeoMap_MarketRent_PerSqm",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "GeoMap_MarketRent_RegionalLevel",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GeoMap_Yield_Average",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "GeoMap_Yield_Source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "GeoMap_Return",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "GeoMap_MarketRent_Period_LT",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "GeoMap_MarketRent_Period_GTE",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "GeoMap_MarketRent_NumberOfOffers",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CrawlerEntryIds_JsonArray",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ScrapingDay",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "AskingPrice",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "IsOnline",
+				"type": "bit"
+			},
+			{
+				"name": "Status",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LastSeenDay",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "UsableArea",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "GeomapId",
+				"type": "varchar"
+			},
+			{
+				"name": "AdditionalCosts",
+				"type": "float",
+				"precision": 15
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": {
+				"value": "@dataset().sinkTableName",
+				"type": "Expression"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,20 @@
+{
+	"name": "geomap_uploaded_files_zip",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datapipeline_blob_storage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "*zip",
+				"folderPath": "de/geomap/uploaded",
+				"container": "data-pipeline-input-files"
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

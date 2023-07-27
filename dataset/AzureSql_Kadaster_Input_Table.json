@@ -1,0 +1,170 @@
+{
+	"name": "AzureSql_Kadaster_Input_Table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datapipeline_dev_db",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "OVER_BEW_K",
+				"type": "nvarchar"
+			},
+			{
+				"name": "STUK_ONTV_DATUM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OVER_STUK",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VV_NAAM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VV_WOONPLAATS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NNP_VV_K",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VK_NAAM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "VK_WOONPLAATS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NNP_VK_K",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJE_MUT_SRT_K",
+				"type": "nvarchar"
+			},
+			{
+				"name": "IND_FAM_TRANS",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJE_OBJEKT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "KAD_GEM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SECTIE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PERCEELNR",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INDEXLT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "INDEXNR",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJE_GROOTTE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJE_KOOP_SOM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJE_IND_MEER_O_G",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJE_BURG_GEM_NR",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJE_BURG_GEM_NAAM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJE_KULT_ONGEB_K",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ZAKR_ZR_K",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJB_OBJ_BEL_K",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJE_X_COORD",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJE_Y_COORD",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJE_KULT_TEXT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJA_KULT_GEB_K",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJA_PLTS_NAAM",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJA_STRAAT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJA_HUIS_NR",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJA_HUIS_LR",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJA_TOEVOEGING",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OBJA_PTT_K",
+				"type": "nvarchar"
+			},
+			{
+				"name": "PHT",
+				"type": "nvarchar"
+			},
+			{
+				"name": "OVER_ID",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BAG_ID",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Kadaster_OV20_RawInput_Staging"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

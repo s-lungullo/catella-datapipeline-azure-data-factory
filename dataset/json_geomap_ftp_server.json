@@ -1,0 +1,24 @@
+{
+	"name": "json_geomap_ftp_server",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "GeoMapFtpServer",
+			"type": "LinkedServiceReference"
+		},
+		"folder": {
+			"name": "Geomap"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "FtpServerLocation"
+			},
+			"compression": {
+				"type": "ZipDeflate"
+			}
+		},
+		"schema": {}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,178 @@
+{
+	"name": "OV20_Input_files",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datapipeline_blob_storage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Catella_OV20*.csv",
+				"folderPath": "nl/kadaster/to_upload",
+				"container": "data-pipeline-input-files"
+			},
+			"columnDelimiter": ";",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "OVER_BEW_K",
+				"type": "String"
+			},
+			{
+				"name": "STUK_ONTV_DATUM",
+				"type": "String"
+			},
+			{
+				"name": "OVER_STUK",
+				"type": "String"
+			},
+			{
+				"name": "VV_NAAM",
+				"type": "String"
+			},
+			{
+				"name": "VV_WOONPLAATS",
+				"type": "String"
+			},
+			{
+				"name": "NNP_VV_K",
+				"type": "String"
+			},
+			{
+				"name": "VK_NAAM",
+				"type": "String"
+			},
+			{
+				"name": "VK_WOONPLAATS",
+				"type": "String"
+			},
+			{
+				"name": "NNP_VK_K",
+				"type": "String"
+			},
+			{
+				"name": "OBJE_MUT_SRT_K",
+				"type": "String"
+			},
+			{
+				"name": "IND_FAM_TRANS",
+				"type": "String"
+			},
+			{
+				"name": "OBJE_OBJEKT",
+				"type": "String"
+			},
+			{
+				"name": "KAD_GEM",
+				"type": "String"
+			},
+			{
+				"name": "SECTIE",
+				"type": "String"
+			},
+			{
+				"name": "PERCEELNR",
+				"type": "String"
+			},
+			{
+				"name": "INDEXLT",
+				"type": "String"
+			},
+			{
+				"name": "INDEXNR",
+				"type": "String"
+			},
+			{
+				"name": "OBJE_GROOTTE",
+				"type": "String"
+			},
+			{
+				"name": "OBJE_KOOP_SOM",
+				"type": "String"
+			},
+			{
+				"name": "OBJE_IND_MEER_O_G",
+				"type": "String"
+			},
+			{
+				"name": "OBJE_BURG_GEM_NR",
+				"type": "String"
+			},
+			{
+				"name": "OBJE_BURG_GEM_NAAM",
+				"type": "String"
+			},
+			{
+				"name": "OBJE_KULT_ONGEB_K",
+				"type": "String"
+			},
+			{
+				"name": "ZAKR_ZR_K",
+				"type": "String"
+			},
+			{
+				"name": "OBJB_OBJ_BEL_K",
+				"type": "String"
+			},
+			{
+				"name": "OBJE_X_COORD",
+				"type": "String"
+			},
+			{
+				"name": "OBJE_Y_COORD",
+				"type": "String"
+			},
+			{
+				"name": "OBJE_KULT_TEXT",
+				"type": "String"
+			},
+			{
+				"name": "OBJA_KULT_GEB_K",
+				"type": "String"
+			},
+			{
+				"name": "OBJA_PLTS_NAAM",
+				"type": "String"
+			},
+			{
+				"name": "OBJA_STRAAT",
+				"type": "String"
+			},
+			{
+				"name": "OBJA_HUIS_NR",
+				"type": "String"
+			},
+			{
+				"name": "OBJA_HUIS_LR",
+				"type": "String"
+			},
+			{
+				"name": "OBJA_TOEVOEGING",
+				"type": "String"
+			},
+			{
+				"name": "OBJA_PTT_K",
+				"type": "String"
+			},
+			{
+				"name": "PHT",
+				"type": "String"
+			},
+			{
+				"name": "OVER_ID",
+				"type": "String"
+			},
+			{
+				"name": "BAG_ID",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

@@ -1,0 +1,1213 @@
+{
+	"name": "wh_data_loader",
+	"properties": {
+		"activities": [
+			{
+				"name": "Upload-Data",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "nl/Watson_Holmes/to_upload",
+							"wildcardFileName": "*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "AzureBlobStorageLogs",
+								"type": "LinkedServiceReference"
+							},
+							"path": "data-pipeline-input-files/nl/Watson_Holmes/logs"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "AanmeldDatum",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AanmeldDatum",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "AantalBadkamers",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AantalBadkamers",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AantalKamers",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AantalKamers",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AantalSlaapKamers",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AantalSlaapKamers",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AantalVerdiepingen",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AantalVerdiepingen",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "ActueleStatus",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ActueleStatus",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Adres",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Adres",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "AdresId",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AdresId",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "AfwerkingGemeubileerd",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AfwerkingGemeubileerd",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "AfwerkingGestoffeerd",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AfwerkingGestoffeerd",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "AfwerkingKaleVerhuur",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "AfwerkingKaleVerhuur",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "Bouwjaar",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Bouwjaar",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Bouwnummer",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Bouwnummer",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Bouwperiode",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Bouwperiode",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Bouwvorm",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Bouwvorm",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Bron",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Bron",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "BuurtId",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BuurtId",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "BuurtNaam",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "BuurtNaam",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ConditieKostenKoper",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ConditieKostenKoper",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "ConditieVrijOpNaam",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ConditieVrijOpNaam",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "Energielabel",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Energielabel",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ErfPacht",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ErfPacht",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ErfPachtAfgekochtTot",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ErfPachtAfgekochtTot",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ErfPachtDuur",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ErfPachtDuur",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ErfPachtPerJaar",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ErfPachtPerJaar",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "FotoUrl",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "FotoUrl",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "GebruiksOppervlakte",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GebruiksOppervlakte",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "GemeenteId",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GemeenteId",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "GemeenteNaam",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "GemeenteNaam",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Huisnummer",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Huisnummer",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "HuisnummerInclToevoegingen",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HuisnummerInclToevoegingen",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "HuurKoop",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "HuurKoop",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Inhoud",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Inhoud",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "IsHuur",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "IsHuur",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "IsKoop",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "IsKoop",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "IsVertrouwelijk",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "IsVertrouwelijk",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "Latitude",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Latitude",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "Longitude",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Longitude",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "Looptijd",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Looptijd",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Makelaar",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Makelaar",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ModelwaardeAVMM2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ModelwaardeAVMM2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ModelwaardeGeindexeerdeM2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ModelwaardeGeindexeerdeM2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ModelwaardeReferentiesM2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ModelwaardeReferentiesM2",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ModifyDate",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ModifyDate",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "NieuwbouwProjectID",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "NieuwbouwProjectID",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "NieuwbouwProjectNaam",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "NieuwbouwProjectNaam",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "OnderhoudsStaatBinnen",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OnderhoudsStaatBinnen",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "OnderhoudsStaatBuiten",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OnderhoudsStaatBuiten",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "OppervlakteTuin",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "OppervlakteTuin",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Overbieden",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Overbieden",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "PandId",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PandId",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Parkeer",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Parkeer",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "PerceelOppervlakte",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "PerceelOppervlakte",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Postcode",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Postcode",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ServiceKosten",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "ServiceKosten",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "StatusActueelInAanbod",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "StatusActueelInAanbod",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "StatusIngetrokken",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "StatusIngetrokken",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "StatusOnderOptie",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "StatusOnderOptie",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "StatusTransactie",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "StatusTransactie",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "StatusTransactieBekend",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "StatusTransactieBekend",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "StatusTransactieOnderVoorbehoud",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "StatusTransactieOnderVoorbehoud",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "Straatnaam",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Straatnaam",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactieConditie",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactieConditie",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactiedatumOndertekeningAkte",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactiedatumOndertekeningAkte",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactiedatumOnderVoorbehoud",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactiedatumOnderVoorbehoud",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactiedatumTransport",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactiedatumTransport",
+									"type": "DateTime",
+									"physicalType": "datetime2"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactieId",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactieId",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Transactieprijs",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Transactieprijs",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactieprijsM2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactieprijsM2",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactieprijsM2Huur",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactieprijsM2Huur",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactieprijsM2Koop",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactieprijsM2Koop",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "TransactieSpecificatie",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "TransactieSpecificatie",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tuin",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Tuin",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "VerblijfsobjectId",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "VerblijfsobjectId",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Vraagprijs",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "Vraagprijs",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "VraagprijsConditie",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "VraagprijsConditie",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "VraagprijsM2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "VraagprijsM2",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "VraagprijsM2Huur",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "VraagprijsM2Huur",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "VraagprijsM2Koop",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "VraagprijsM2Koop",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "VraagprijsOorspronkelijk",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "VraagprijsOorspronkelijk",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "VraagprijsOorspronkelijkM2",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "VraagprijsOorspronkelijkM2",
+									"type": "Double",
+									"physicalType": "float"
+								}
+							},
+							{
+								"source": {
+									"name": "VraagprijsSpecificatie",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "VraagprijsSpecificatie",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "WijkId",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "WijkId",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "WijkNaam",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "WijkNaam",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "WoningSubType",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "WoningSubType",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							},
+							{
+								"source": {
+									"name": "WoningType",
+									"type": "String",
+									"physicalType": "String"
+								},
+								"sink": {
+									"name": "WoningType",
+									"type": "String",
+									"physicalType": "nvarchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "WH_input_csv",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSQL_WH_Input_Table",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Copy_files_to_archive",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Upload-Data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"wildcardFolderPath": "nl/Watson_Holmes/to_upload",
+							"wildcardFileName": "*.csv",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings"
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings",
+							"copyBehavior": "PreserveHierarchy"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "WH_input_csv",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "WH_archive",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "delete_from_input_folder",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "Copy_files_to_archive",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "WH_input_csv",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-06-29T14:40:34Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

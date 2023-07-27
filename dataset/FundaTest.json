@@ -1,0 +1,17 @@
+{
+	"name": "FundaTest",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datapipeline_sql_server_test",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "FundaTest"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

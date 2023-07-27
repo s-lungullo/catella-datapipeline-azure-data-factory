@@ -1,0 +1,819 @@
+{
+	"name": "testfundaupload",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "['objectID']"
+								},
+								"sink": {
+									"name": "objectID",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['objectUrl']"
+								},
+								"sink": {
+									"name": "objectUrl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['address']"
+								},
+								"sink": {
+									"name": "address",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['jsondata_address_street']"
+								},
+								"sink": {
+									"name": "jsondata_address_street",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['jsondata_zipcode']"
+								},
+								"sink": {
+									"name": "jsondata_zipcode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['jsondata_city']"
+								},
+								"sink": {
+									"name": "jsondata_city",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['jsondata_province']"
+								},
+								"sink": {
+									"name": "jsondata_province",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['jsondata_address_housenumber']"
+								},
+								"sink": {
+									"name": "jsondata_address_housenumber",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['jsondata_address_housenumber_extension']"
+								},
+								"sink": {
+									"name": "jsondata_address_housenumber_extension",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['jsondata_price_buy']"
+								},
+								"sink": {
+									"name": "jsondata_price_buy",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['jsondata_price_rental']"
+								},
+								"sink": {
+									"name": "jsondata_price_rental",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['jsondata_squaremeters']"
+								},
+								"sink": {
+									"name": "jsondata_squaremeters",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['jsondata_energieklasse']"
+								},
+								"sink": {
+									"name": "jsondata_energieklasse",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['zipCode']"
+								},
+								"sink": {
+									"name": "zipCode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['city']"
+								},
+								"sink": {
+									"name": "city",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['omschrijving']"
+								},
+								"sink": {
+									"name": "omschrijving",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['isExternal']"
+								},
+								"sink": {
+									"name": "isExternal",
+									"type": "Byte"
+								}
+							},
+							{
+								"source": {
+									"path": "['kenmerkenOverdracht_priceString']"
+								},
+								"sink": {
+									"name": "kenmerkenOverdracht_priceString",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['kenmerkenOverdracht_price']"
+								},
+								"sink": {
+									"name": "kenmerkenOverdracht_price",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['kenmerkenOverdracht_firstPrice']"
+								},
+								"sink": {
+									"name": "kenmerkenOverdracht_firstPrice",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['kenmerkenOverdracht_aangebodenSinds']"
+								},
+								"sink": {
+									"name": "kenmerkenOverdracht_aangebodenSinds",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['kenmerkenOverdracht_status']"
+								},
+								"sink": {
+									"name": "kenmerkenOverdracht_status",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['kenmerkenOverdracht_acceptatie']"
+								},
+								"sink": {
+									"name": "kenmerkenOverdracht_acceptatie",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['bouw_soortWoonhuis']"
+								},
+								"sink": {
+									"name": "bouw_soortWoonhuis",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['bouw_soortAppartement']"
+								},
+								"sink": {
+									"name": "bouw_soortAppartement",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['bouw_soortBouw']"
+								},
+								"sink": {
+									"name": "bouw_soortBouw",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['bouw_bouwjaar']"
+								},
+								"sink": {
+									"name": "bouw_bouwjaar",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['bouw_soortDak']"
+								},
+								"sink": {
+									"name": "bouw_soortDak",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['bouw_specifiek']"
+								},
+								"sink": {
+									"name": "bouw_specifiek",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['oppervlakteInhoud_woonoppervlakte']"
+								},
+								"sink": {
+									"name": "oppervlakteInhoud_woonoppervlakte",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['oppervlakteInhoud_overigeInpandigeRuimte']"
+								},
+								"sink": {
+									"name": "oppervlakteInhoud_overigeInpandigeRuimte",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['oppervlakteInhoud_externeBergRuimte']"
+								},
+								"sink": {
+									"name": "oppervlakteInhoud_externeBergRuimte",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['oppervlakteInhoud_perceelOppervlakte']"
+								},
+								"sink": {
+									"name": "oppervlakteInhoud_perceelOppervlakte",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['oppervlakteInhoud_inhoud']"
+								},
+								"sink": {
+									"name": "oppervlakteInhoud_inhoud",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['indeling_aantalKamersString']"
+								},
+								"sink": {
+									"name": "indeling_aantalKamersString",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['Indeling_aantalkamers']"
+								},
+								"sink": {
+									"name": "Indeling_aantalkamers",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['Indeling_aantalSlaapkamers']"
+								},
+								"sink": {
+									"name": "Indeling_aantalSlaapkamers",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['Indeling_aantalBadkamers']"
+								},
+								"sink": {
+									"name": "Indeling_aantalBadkamers",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['Indeling_badkamerVoorzieningen']"
+								},
+								"sink": {
+									"name": "Indeling_badkamerVoorzieningen",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['Indeling_aantalWoonlagen']"
+								},
+								"sink": {
+									"name": "Indeling_aantalWoonlagen",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['Indeling_voorzieningen']"
+								},
+								"sink": {
+									"name": "Indeling_voorzieningen",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['VVE_bijdrage']"
+								},
+								"sink": {
+									"name": "VVE_bijdrage",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['VVEChecklist_inschrijving']"
+								},
+								"sink": {
+									"name": "VVEChecklist_inschrijving",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['VVEChecklist_jaarlijkseVergadering']"
+								},
+								"sink": {
+									"name": "VVEChecklist_jaarlijkseVergadering",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['VVEChecklist_periodiekeBijdrage']"
+								},
+								"sink": {
+									"name": "VVEChecklist_periodiekeBijdrage",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['VVEChecklist_reservefondsAanwezig']"
+								},
+								"sink": {
+									"name": "VVEChecklist_reservefondsAanwezig",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['VVEChecklist_onderhoudsplan']"
+								},
+								"sink": {
+									"name": "VVEChecklist_onderhoudsplan",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['VVEChecklist_opstalverzekering']"
+								},
+								"sink": {
+									"name": "VVEChecklist_opstalverzekering",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['Energie_voorlopigEnergieLabel']"
+								},
+								"sink": {
+									"name": "Energie_voorlopigEnergieLabel",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['Energie_isolatie']"
+								},
+								"sink": {
+									"name": "Energie_isolatie",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['Energie_verwarming']"
+								},
+								"sink": {
+									"name": "Energie_verwarming",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['Energy_warmWater']"
+								},
+								"sink": {
+									"name": "Energy_warmWater",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['kadastraleGegevens_oppervlakte']"
+								},
+								"sink": {
+									"name": "kadastraleGegevens_oppervlakte",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['kadastraleGegevens_eigendomsSituatie']"
+								},
+								"sink": {
+									"name": "kadastraleGegevens_eigendomsSituatie",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['kadastraleGegevens_lasten']"
+								},
+								"sink": {
+									"name": "kadastraleGegevens_lasten",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['buitenRuimte_ligging']"
+								},
+								"sink": {
+									"name": "buitenRuimte_ligging",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['buitenRuimte_tuin']"
+								},
+								"sink": {
+									"name": "buitenRuimte_tuin",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['buitenRuimte_achtertuin']"
+								},
+								"sink": {
+									"name": "buitenRuimte_achtertuin",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['buitenRuimte_voorTuin']"
+								},
+								"sink": {
+									"name": "buitenRuimte_voorTuin",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['Buitenruimte_liggingTuin']"
+								},
+								"sink": {
+									"name": "Buitenruimte_liggingTuin",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['Buitenruimte_balkonDakterras']"
+								},
+								"sink": {
+									"name": "Buitenruimte_balkonDakterras",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['parkeerGelegenheid_soortParkeerGelegenheid']"
+								},
+								"sink": {
+									"name": "parkeerGelegenheid_soortParkeerGelegenheid",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['Garage_soortGarage']"
+								},
+								"sink": {
+									"name": "Garage_soortGarage",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['isRental']"
+								},
+								"sink": {
+									"name": "isRental",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['huur_huurPrijsString']"
+								},
+								"sink": {
+									"name": "huur_huurPrijsString",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['huur_huurPrijs']"
+								},
+								"sink": {
+									"name": "huur_huurPrijs",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "['huur_waarborgSomString']"
+								},
+								"sink": {
+									"name": "huur_waarborgSomString",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['bouw_soortAppertement']"
+								},
+								"sink": {
+									"name": "bouw_soortAppertement",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['Energy_cvketel']"
+								},
+								"sink": {
+									"name": "Energy_cvketel",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['huur_waarborgSom']"
+								},
+								"sink": {
+									"name": "huur_waarborgSom",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['adjusted']"
+								},
+								"sink": {
+									"name": "adjusted",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "['priceHistory']"
+								},
+								"sink": {
+									"name": "priceHistory",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['statusHistory']"
+								},
+								"sink": {
+									"name": "statusHistory",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['huur_kostenHuurderString']"
+								},
+								"sink": {
+									"name": "huur_kostenHuurderString",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['huur_huurOvereenkomst']"
+								},
+								"sink": {
+									"name": "huur_huurOvereenkomst",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['realEstateAgent_name']"
+								},
+								"sink": {
+									"name": "realEstateAgent_name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['realEstateAgent_phone']"
+								},
+								"sink": {
+									"name": "realEstateAgent_phone",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['realEstateAgent_fundaUrl']"
+								},
+								"sink": {
+									"name": "realEstateAgent_fundaUrl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['images']"
+								},
+								"sink": {
+									"name": "images",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['soldFirstForSaleDate']"
+								},
+								"sink": {
+									"name": "soldFirstForSaleDate",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['soldSoldDate']"
+								},
+								"sink": {
+									"name": "soldSoldDate",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "['id']"
+								},
+								"sink": {
+									"name": "id",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"path": "$['description']"
+								},
+								"sink": {
+									"name": "description",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['itemCount']"
+								},
+								"sink": {
+									"name": "itemCount",
+									"type": "Int64"
+								}
+							}
+						],
+						"collectionReference": "$['result']",
+						"mapComplexValuesToString": false
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "funda_test",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "FundaTest",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2023-02-08T12:53:58Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
