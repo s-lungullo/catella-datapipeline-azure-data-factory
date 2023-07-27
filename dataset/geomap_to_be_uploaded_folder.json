@@ -15,6 +15,9 @@
 				"type": "AzureBlobStorageLocation",
 				"folderPath": "de/geomap/to_upload",
 				"container": "data-pipeline-input-files"
+			},
+			"compression": {
+				"type": "ZipDeflate"
 			}
 		},
 		"schema": {
