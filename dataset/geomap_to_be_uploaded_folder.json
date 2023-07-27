@@ -15,9 +15,6 @@
 				"type": "AzureBlobStorageLocation",
 				"folderPath": "de/geomap/to_upload",
 				"container": "data-pipeline-input-files"
-			},
-			"compression": {
-				"type": "ZipDeflate"
 			}
 		},
 		"schema": {
@@ -136,6 +133,36 @@
 									"type": "array",
 									"items": {
 										"type": "string"
+									}
+								},
+								"energieausweis": {
+									"type": "object",
+									"properties": {
+										"ausweisTyp": {
+											"type": "string"
+										},
+										"gueltigBis": {
+											"type": "string"
+										},
+										"energieKennwerte": {
+											"type": "object",
+											"properties": {
+												"ENERGIEKENNWERT": {
+													"type": "object",
+													"properties": {
+														"KennwertKlasse": {
+															"type": "string"
+														},
+														"kennwert": {
+															"type": "number"
+														},
+														"KennwertKlasseText": {
+															"type": "string"
+														}
+													}
+												}
+											}
+										}
 									}
 								},
 								"etageText": {
