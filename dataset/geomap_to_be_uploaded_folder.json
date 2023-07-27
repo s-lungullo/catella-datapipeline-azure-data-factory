@@ -135,13 +135,22 @@
 										"type": "string"
 									}
 								},
+								"sanitär": {
+									"type": "array",
+									"items": {
+										"type": "string"
+									}
+								},
+								"saniert": {
+									"type": "boolean"
+								},
 								"energieausweis": {
 									"type": "object",
 									"properties": {
 										"ausweisTyp": {
 											"type": "string"
 										},
-										"gueltigBis": {
+										"ausweisInfo": {
 											"type": "string"
 										},
 										"energieKennwerte": {
@@ -164,18 +173,6 @@
 											}
 										}
 									}
-								},
-								"etageText": {
-									"type": "string"
-								},
-								"sanitär": {
-									"type": "array",
-									"items": {
-										"type": "string"
-									}
-								},
-								"saniert": {
-									"type": "boolean"
 								},
 								"flächen": {
 									"type": "object",
@@ -204,6 +201,9 @@
 								},
 								"etage": {
 									"type": "number"
+								},
+								"etageText": {
+									"type": "string"
 								},
 								"anzahlen": {
 									"type": "object",
