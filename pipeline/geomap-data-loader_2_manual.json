@@ -1,5 +1,5 @@
 {
-	"name": "geomap-data-loader_2_test",
+	"name": "geomap-data-loader_2_manual",
 	"properties": {
 		"description": "Data pipeline to load all geomap files to the database",
 		"activities": [
