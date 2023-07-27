@@ -310,6 +310,9 @@
 						"preise": {
 							"type": "object",
 							"properties": {
+								"provisionsfrei": {
+									"type": "boolean"
+								},
 								"heizkostenInNebenkostenEnthalten": {
 									"type": "boolean"
 								},
@@ -509,6 +512,9 @@
 				},
 				"online": {
 					"type": "boolean"
+				},
+				"lastOfflineDay": {
+					"type": "string"
 				},
 				"state": {
 					"type": "string"
