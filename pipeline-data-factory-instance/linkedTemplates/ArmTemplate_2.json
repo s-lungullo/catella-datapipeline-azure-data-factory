@@ -983,9 +983,6 @@
 												"type": "string"
 											}
 										},
-										"etageText": {
-											"type": "string"
-										},
 										"sanitär": {
 											"type": "array",
 											"items": {
@@ -995,12 +992,45 @@
 										"saniert": {
 											"type": "boolean"
 										},
+										"energieausweis": {
+											"type": "object",
+											"properties": {
+												"ausweisTyp": {
+													"type": "string"
+												},
+												"ausweisInfo": {
+													"type": "string"
+												},
+												"energieKennwerte": {
+													"type": "object",
+													"properties": {
+														"ENERGIEKENNWERT": {
+															"type": "object",
+															"properties": {
+																"KennwertKlasse": {
+																	"type": "string"
+																},
+																"kennwert": {
+																	"type": "number"
+																},
+																"KennwertKlasseText": {
+																	"type": "string"
+																}
+															}
+														}
+													}
+												}
+											}
+										},
 										"flächen": {
 											"type": "object",
 											"properties": {
 												"flächeValues": {
 													"type": "object",
 													"properties": {
+														"Grundstuecksflaeche": {
+															"type": "number"
+														},
 														"Wohnflaeche": {
 															"type": "number"
 														},
@@ -1019,6 +1049,9 @@
 										},
 										"etage": {
 											"type": "number"
+										},
+										"etageText": {
+											"type": "string"
 										},
 										"anzahlen": {
 											"type": "object",
@@ -1057,10 +1090,61 @@
 											"properties": {
 												"BAUJAHR": {
 													"type": "integer"
+												},
+												"SANIERUNG": {
+													"type": "integer"
 												}
 											}
 										},
 										"keller": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"kommunikation": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"boden": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"aufzug": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"energieträger": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"stellplatz": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"möbliert": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"lageEinheit": {
+											"type": "array",
+											"items": {
+												"type": "string"
+											}
+										},
+										"sonstiges": {
 											"type": "array",
 											"items": {
 												"type": "string"
@@ -1074,6 +1158,12 @@
 								"preise": {
 									"type": "object",
 									"properties": {
+										"provisionsfrei": {
+											"type": "boolean"
+										},
+										"heizkostenInNebenkostenEnthalten": {
+											"type": "boolean"
+										},
 										"preisTexte": {
 											"type": "object",
 											"properties": {
@@ -1098,10 +1188,10 @@
 													"type": "number"
 												},
 												"NebenkostenProMonat": {
-													"type": "integer"
+													"type": "number"
 												},
 												"MietKaution": {
-													"type": "integer"
+													"type": "number"
 												},
 												"HeizkostenProMonat": {
 													"type": "number"
@@ -1110,7 +1200,10 @@
 													"type": "number"
 												},
 												"Kaufpreis": {
-													"type": "integer"
+													"type": "number"
+												},
+												"HausgeldProMonat": {
+													"type": "number"
 												}
 											}
 										}
@@ -1123,6 +1216,9 @@
 											"type": "string"
 										},
 										"stadtbezirk": {
+											"type": "string"
+										},
+										"kreis": {
 											"type": "string"
 										},
 										"parentIds": {
@@ -1171,6 +1267,12 @@
 										},
 										"stadtbezirkId": {
 											"type": "string"
+										},
+										"strasse": {
+											"type": "string"
+										},
+										"hausnummer": {
+											"type": "string"
 										}
 									}
 								}
@@ -1184,6 +1286,40 @@
 						},
 						"preisProQm": {
 							"type": "number"
+						},
+						"rendite": {
+							"type": "object",
+							"properties": {
+								"marktmieteProQm": {
+									"type": "number"
+								},
+								"marktmieteGebiet": {
+									"type": "string"
+								},
+								"renditeAvg": {
+									"type": "number"
+								},
+								"renditeQuelle": {
+									"type": "string"
+								},
+								"marktRendite": {
+									"type": "number"
+								},
+								"zeitraumMarktmiete": {
+									"type": "object",
+									"properties": {
+										"lt": {
+											"type": "string"
+										},
+										"gte": {
+											"type": "string"
+										}
+									}
+								},
+								"anzahlAngeboteMarktmiete": {
+									"type": "integer"
+								}
+							}
 						},
 						"onlineRanges": {
 							"type": "array",
@@ -1224,6 +1360,9 @@
 						},
 						"online": {
 							"type": "boolean"
+						},
+						"lastOfflineDay": {
+							"type": "string"
 						},
 						"state": {
 							"type": "string"
@@ -6139,6 +6278,15 @@
 									},
 									{
 										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['saniert']"
+										},
+										"sink": {
+											"name": "saniert",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
 											"path": "$['crawlerObject']['objektEigenschaften']['heizungsart']"
 										},
 										"sink": {
@@ -6157,27 +6305,38 @@
 									},
 									{
 										"source": {
-											"path": "$['crawlerObject']['objektEigenschaften']['saniert']"
+											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['ausweisTyp']"
 										},
 										"sink": {
-											"name": "saniert",
-											"type": "Boolean"
+											"name": "ausweisTyp",
+											"type": "String"
 										}
 									},
 									{
 										"source": {
-											"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Wohnflaeche']"
+											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['ausweisInfo']"
 										},
 										"sink": {
-											"name": "Wohnflaeche"
+											"name": "ausweisInfo",
+											"type": "String"
 										}
 									},
 									{
 										"source": {
-											"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Nutzflaeche']"
+											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['energieKennwerte']['ENERGIEKENNWERT']['KennwertKlasse']"
 										},
 										"sink": {
-											"name": "Nutzflaeche"
+											"name": "KennwertKlasse",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['energieKennwerte']['ENERGIEKENNWERT']['kennwert']"
+										},
+										"sink": {
+											"name": "kennwert",
+											"type": "Double"
 										}
 									},
 									{
@@ -6186,7 +6345,25 @@
 										},
 										"sink": {
 											"name": "Grundstuecksflaeche",
-											"type": "Int32"
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Wohnflaeche']"
+										},
+										"sink": {
+											"name": "Wohnflaeche",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Nutzflaeche']"
+										},
+										"sink": {
+											"name": "Nutzflaeche",
+											"type": "Double"
 										}
 									},
 									{
@@ -6277,42 +6454,6 @@
 										"sink": {
 											"name": "SANIERUNG",
 											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['ausweisInfo']"
-										},
-										"sink": {
-											"name": "ausweisInfo",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['ausweisTyp']"
-										},
-										"sink": {
-											"name": "ausweisTyp",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['energieKennwerte']['ENERGIEKENNWERT']['kennwert']"
-										},
-										"sink": {
-											"name": "kennwert",
-											"type": "Double"
-										}
-									},
-									{
-										"source": {
-											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['energieKennwerte']['ENERGIEKENNWERT']['KennwertKlasse']"
-										},
-										"sink": {
-											"name": "KennwertKlasse",
-											"type": "String"
 										}
 									},
 									{
@@ -6416,83 +6557,11 @@
 									},
 									{
 										"source": {
-											"path": "$['crawlerObject']['preise']['currency']"
+											"path": "$['crawlerObject']['preise']['provisionsfrei']"
 										},
 										"sink": {
-											"name": "currency",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatOhneNebenkosten']"
-										},
-										"sink": {
-											"name": "MieteProMonatOhneNebenkosten",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatMitNebenkosten']"
-										},
-										"sink": {
-											"name": "MieteProMonatMitNebenkosten",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"path": "$['crawlerObject']['preise']['preisValues']['NebenkostenProMonat']"
-										},
-										"sink": {
-											"name": "NebenkostenProMonat",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"path": "$['crawlerObject']['preise']['preisValues']['MietKaution']"
-										},
-										"sink": {
-											"name": "MietKaution",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"path": "$['crawlerObject']['preise']['preisValues']['HeizkostenProMonat']"
-										},
-										"sink": {
-											"name": "HeizkostenProMonat",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatProStellplatz']"
-										},
-										"sink": {
-											"name": "MieteProMonatProStellplatz",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"path": "$['crawlerObject']['preise']['preisValues']['Kaufpreis']"
-										},
-										"sink": {
-											"name": "Kaufpreis",
-											"type": "Int32"
-										}
-									},
-									{
-										"source": {
-											"path": "$['crawlerObject']['preise']['preisValues']['HausgeldProMonat']"
-										},
-										"sink": {
-											"name": "HausgeldProMonat",
-											"type": "Int32"
+											"name": "provisionsfrei",
+											"type": "Boolean"
 										}
 									},
 									{
@@ -6506,11 +6575,83 @@
 									},
 									{
 										"source": {
-											"path": "$['crawlerObject']['preise']['provisionsfrei']"
+											"path": "$['crawlerObject']['preise']['currency']"
 										},
 										"sink": {
-											"name": "provisionsfrei",
-											"type": "Boolean"
+											"name": "currency",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatOhneNebenkosten']"
+										},
+										"sink": {
+											"name": "MieteProMonatOhneNebenkosten",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatMitNebenkosten']"
+										},
+										"sink": {
+											"name": "MieteProMonatMitNebenkosten",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['NebenkostenProMonat']"
+										},
+										"sink": {
+											"name": "NebenkostenProMonat",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['MietKaution']"
+										},
+										"sink": {
+											"name": "MietKaution",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['HeizkostenProMonat']"
+										},
+										"sink": {
+											"name": "HeizkostenProMonat",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatProStellplatz']"
+										},
+										"sink": {
+											"name": "MieteProMonatProStellplatz",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['Kaufpreis']"
+										},
+										"sink": {
+											"name": "Kaufpreis",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['HausgeldProMonat']"
+										},
+										"sink": {
+											"name": "HausgeldProMonat",
+											"type": "Double"
 										}
 									},
 									{
@@ -6528,6 +6669,15 @@
 										},
 										"sink": {
 											"name": "stadtbezirk",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['kreis']"
+										},
+										"sink": {
+											"name": "kreis",
 											"type": "String"
 										}
 									},
@@ -6564,15 +6714,6 @@
 										},
 										"sink": {
 											"name": "plz",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['crawlerObject']['addr']['kreis']"
-										},
-										"sink": {
-											"name": "kreis",
 											"type": "String"
 										}
 									},
@@ -6627,60 +6768,6 @@
 										},
 										"sink": {
 											"name": "onlineRanges",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['eventDay']"
-										},
-										"sink": {
-											"name": "eventDay",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"path": "$['online']"
-										},
-										"sink": {
-											"name": "online",
-											"type": "Boolean"
-										}
-									},
-									{
-										"source": {
-											"path": "$['state']"
-										},
-										"sink": {
-											"name": "state",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['lastSeenDay']"
-										},
-										"sink": {
-											"name": "lastSeenDay",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
-											"path": "$['groupId']"
-										},
-										"sink": {
-											"name": "groupId",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"path": "$['JsonFilePath']"
-										},
-										"sink": {
-											"name": "JsonFilePath",
 											"type": "String"
 										}
 									},
@@ -6758,11 +6845,65 @@
 									},
 									{
 										"source": {
+											"path": "$['eventDay']"
+										},
+										"sink": {
+											"name": "eventDay",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['online']"
+										},
+										"sink": {
+											"name": "online",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
 											"path": "$['lastOfflineDay']"
 										},
 										"sink": {
 											"name": "lastOfflineDay",
 											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['lastSeenDay']"
+										},
+										"sink": {
+											"name": "lastSeenDay",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['state']"
+										},
+										"sink": {
+											"name": "state",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['groupId']"
+										},
+										"sink": {
+											"name": "groupId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['JsonFilePath']"
+										},
+										"sink": {
+											"name": "JsonFilePath",
+											"type": "String"
 										}
 									}
 								],
