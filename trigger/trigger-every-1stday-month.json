@@ -2,7 +2,7 @@
 	"name": "trigger-every-1stday-month",
 	"properties": {
 		"annotations": [],
-		"runtimeState": "Started",
+		"runtimeState": "Stopped",
 		"pipelines": [
 			{
 				"pipelineReference": {
