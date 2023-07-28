@@ -13,6 +13,479 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/OV15_Input_files')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "datapipeline_blob_storage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Catella_OV15*.csv",
+						"folderPath": "nl/kadaster/to_upload",
+						"container": "data-pipeline-input-files"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"nullValue": "\"\"",
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "DATUM",
+						"type": "String"
+					},
+					{
+						"name": "PTT_K",
+						"type": "String"
+					},
+					{
+						"name": "PLTSNAAM",
+						"type": "String"
+					},
+					{
+						"name": "STRAAT",
+						"type": "String"
+					},
+					{
+						"name": "HUISNR",
+						"type": "String"
+					},
+					{
+						"name": "TOEV",
+						"type": "String"
+					},
+					{
+						"name": "WONINGTYPE",
+						"type": "String"
+					},
+					{
+						"name": "X_COORD",
+						"type": "String"
+					},
+					{
+						"name": "Y_COORD",
+						"type": "String"
+					},
+					{
+						"name": "KULT_GEB_K",
+						"type": "String"
+					},
+					{
+						"name": "GROOTTE",
+						"type": "String"
+					},
+					{
+						"name": "K_SOM",
+						"type": "String"
+					},
+					{
+						"name": "IND_M_O_G",
+						"type": "String"
+					},
+					{
+						"name": "ZAK_R",
+						"type": "String"
+					},
+					{
+						"name": "KULT_TEKST",
+						"type": "String"
+					},
+					{
+						"name": "OBJ_BEL",
+						"type": "String"
+					},
+					{
+						"name": "ERFDIENSTBH",
+						"type": "String"
+					},
+					{
+						"name": "KULT_GEB_K1",
+						"type": "String"
+					},
+					{
+						"name": "KULT_ONGEB_K1",
+						"type": "String"
+					},
+					{
+						"name": "INDEX_LR1",
+						"type": "String"
+					},
+					{
+						"name": "GROOTTE1",
+						"type": "String"
+					},
+					{
+						"name": "PTT_K1",
+						"type": "String"
+					},
+					{
+						"name": "PLTSNAAM1",
+						"type": "String"
+					},
+					{
+						"name": "STRAAT1",
+						"type": "String"
+					},
+					{
+						"name": "HUISNR1",
+						"type": "String"
+					},
+					{
+						"name": "TOEV1",
+						"type": "String"
+					},
+					{
+						"name": "KULT_GEB_K2",
+						"type": "String"
+					},
+					{
+						"name": "KULT_ONGEB_K2",
+						"type": "String"
+					},
+					{
+						"name": "INDEX_LR2",
+						"type": "String"
+					},
+					{
+						"name": "GROOTTE2",
+						"type": "String"
+					},
+					{
+						"name": "PTT_K2",
+						"type": "String"
+					},
+					{
+						"name": "PLTSNAAM2",
+						"type": "String"
+					},
+					{
+						"name": "STRAAT2",
+						"type": "String"
+					},
+					{
+						"name": "HUISNR2",
+						"type": "String"
+					},
+					{
+						"name": "TOEV2",
+						"type": "String"
+					},
+					{
+						"name": "KULT_GEB_K3",
+						"type": "String"
+					},
+					{
+						"name": "KULT_ONGEB_K3",
+						"type": "String"
+					},
+					{
+						"name": "INDEX_LR3",
+						"type": "String"
+					},
+					{
+						"name": "GROOTTE3",
+						"type": "String"
+					},
+					{
+						"name": "PTT_K3",
+						"type": "String"
+					},
+					{
+						"name": "PLTSNAAM3",
+						"type": "String"
+					},
+					{
+						"name": "STRAAT3",
+						"type": "String"
+					},
+					{
+						"name": "HUISNR3",
+						"type": "String"
+					},
+					{
+						"name": "TOEV3",
+						"type": "String"
+					},
+					{
+						"name": "KULT_GEB_K4",
+						"type": "String"
+					},
+					{
+						"name": "KULT_ONGEB_K4",
+						"type": "String"
+					},
+					{
+						"name": "INDEX_LR4",
+						"type": "String"
+					},
+					{
+						"name": "GROOTTE4",
+						"type": "String"
+					},
+					{
+						"name": "PTT_K4",
+						"type": "String"
+					},
+					{
+						"name": "PLTSNAAM4",
+						"type": "String"
+					},
+					{
+						"name": "STRAAT4",
+						"type": "String"
+					},
+					{
+						"name": "HUISNR4",
+						"type": "String"
+					},
+					{
+						"name": "TOEV4",
+						"type": "String"
+					},
+					{
+						"name": "IND_HUURDER",
+						"type": "String"
+					},
+					{
+						"name": "BEWARINGKODE",
+						"type": "String"
+					},
+					{
+						"name": "STUK_ID",
+						"type": "String"
+					},
+					{
+						"name": "MUT_SRT",
+						"type": "String"
+					},
+					{
+						"name": "BURGEM_NR",
+						"type": "String"
+					},
+					{
+						"name": "OBJECT",
+						"type": "String"
+					},
+					{
+						"name": "NNP_1E_VERKR",
+						"type": "String"
+					},
+					{
+						"name": "NNP_1E_VERVR",
+						"type": "String"
+					},
+					{
+						"name": "FAM_TRANS",
+						"type": "String"
+					},
+					{
+						"name": "PHT",
+						"type": "String"
+					},
+					{
+						"name": "KAD_GEM",
+						"type": "String"
+					},
+					{
+						"name": "SECTIE",
+						"type": "String"
+					},
+					{
+						"name": "BAG_ID",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/OV20_Input_files')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "datapipeline_blob_storage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Catella_OV20*.csv",
+						"folderPath": "nl/kadaster/to_upload",
+						"container": "data-pipeline-input-files"
+					},
+					"columnDelimiter": ";",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": [
+					{
+						"name": "OVER_BEW_K",
+						"type": "String"
+					},
+					{
+						"name": "STUK_ONTV_DATUM",
+						"type": "String"
+					},
+					{
+						"name": "OVER_STUK",
+						"type": "String"
+					},
+					{
+						"name": "VV_NAAM",
+						"type": "String"
+					},
+					{
+						"name": "VV_WOONPLAATS",
+						"type": "String"
+					},
+					{
+						"name": "NNP_VV_K",
+						"type": "String"
+					},
+					{
+						"name": "VK_NAAM",
+						"type": "String"
+					},
+					{
+						"name": "VK_WOONPLAATS",
+						"type": "String"
+					},
+					{
+						"name": "NNP_VK_K",
+						"type": "String"
+					},
+					{
+						"name": "OBJE_MUT_SRT_K",
+						"type": "String"
+					},
+					{
+						"name": "IND_FAM_TRANS",
+						"type": "String"
+					},
+					{
+						"name": "OBJE_OBJEKT",
+						"type": "String"
+					},
+					{
+						"name": "KAD_GEM",
+						"type": "String"
+					},
+					{
+						"name": "SECTIE",
+						"type": "String"
+					},
+					{
+						"name": "PERCEELNR",
+						"type": "String"
+					},
+					{
+						"name": "INDEXLT",
+						"type": "String"
+					},
+					{
+						"name": "INDEXNR",
+						"type": "String"
+					},
+					{
+						"name": "OBJE_GROOTTE",
+						"type": "String"
+					},
+					{
+						"name": "OBJE_KOOP_SOM",
+						"type": "String"
+					},
+					{
+						"name": "OBJE_IND_MEER_O_G",
+						"type": "String"
+					},
+					{
+						"name": "OBJE_BURG_GEM_NR",
+						"type": "String"
+					},
+					{
+						"name": "OBJE_BURG_GEM_NAAM",
+						"type": "String"
+					},
+					{
+						"name": "OBJE_KULT_ONGEB_K",
+						"type": "String"
+					},
+					{
+						"name": "ZAKR_ZR_K",
+						"type": "String"
+					},
+					{
+						"name": "OBJB_OBJ_BEL_K",
+						"type": "String"
+					},
+					{
+						"name": "OBJE_X_COORD",
+						"type": "String"
+					},
+					{
+						"name": "OBJE_Y_COORD",
+						"type": "String"
+					},
+					{
+						"name": "OBJE_KULT_TEXT",
+						"type": "String"
+					},
+					{
+						"name": "OBJA_KULT_GEB_K",
+						"type": "String"
+					},
+					{
+						"name": "OBJA_PLTS_NAAM",
+						"type": "String"
+					},
+					{
+						"name": "OBJA_STRAAT",
+						"type": "String"
+					},
+					{
+						"name": "OBJA_HUIS_NR",
+						"type": "String"
+					},
+					{
+						"name": "OBJA_HUIS_LR",
+						"type": "String"
+					},
+					{
+						"name": "OBJA_TOEVOEGING",
+						"type": "String"
+					},
+					{
+						"name": "OBJA_PTT_K",
+						"type": "String"
+					},
+					{
+						"name": "PHT",
+						"type": "String"
+					},
+					{
+						"name": "OVER_ID",
+						"type": "String"
+					},
+					{
+						"name": "BAG_ID",
+						"type": "String"
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/WH_archive')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -2716,6 +3189,7 @@
 				"lastPublishTime": "2023-07-18T20:44:05Z"
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/OV15_Input_files')]",
 				"[concat(variables('factoryId'), '/datasets/kadaster_to_be_uploaded')]"
 			]
 		},
@@ -3394,6 +3868,7 @@
 				"lastPublishTime": "2023-07-18T20:44:05Z"
 			},
 			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/OV20_Input_files')]",
 				"[concat(variables('factoryId'), '/datasets/kadaster_to_be_uploaded')]"
 			]
 		},
@@ -6997,2901 +7472,6 @@
 				"[concat(variables('factoryId'), '/datasets/geomap_to_be_uploaded_files_zip')]",
 				"[concat(variables('factoryId'), '/datasets/geomap_uploaded_zip_folder')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/kadaster-data-loader')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Data pipeline to load all kadaster files to the database",
-				"activities": [
-					{
-						"name": "Upload-Data",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "If Reupload 2019",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "1.00:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"additionalColumns": [
-									{
-										"name": "JsonFilePath",
-										"value": "$$FILEPATH"
-									}
-								],
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": false,
-									"wildcardFolderPath": "nl/kadaster/to_upload/ov20",
-									"wildcardFileName": "*.csv",
-									"enablePartitionDiscovery": true
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "AzureSqlSink",
-								"writeBehavior": "insert",
-								"sqlWriterUseTableLock": true,
-								"disableMetricsCollection": false
-							},
-							"enableStaging": false,
-							"enableSkipIncompatibleRow": true,
-							"logSettings": {
-								"enableCopyActivityLog": true,
-								"copyActivityLogSettings": {
-									"logLevel": "Warning",
-									"enableReliableLogging": false
-								},
-								"logLocationSettings": {
-									"linkedServiceName": {
-										"referenceName": "AzureBlobStorageLogs",
-										"type": "LinkedServiceReference"
-									},
-									"path": "logs/kadasterupload"
-								}
-							},
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "OVER_BEW_K",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OVER_BEW_K",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "STUK_ONTV_DATUM",
-											"type": "String"
-										},
-										"sink": {
-											"name": "STUK_ONTV_DATUM",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OVER_STUK",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OVER_STUK",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "VV_NAAM",
-											"type": "String"
-										},
-										"sink": {
-											"name": "VV_NAAM",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "VV_WOONPLAATS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "VV_WOONPLAATS",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "NNP_VV_K",
-											"type": "String"
-										},
-										"sink": {
-											"name": "NNP_VV_K",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "VK_NAAM",
-											"type": "String"
-										},
-										"sink": {
-											"name": "VK_NAAM",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "VK_WOONPLAATS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "VK_WOONPLAATS",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "NNP_VK_K",
-											"type": "String"
-										},
-										"sink": {
-											"name": "NNP_VK_K",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJE_MUT_SRT_K",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJE_MUT_SRT_K",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "IND_FAM_TRANS",
-											"type": "String"
-										},
-										"sink": {
-											"name": "IND_FAM_TRANS",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJE_OBJEKT",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJE_OBJEKT",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "KAD_GEM",
-											"type": "String"
-										},
-										"sink": {
-											"name": "KAD_GEM",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "SECTIE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "SECTIE",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "PERCEELNR",
-											"type": "String"
-										},
-										"sink": {
-											"name": "PERCEELNR",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "INDEXLT",
-											"type": "String"
-										},
-										"sink": {
-											"name": "INDEXLT",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "INDEXNR",
-											"type": "String"
-										},
-										"sink": {
-											"name": "INDEXNR",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJE_GROOTTE",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJE_GROOTTE",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJE_KOOP_SOM",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJE_KOOP_SOM",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJE_IND_MEER_O_G",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJE_IND_MEER_O_G",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJE_BURG_GEM_NR",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJE_BURG_GEM_NR",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJE_BURG_GEM_NAAM",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJE_BURG_GEM_NAAM",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJE_KULT_ONGEB_K",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJE_KULT_ONGEB_K",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "ZAKR_ZR_K",
-											"type": "String"
-										},
-										"sink": {
-											"name": "ZAKR_ZR_K",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJB_OBJ_BEL_K",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJB_OBJ_BEL_K",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJE_X_COORD",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJE_X_COORD",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJE_Y_COORD",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJE_Y_COORD",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJE_KULT_TEXT",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJE_KULT_TEXT",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJA_KULT_GEB_K",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJA_KULT_GEB_K",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJA_PLTS_NAAM",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJA_PLTS_NAAM",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJA_STRAAT",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJA_STRAAT",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJA_HUIS_NR",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJA_HUIS_NR",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJA_HUIS_LR",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJA_HUIS_LR",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJA_TOEVOEGING",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJA_TOEVOEGING",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OBJA_PTT_K",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OBJA_PTT_K",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "PHT",
-											"type": "String"
-										},
-										"sink": {
-											"name": "PHT",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "OVER_ID",
-											"type": "String"
-										},
-										"sink": {
-											"name": "OVER_ID",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
-											"name": "BAG_ID",
-											"type": "String"
-										},
-										"sink": {
-											"name": "BAG_ID",
-											"type": "String"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "kadaster_to_be_uploaded",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DataPipelineTest_KadasterRawInputStaging",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					},
-					{
-						"name": "SP_Pipeline_Log",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Upload-Data",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							},
-							{
-								"activity": "Copy from staging",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[sp_UpdateCatellaDataPipeline_LogTable]",
-							"storedProcedureParameters": {
-								"DataFactory_Name": {
-									"value": {
-										"value": "@{pipeline().DataFactory}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"Pipeline_Name": {
-									"value": {
-										"value": "@{pipeline().Pipeline}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"RunId": {
-									"value": {
-										"value": "@{pipeline().RunId}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"Source": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.executionDetails[0].source.type}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"Destination": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.executionDetails[0].sink.type}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"TriggerType": {
-									"value": {
-										"value": "@{pipeline().TriggerType}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"TriggerId": {
-									"value": {
-										"value": "@{pipeline().TriggerId}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"TriggerName": {
-									"value": {
-										"value": "@{pipeline().TriggerName}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"TriggerTime": {
-									"value": {
-										"value": "@{pipeline().TriggerTime}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"RowsCopied": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.rowsCopied}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"DataRead": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.rowsRead}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"No_ParallelCopies": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.usedParallelCopies}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"copyDuration_in_secs": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.copyDuration}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"effectiveIntegrationRuntime": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.effectiveIntegrationRuntime}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"Source_Type": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.executionDetails[0].source.type}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"Sink_Type": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.executionDetails[0].sink.type}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"Execution_Status": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.executionDetails[0].status}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"CopyActivity_Start_Time": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.executionDetails[0].start}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"CopyActivity_End_Time": {
-									"value": {
-										"value": "@{utcnow()}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"CopyActivity_queuingDuration_in_secs": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.executionDetails[0]. detailedDurations.queuingDuration}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"CopyActivity_transferDuration_in_secs": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.executionDetails[0]. detailedDurations.transferDuration}",
-										"type": "Expression"
-									},
-									"type": "String"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "DataPipelineSQLTest",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "SP_Pipeline_Error",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Upload-Data",
-								"dependencyConditions": [
-									"Failed"
-								]
-							},
-							{
-								"activity": "Copy from staging",
-								"dependencyConditions": [
-									"Failed"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[sp_UpdateCatellaDataPipeline_ErrorsTable]",
-							"storedProcedureParameters": {
-								"DataFactory_Name": {
-									"value": {
-										"value": "@{pipeline().DataFactory}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"Pipeline_Name": {
-									"value": {
-										"value": "@{pipeline().Pipeline}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"RunId": {
-									"value": {
-										"value": "@{pipeline().RunId}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"Source": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.executionDetails[0].source.type}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"Destination": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.executionDetails[0].sink.type}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"TriggerType": {
-									"value": {
-										"value": "@{pipeline().TriggerType}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"TriggerId": {
-									"value": {
-										"value": "@{pipeline().TriggerId}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"TriggerName": {
-									"value": {
-										"value": "@{pipeline().TriggerName}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"TriggerTime": {
-									"value": {
-										"value": "@{pipeline().TriggerTime}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"No_ParallelCopies": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.usedParallelCopies}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"CopyDuration_in_secs": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.copyDuration}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"EffectiveIntegrationRuntime": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.effectiveIntegrationRuntime}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"Source_Type": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.executionDetails[0].source.type}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"Sink_Type": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.executionDetails[0].sink.type}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"Execution_Status": {
-									"value": {
-										"value": "@{activity('Upload-Data').output.executionDetails[0].status}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"ErrorCode": {
-									"value": {
-										"value": "@{activity('Upload-Data').error.errorCode}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"ErrorDescription": {
-									"value": {
-										"value": "@{activity('Upload-Data').error.message}",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"ErrorLoggedTIme": {
-									"value": {
-										"value": "@utcnow()",
-										"type": "Expression"
-									},
-									"type": "String"
-								},
-								"FailureType": {
-									"value": {
-										"value": "@concat(activity('Upload-Data').error.message,'failureType:',activity('Upload-Data').error.failureType)",
-										"type": "Expression"
-									},
-									"type": "String"
-								}
-							}
-						},
-						"linkedServiceName": {
-							"referenceName": "DataPipelineSQLTest",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "PipelineThrow",
-						"type": "Fail",
-						"dependsOn": [
-							{
-								"activity": "SP_Pipeline_Error",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"userProperties": [],
-						"typeProperties": {
-							"message": {
-								"value": "@activity('Upload-Data').error.message",
-								"type": "Expression"
-							},
-							"errorCode": {
-								"value": "@activity('Upload-Data').error.errorCode",
-								"type": "Expression"
-							}
-						}
-					},
-					{
-						"name": "Copy from staging",
-						"type": "SqlServerStoredProcedure",
-						"dependsOn": [
-							{
-								"activity": "Upload-Data",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"storedProcedureName": "[[dbo].[sp_copykadaster_data_from_staging]"
-						},
-						"linkedServiceName": {
-							"referenceName": "DataPipelineSQLTest",
-							"type": "LinkedServiceReference"
-						}
-					},
-					{
-						"name": "If Reupload 2019",
-						"type": "IfCondition",
-						"dependsOn": [],
-						"userProperties": [],
-						"typeProperties": {
-							"expression": {
-								"value": "@variables('reupload-2019')",
-								"type": "Expression"
-							},
-							"ifTrueActivities": [
-								{
-									"name": "Upload-Kadaster-2019 to staging",
-									"type": "Copy",
-									"dependsOn": [
-										{
-											"activity": "Reset Kadaster Raw Input",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "1.00:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "ExcelSource",
-											"additionalColumns": [
-												{
-													"name": "JsonFilePath",
-													"value": "$$FILEPATH"
-												}
-											],
-											"storeSettings": {
-												"type": "AzureBlobStorageReadSettings",
-												"recursive": true,
-												"enablePartitionDiscovery": false
-											}
-										},
-										"sink": {
-											"type": "AzureSqlSink",
-											"writeBehavior": "insert",
-											"sqlWriterUseTableLock": true,
-											"disableMetricsCollection": false
-										},
-										"enableStaging": false,
-										"enableSkipIncompatibleRow": true,
-										"logSettings": {
-											"enableCopyActivityLog": true,
-											"copyActivityLogSettings": {
-												"logLevel": "Warning",
-												"enableReliableLogging": false
-											},
-											"logLocationSettings": {
-												"linkedServiceName": {
-													"referenceName": "AzureBlobStorageLogs",
-													"type": "LinkedServiceReference"
-												},
-												"path": "logs/kadasterupload"
-											}
-										},
-										"translator": {
-											"type": "TabularTranslator",
-											"mappings": [
-												{
-													"source": {
-														"name": "BEWARINGKODE",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OVER_BEW_K",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "DATUM",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "STUK_ONTV_DATUM",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "STUK_ID",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OVER_STUK",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "MUT_SRT",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OBJE_MUT_SRT_K",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "FAM_TRANS",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "IND_FAM_TRANS",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "OBJECT",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OBJE_OBJEKT",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "KAD_GEM",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "KAD_GEM",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "SECTIE",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "SECTIE",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "INDEX_LR1",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "INDEXLT",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "GROOTTE",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OBJE_GROOTTE",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "K_SOM",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OBJE_KOOP_SOM",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "BURGEM_NR",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OBJE_BURG_GEM_NR",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "KULT_GEB_K1",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OBJE_KULT_ONGEB_K",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "ZAK_R",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "ZAKR_ZR_K",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "OBJ_BEL",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OBJB_OBJ_BEL_K",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "X_COORD",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OBJE_X_COORD",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "Y_COORD",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OBJE_Y_COORD",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "KULT_TEKST",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OBJE_KULT_TEXT",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "KULT_GEB_K",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OBJA_KULT_GEB_K",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "PLTSNAAM",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OBJA_PLTS_NAAM",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "STRAAT",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OBJA_STRAAT",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "HUISNR",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OBJA_HUIS_NR",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "TOEV",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OBJA_TOEVOEGING",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "PTT_K",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "OBJA_PTT_K",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "PHT",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "PHT",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												},
-												{
-													"source": {
-														"name": "CADOV_CADOI_ADRESSEERBR_OBJ_ID",
-														"type": "String",
-														"physicalType": "String"
-													},
-													"sink": {
-														"name": "BAG_ID",
-														"type": "String",
-														"physicalType": "nvarchar"
-													}
-												}
-											],
-											"typeConversion": true,
-											"typeConversionSettings": {
-												"allowDataTruncation": true,
-												"treatBooleanAsNumber": false
-											}
-										}
-									},
-									"inputs": [
-										{
-											"referenceName": "Kadaster2019",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "DataPipelineTest_KadasterRawInputStaging",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									]
-								},
-								{
-									"name": "Set reupload 2019 to false",
-									"type": "SetVariable",
-									"dependsOn": [
-										{
-											"activity": "copy-files-from-archive",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"variableName": "reupload-2019",
-										"value": {
-											"value": "@bool(0)",
-											"type": "Expression"
-										}
-									}
-								},
-								{
-									"name": "Reset Kadaster Raw Input",
-									"type": "SqlServerStoredProcedure",
-									"dependsOn": [],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"storedProcedureName": "[[dbo].[sp_reset_kadsater_raw_input]"
-									},
-									"linkedServiceName": {
-										"referenceName": "DataPipelineSQLTest",
-										"type": "LinkedServiceReference"
-									}
-								},
-								{
-									"name": "copy-files-from-archive",
-									"type": "Copy",
-									"dependsOn": [
-										{
-											"activity": "Upload-Kadaster-2019 to staging",
-											"dependencyConditions": [
-												"Succeeded"
-											]
-										}
-									],
-									"policy": {
-										"timeout": "0.12:00:00",
-										"retry": 0,
-										"retryIntervalInSeconds": 30,
-										"secureOutput": false,
-										"secureInput": false
-									},
-									"userProperties": [],
-									"typeProperties": {
-										"source": {
-											"type": "DelimitedTextSource",
-											"storeSettings": {
-												"type": "AzureBlobFSReadSettings",
-												"recursive": false,
-												"wildcardFolderPath": "nl/kadaster/uploaded",
-												"wildcardFileName": "*.csv",
-												"enablePartitionDiscovery": false
-											},
-											"formatSettings": {
-												"type": "DelimitedTextReadSettings"
-											}
-										},
-										"sink": {
-											"type": "DelimitedTextSink",
-											"storeSettings": {
-												"type": "AzureBlobFSWriteSettings",
-												"copyBehavior": "PreserveHierarchy"
-											},
-											"formatSettings": {
-												"type": "DelimitedTextWriteSettings",
-												"quoteAllText": true,
-												"fileExtension": ".csv"
-											}
-										},
-										"enableStaging": false,
-										"translator": {
-											"type": "TabularTranslator",
-											"typeConversion": true,
-											"typeConversionSettings": {
-												"allowDataTruncation": true,
-												"treatBooleanAsNumber": false
-											}
-										}
-									},
-									"inputs": [
-										{
-											"referenceName": "kadaster_uploaded",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									],
-									"outputs": [
-										{
-											"referenceName": "kadaster_to_be_uploaded",
-											"type": "DatasetReference",
-											"parameters": {}
-										}
-									]
-								}
-							]
-						}
-					},
-					{
-						"name": "reset-to-be-uploaded-folder",
-						"type": "Delete",
-						"dependsOn": [
-							{
-								"activity": "copy-files-to-archive",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 3,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataset": {
-								"referenceName": "kadaster_to_be_uploaded",
-								"type": "DatasetReference",
-								"parameters": {}
-							},
-							"logStorageSettings": {
-								"linkedServiceName": {
-									"referenceName": "AzureBlobStorageLogs",
-									"type": "LinkedServiceReference"
-								},
-								"path": "logs/geomapupload"
-							},
-							"enableLogging": true,
-							"storeSettings": {
-								"type": "AzureBlobFSReadSettings",
-								"recursive": true,
-								"wildcardFileName": "*",
-								"enablePartitionDiscovery": false
-							}
-						}
-					},
-					{
-						"name": "copy-files-to-archive",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Upload-Data",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobFSReadSettings",
-									"recursive": false,
-									"wildcardFolderPath": "nl/kadaster/to_upload/ov20",
-									"wildcardFileName": "*.csv",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobFSWriteSettings",
-									"copyBehavior": "PreserveHierarchy"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".csv"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "kadaster_to_be_uploaded",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "kadaster_uploaded",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"variables": {
-					"reupload-2019": {
-						"type": "Boolean",
-						"defaultValue": true
-					}
-				},
-				"annotations": [],
-				"lastPublishTime": "2023-02-13T12:57:10Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/datasets/kadaster_to_be_uploaded')]",
-				"[concat(variables('factoryId'), '/datasets/kadaster_uploaded')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/move_data_from_sources_to_adress_table')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"activities": [
-					{
-						"name": "Transfer And Load GeoMap Data",
-						"type": "Copy",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "AzureSqlSource",
-								"sqlReaderQuery": "Select * FROM [dbo].[GeoMapRawImport]",
-								"queryTimeout": "02:00:00",
-								"partitionOption": "None"
-							},
-							"sink": {
-								"type": "AzureSqlSink",
-								"sqlWriterStoredProcedureName": "[[dbo].[sp_transform_and_load_geomap_data]",
-								"sqlWriterTableType": "GeoMapRawInputType",
-								"storedProcedureTableTypeParameterName": "GeoMapInput",
-								"disableMetricsCollection": false
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"mappings": [
-									{
-										"source": {
-											"name": "JsonFilePath",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "JsonFilePath",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "RentOrSale",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "RentOrSale",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "City",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "City",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Longitude",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "Longitude",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "Latitude",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "Latitude",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "FederalState",
-											"type": "String",
-											"physicalType": "nchar"
-										},
-										"sink": {
-											"name": "FederalState",
-											"type": "String",
-											"physicalType": "nchar"
-										}
-									},
-									{
-										"source": {
-											"name": "District",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "District",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Country",
-											"type": "String",
-											"physicalType": "nchar"
-										},
-										"sink": {
-											"name": "Country",
-											"type": "String",
-											"physicalType": "nchar"
-										}
-									},
-									{
-										"source": {
-											"name": "StadOrOrtsTeil",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "StadOrOrtsTeil",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Plz",
-											"type": "String",
-											"physicalType": "nchar"
-										},
-										"sink": {
-											"name": "Plz",
-											"type": "String",
-											"physicalType": "nchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Strasse",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Strasse",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "DwellingType",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "DwellingType",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Titel",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Titel",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Raw_Availability",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Raw_Availability",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "DetailedUrl",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "DetailedUrl",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Description_Location",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Description_Location",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Description_Main",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Description_Main",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Description_Other",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Description_Other",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Description_Furnishing",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Description_Furnishing",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "AvailableFrom",
-											"type": "DateTime",
-											"physicalType": "datetime2"
-										},
-										"sink": {
-											"name": "AvailableFrom",
-											"type": "DateTime",
-											"physicalType": "datetime2"
-										}
-									},
-									{
-										"source": {
-											"name": "ImageUrls_JsonArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "ImageUrls_JsonArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Raw_DwellingType",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Raw_DwellingType",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Raw_Floor",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Raw_Floor",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "WhiteGoodsQuality",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "WhiteGoodsQuality",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Floor",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "Floor",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "NumberOfRooms",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "NumberOfRooms",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "NumberOfFloors",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "NumberOfFloors",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "NumberOfBathrooms",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "NumberOfBathrooms",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "NumberOfParkingSpots",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "NumberOfParkingSpots",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "NumberOfBedRooms",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "NumberOfBedRooms",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "ConstructionYear",
-											"type": "Int32",
-											"physicalType": "int"
-										},
-										"sink": {
-											"name": "ConstructionYear",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "RenovationYear",
-											"type": "Int32",
-											"physicalType": "int"
-										},
-										"sink": {
-											"name": "RenovationYear",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "LivingArea",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "LivingArea",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "LandArea",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "LandArea",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "Condition",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Condition",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "EnergyIdInfo",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "EnergyIdInfo",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "IsSanitized",
-											"type": "Boolean",
-											"physicalType": "bit"
-										},
-										"sink": {
-											"name": "IsSanitized",
-											"type": "Boolean",
-											"physicalType": "bit"
-										}
-									},
-									{
-										"source": {
-											"name": "IsRented",
-											"type": "Boolean",
-											"physicalType": "bit"
-										},
-										"sink": {
-											"name": "IsRented",
-											"type": "Boolean",
-											"physicalType": "bit"
-										}
-									},
-									{
-										"source": {
-											"name": "ParkingTypes_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "ParkingTypes_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "SanitaryTypes_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "SanitaryTypes_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ElevatorTypes_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "ElevatorTypes_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "BasementTypes_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "BasementTypes_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "BalconyTypes_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "BalconyTypes_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "EnergySources_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "EnergySources_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "KitchenTypes_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "KitchenTypes_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "UnitLocations_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "UnitLocations_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Details_Other_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Details_Other_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "HeatingTypes_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "HeatingTypes_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "PropertyType",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "PropertyType",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "IsCommisionFree",
-											"type": "Boolean",
-											"physicalType": "bit"
-										},
-										"sink": {
-											"name": "IsCommisionFree",
-											"type": "Boolean",
-											"physicalType": "bit"
-										}
-									},
-									{
-										"source": {
-											"name": "Raw_Commision",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Raw_Commision",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Raw_AskingPrise",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Raw_AskingPrise",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Raw_AskingPricePerParking",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Raw_AskingPricePerParking",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Raw_RentPerMonth_AdditionalCosts",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Raw_RentPerMonth_AdditionalCosts",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Raw_AdditionalCostsPerMonth",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Raw_AdditionalCostsPerMonth",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Raw_RentalDeposit",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Raw_RentalDeposit",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Raw_HeatingCostsPerMonth",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Raw_HeatingCostsPerMonth",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Raw_RentPerMonthPerParking",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Raw_RentPerMonthPerParking",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Raw_RentPerMonthNoAdditionalCosts",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Raw_RentPerMonthNoAdditionalCosts",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Currency",
-											"type": "String",
-											"physicalType": "nchar"
-										},
-										"sink": {
-											"name": "Currency",
-											"type": "String",
-											"physicalType": "nchar"
-										}
-									},
-									{
-										"source": {
-											"name": "PurchasePrice",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "PurchasePrice",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "PurchasePricePerParking",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "PurchasePricePerParking",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "RentPerMonthWithAdditionalCosts",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "RentPerMonthWithAdditionalCosts",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "AdditionalCostsPerMonth",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "AdditionalCostsPerMonth",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "RentalDeposit",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "RentalDeposit",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "RentPerMonthPerParking",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "RentPerMonthPerParking",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "RentPerMonthNoAdditionalCosts",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "RentPerMonthNoAdditionalCosts",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "HeatingCostsPerMonth",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "HeatingCostsPerMonth",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "HeatingCostsIncludedInAdditionalCosts",
-											"type": "Boolean",
-											"physicalType": "bit"
-										},
-										"sink": {
-											"name": "HeatingCostsIncludedInAdditionalCosts",
-											"type": "Boolean",
-											"physicalType": "bit"
-										}
-									},
-									{
-										"source": {
-											"name": "Location",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Location",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "CountryId",
-											"type": "String",
-											"physicalType": "nchar"
-										},
-										"sink": {
-											"name": "CountryId",
-											"type": "String",
-											"physicalType": "nchar"
-										}
-									},
-									{
-										"source": {
-											"name": "LocationAccuracy",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "LocationAccuracy",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Lon",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "Lon",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "Lat",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "Lat",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "CityId",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "CityId",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "PostalCode",
-											"type": "String",
-											"physicalType": "nchar"
-										},
-										"sink": {
-											"name": "PostalCode",
-											"type": "String",
-											"physicalType": "nchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Stadtteil",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Stadtteil",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Stadtbezirk",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Stadtbezirk",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Street",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Street",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "StadtteilId",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "StadtteilId",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "HouseNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "HouseNumber",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "StadtbezirkId",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "StadtbezirkId",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "KreisId",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "KreisId",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Kreis",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Kreis",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "LocationHierarchy_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "LocationHierarchy_StringArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ConstructionStatus",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "ConstructionStatus",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "Brokers_JsonArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Brokers_JsonArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "FirstSeenDay",
-											"type": "DateTime",
-											"physicalType": "datetime2"
-										},
-										"sink": {
-											"name": "FirstSeenDay",
-											"type": "DateTime",
-											"physicalType": "datetime2"
-										}
-									},
-									{
-										"source": {
-											"name": "DaysOnline",
-											"type": "Int32",
-											"physicalType": "int"
-										},
-										"sink": {
-											"name": "DaysOnline",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "PreisPerSqm",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "PreisPerSqm",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "GeoMap_MarketRent_PerSqm",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "GeoMap_MarketRent_PerSqm",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "GeoMap_MarketRent_RegionalLevel",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "GeoMap_MarketRent_RegionalLevel",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "GeoMap_Yield_Average",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "GeoMap_Yield_Average",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "GeoMap_Yield_Source",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "GeoMap_Yield_Source",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "GeoMap_Return",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "GeoMap_Return",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "GeoMap_MarketRent_Period_LT",
-											"type": "DateTime",
-											"physicalType": "datetime2"
-										},
-										"sink": {
-											"name": "GeoMap_MarketRent_Period_LT",
-											"type": "DateTime",
-											"physicalType": "datetime2"
-										}
-									},
-									{
-										"source": {
-											"name": "GeoMap_MarketRent_Period_GTE",
-											"type": "DateTime",
-											"physicalType": "datetime2"
-										},
-										"sink": {
-											"name": "GeoMap_MarketRent_Period_GTE",
-											"type": "DateTime",
-											"physicalType": "datetime2"
-										}
-									},
-									{
-										"source": {
-											"name": "GeoMap_MarketRent_NumberOfOffers",
-											"type": "Int32",
-											"physicalType": "int"
-										},
-										"sink": {
-											"name": "GeoMap_MarketRent_NumberOfOffers",
-											"type": "Int32",
-											"physicalType": "int"
-										}
-									},
-									{
-										"source": {
-											"name": "OnlineRanges_JsonArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "OnlineRanges_JsonArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "CrawlerEntryIds_JsonArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "CrawlerEntryIds_JsonArray",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "ScrapingDay",
-											"type": "DateTime",
-											"physicalType": "datetime2"
-										},
-										"sink": {
-											"name": "ScrapingDay",
-											"type": "DateTime",
-											"physicalType": "datetime2"
-										}
-									},
-									{
-										"source": {
-											"name": "AskingPrice",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "AskingPrice",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "IsOnline",
-											"type": "Boolean",
-											"physicalType": "bit"
-										},
-										"sink": {
-											"name": "IsOnline",
-											"type": "Boolean",
-											"physicalType": "bit"
-										}
-									},
-									{
-										"source": {
-											"name": "Status",
-											"type": "String",
-											"physicalType": "nvarchar"
-										},
-										"sink": {
-											"name": "Status",
-											"type": "String",
-											"physicalType": "nvarchar"
-										}
-									},
-									{
-										"source": {
-											"name": "LastSeenDay",
-											"type": "DateTime",
-											"physicalType": "datetime2"
-										},
-										"sink": {
-											"name": "LastSeenDay",
-											"type": "DateTime",
-											"physicalType": "datetime2"
-										}
-									},
-									{
-										"source": {
-											"name": "UsableArea",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "UsableArea",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									},
-									{
-										"source": {
-											"name": "GeomapId",
-											"type": "String",
-											"physicalType": "varchar"
-										},
-										"sink": {
-											"name": "GeomapId",
-											"type": "String",
-											"physicalType": "varchar"
-										}
-									},
-									{
-										"source": {
-											"name": "AdditionalCosts",
-											"type": "Double",
-											"physicalType": "float"
-										},
-										"sink": {
-											"name": "AdditionalCosts",
-											"type": "Double",
-											"physicalType": "float"
-										}
-									}
-								],
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "DataPipelineTest_GeomapRawInput",
-								"type": "DatasetReference",
-								"parameters": {
-									"sinkTableName": "GeoMapRawImport"
-								}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "DataPipelineTest_GeomapRawInput",
-								"type": "DatasetReference",
-								"parameters": {
-									"sinkTableName": "GeoMapRawImport"
-								}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2023-02-15T16:54:34Z"
-			},
-			"dependsOn": []
 		}
 	]
 }

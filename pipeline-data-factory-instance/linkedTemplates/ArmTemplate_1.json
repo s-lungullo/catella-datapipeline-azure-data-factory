@@ -7,6 +7,10 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "pipeline-data-factory-instance"
 		},
+		"DataPipelineSQLDev_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'DataPipelineSQLDev'"
+		},
 		"DataPipelineSQLTest_connectionString": {
 			"type": "secureString",
 			"metadata": "Secure string for 'connectionString' of 'DataPipelineSQLTest'"
@@ -36,6 +40,1037 @@
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/CopyPipeline_GeoMapBigFile')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Copy_taf",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [
+							{
+								"name": "Source",
+								"value": "data/de/geomap-raw/results_2020-01-01_2020-04-01.json"
+							},
+							{
+								"name": "Destination",
+								"value": "GeoMapTest.results_2020-01-01_2020-04-01"
+							}
+						],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": false,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBatchTimeout": "10:00:00",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"tableOption": "autoCreate",
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"validateDataConsistency": false,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "DataFactoryBlobStorage",
+										"type": "LinkedServiceReference"
+									},
+									"path": "logs"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['crawlerObject']['kaufMiete']"
+										},
+										"sink": {
+											"name": "RentOrPurchase",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['lage']['ort']"
+										},
+										"sink": {
+											"name": "City",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['lage']['landName']"
+										},
+										"sink": {
+											"name": "Country",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['lage']['geoLongitude']"
+										},
+										"sink": {
+											"name": "Longitude",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['lage']['geoLatitude']"
+										},
+										"sink": {
+											"name": "Latitude",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['lage']['bundesland']"
+										},
+										"sink": {
+											"name": "Bundesland",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['lage']['land']"
+										},
+										"sink": {
+											"name": "District",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['lage']['plz']"
+										},
+										"sink": {
+											"name": "PostCode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['lage']['strasse']"
+										},
+										"sink": {
+											"name": "Street",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['lage']['stadtteilOrtsteil']"
+										},
+										"sink": {
+											"name": "stadtteilOrtsteil",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['anbieter'][0]['name']"
+										},
+										"sink": {
+											"name": "Broker1",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['anbieter'][0]['anbieterGewerblich']"
+										},
+										"sink": {
+											"name": "anbieterGewerblich",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['titel']"
+										},
+										"sink": {
+											"name": "Titel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['onlineSeitLautPortalText']"
+										},
+										"sink": {
+											"name": "OnlineSince",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['portalUrl']"
+										},
+										"sink": {
+											"name": "DetailURL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['onlineSeitLautPortal']"
+										},
+										"sink": {
+											"name": "OnlineSince",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['BESCHREIBUNG']"
+										},
+										"sink": {
+											"name": "Description",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['LAGE']"
+										},
+										"sink": {
+											"name": "DescriptionLocation",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['SONSTIGES']"
+										},
+										"sink": {
+											"name": "DescriptionOther",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['AUSSTATTUNG']"
+										},
+										"sink": {
+											"name": "DescriptionFurnishing",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['verfugbarAbText']"
+										},
+										"sink": {
+											"name": "Availability",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['medien'][0]['mediaArt']"
+										},
+										"sink": {
+											"name": "TypeOfImage",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['medien'][0]['originUrl']"
+										},
+										"sink": {
+											"name": "ImageURL",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['medien'][0]['mediaTyp'][0]"
+										},
+										"sink": {
+											"name": "TypeOfImage",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['verfugbarAb']"
+										},
+										"sink": {
+											"name": "AvailabilityText",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['ZIMMER']"
+										},
+										"sink": {
+											"name": "NumberOfRooms",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['BADEZIMMER']"
+										},
+										"sink": {
+											"name": "NumberOfBathroom",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['SCHLAFZIMMER']"
+										},
+										"sink": {
+											"name": "NumberOfBedroom",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['ETAGEN']"
+										},
+										"sink": {
+											"name": "FloorNumber",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Wohnflaeche']"
+										},
+										"sink": {
+											"name": "LivingArea",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Grundstuecksflaeche']"
+										},
+										"sink": {
+											"name": "LandArea",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['sonstiges'][0]"
+										},
+										"sink": {
+											"name": "OtherParticularities",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['heizungsart'][0]"
+										},
+										"sink": {
+											"name": "TypeOfHeating",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['etageText']"
+										},
+										"sink": {
+											"name": "MetaFloorText",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['stellplatz'][0]"
+										},
+										"sink": {
+											"name": "MetaParkingSpace",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['energieträger'][0]"
+										},
+										"sink": {
+											"name": "EnergySource",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['saniert']"
+										},
+										"sink": {
+											"name": "ObjectProperties_Sanitiezed",
+											"type": "Byte"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['ausweisTyp']"
+										},
+										"sink": {
+											"name": "EnergyCertificateType",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['ausweisInfo']"
+										},
+										"sink": {
+											"name": "EnergyCertificateInfo",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['energieKennwerte']['ENERGIEKENNWERT']['KennwertKlasse']"
+										},
+										"sink": {
+											"name": "EnergyClass",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['energieKennwerte']['ENERGIEKENNWERT']['kennwert']"
+										},
+										"sink": {
+											"name": "EnergyValue",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['energieKennwerte']['ENERGIEKENNWERT']['KennwertKlasseText']"
+										},
+										"sink": {
+											"name": "EnergyLabelText",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['etage']"
+										},
+										"sink": {
+											"name": "FloorNumber",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['lageEinheit'][0]"
+										},
+										"sink": {
+											"name": "UnitLocation",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['küche'][0]"
+										},
+										"sink": {
+											"name": "KitchenType",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['balkonTerrasse'][0]"
+										},
+										"sink": {
+											"name": "BalconyType",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['jahreszahlen']['SANIERUNG']"
+										},
+										"sink": {
+											"name": "RenovationYear",
+											"type": "Int16"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['jahreszahlen']['BAUJAHR']"
+										},
+										"sink": {
+											"name": "ConstructioYear",
+											"type": "Int16"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['keller'][0]"
+										},
+										"sink": {
+											"name": "ObjectPropertiesKeller",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['aufzug'][0]"
+										},
+										"sink": {
+											"name": "ObjectPropertiesElevator",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['sanitär'][0]"
+										},
+										"sink": {
+											"name": "ObjectPropertiesCV",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['möbliert'][0]"
+										},
+										"sink": {
+											"name": "Furnishing",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektArt']"
+										},
+										"sink": {
+											"name": "PropertyType",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisTexte']['MieteProMonatOhneNebenkosten']"
+										},
+										"sink": {
+											"name": "MetaMieteProMonatOhneNebenkosten",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisTexte']['MieteProMonatMitNebenkosten']"
+										},
+										"sink": {
+											"name": "MetaMieteProMonatMitNebenkosten",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisTexte']['NebenkostenProMonat']"
+										},
+										"sink": {
+											"name": "MetaNebenkostenProMonat",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisTexte']['MietKaution']"
+										},
+										"sink": {
+											"name": "MetaMietKaution",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisTexte']['HeizkostenProMonat']"
+										},
+										"sink": {
+											"name": "MetaHeizkostenProMonat",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisTexte']['MieteProMonatProStellplatz']"
+										},
+										"sink": {
+											"name": "MetaMieteProMonatProStellplatz",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['currency']"
+										},
+										"sink": {
+											"name": "Currency",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatOhneNebenkosten']"
+										},
+										"sink": {
+											"name": "RentPerMonthWithoutAdditionalCosts",
+											"type": "Decimal"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatMitNebenkosten']"
+										},
+										"sink": {
+											"name": "RentPerMonthWithAdditionalCosts",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['NebenkostenProMonat']"
+										},
+										"sink": {
+											"name": "ExtraCostsPerMonth",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatProStellplatz']"
+										},
+										"sink": {
+											"name": "RentPerMonthPerPitch",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['MietKaution']"
+										},
+										"sink": {
+											"name": "RentalDeposit",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['HeizkostenProMonat']"
+										},
+										"sink": {
+											"name": "HeatingCostsPerMonth",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['heizkostenInNebenkostenEnthalten']"
+										},
+										"sink": {
+											"name": "IncludingHeatingCosts",
+											"type": "Byte"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['ort']"
+										},
+										"sink": {
+											"name": "ORT",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['kreisId']"
+										},
+										"sink": {
+											"name": "KreisID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['kreis']"
+										},
+										"sink": {
+											"name": "Kreis",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['landId']"
+										},
+										"sink": {
+											"name": "CountryID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['parentIds'][0]"
+										},
+										"sink": {
+											"name": "LocationParedID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['accuracy']"
+										},
+										"sink": {
+											"name": "LocationAccuracy",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['location']['lon']"
+										},
+										"sink": {
+											"name": "Longitude",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['location']['lat']"
+										},
+										"sink": {
+											"name": "Latitude",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['ortId']"
+										},
+										"sink": {
+											"name": "OrtId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['plz']"
+										},
+										"sink": {
+											"name": "PostalCode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['stadtteil']"
+										},
+										"sink": {
+											"name": "Stadtteil",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['stadtbezirk']"
+										},
+										"sink": {
+											"name": "Stadtbezirk",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['strasse']"
+										},
+										"sink": {
+											"name": "Street",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['stadtteilId']"
+										},
+										"sink": {
+											"name": "stadtteilId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['hausnummer']"
+										},
+										"sink": {
+											"name": "HouseNumber",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['stadtbezirkId']"
+										},
+										"sink": {
+											"name": "LocationId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektTyp']"
+										},
+										"sink": {
+											"name": "PropertyType",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektTypText']"
+										},
+										"sink": {
+											"name": "MetaObjectTypeText",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['firstSeenDay']"
+										},
+										"sink": {
+											"name": "FirstSeenDay",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['daysOnline']"
+										},
+										"sink": {
+											"name": "DaysOnline",
+											"type": "Int16"
+										}
+									},
+									{
+										"source": {
+											"path": "$['preisProQm']"
+										},
+										"sink": {
+											"name": "PricePerSQM",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['onlineRanges'][0]['lt']"
+										},
+										"sink": {
+											"name": "OnlineRange_LT",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['onlineRanges'][0]['gte']"
+										},
+										"sink": {
+											"name": "OnlineRange_GTE",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerIdsEntryIds'][0]['firstSeenDay']"
+										},
+										"sink": {
+											"name": "MetaFirstSeenDay",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerIdsEntryIds'][0]['portalUrl']"
+										},
+										"sink": {
+											"name": "MetaDetailUrl",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerIdsEntryIds'][0]['state']"
+										},
+										"sink": {
+											"name": "MetaStatus",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerIdsEntryIds'][0]['lastUpdatedDay']"
+										},
+										"sink": {
+											"name": "LastUpdatedDay",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['eventDay']"
+										},
+										"sink": {
+											"name": "ScrapingDay",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['preis']"
+										},
+										"sink": {
+											"name": "AskingPrice",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['online']"
+										},
+										"sink": {
+											"name": "IsOnline",
+											"type": "Byte"
+										}
+									},
+									{
+										"source": {
+											"path": "$['state']"
+										},
+										"sink": {
+											"name": "Status",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['lastSeenDay']"
+										},
+										"sink": {
+											"name": "LastSeenDay",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['nutzflaeche']"
+										},
+										"sink": {
+											"name": "UsableArea",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['groupId']"
+										},
+										"sink": {
+											"name": "GeoMapID",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['nebenkosten']['Nebenkosten']"
+										},
+										"sink": {
+											"name": "ExtraCosts",
+											"type": "Double"
+										}
+									}
+								],
+								"mapComplexValuesToString": true
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "SourceDataset_taf",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DestinationDataset_taf",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-01-27T16:03:55Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DataPipelineSQLDev')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"connectionString": "[parameters('DataPipelineSQLDev_connectionString')]"
+				},
+				"connectVia": {
+					"referenceName": "integrationRuntimePrivate",
+					"type": "IntegrationRuntimeReference"
+				}
+			},
+			"dependsOn": []
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/DataPipelineSQLTest')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -1298,7 +2333,9 @@
 					"table": "GeoMapRawImport_2"
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DataPipelineSQLDev')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AzureSql_Kadaster_Input_Table')]",
@@ -3729,483 +4766,6 @@
 					"quoteChar": "\""
 				},
 				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/datapipeline_blob_storage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OV15_Input_files')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "datapipeline_blob_storage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Catella_OV15*.csv",
-						"folderPath": "nl/kadaster/to_upload",
-						"container": "data-pipeline-input-files"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"nullValue": "\"\"",
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "DATUM",
-						"type": "String"
-					},
-					{
-						"name": "PTT_K",
-						"type": "String"
-					},
-					{
-						"name": "PLTSNAAM",
-						"type": "String"
-					},
-					{
-						"name": "STRAAT",
-						"type": "String"
-					},
-					{
-						"name": "HUISNR",
-						"type": "String"
-					},
-					{
-						"name": "TOEV",
-						"type": "String"
-					},
-					{
-						"name": "WONINGTYPE",
-						"type": "String"
-					},
-					{
-						"name": "X_COORD",
-						"type": "String"
-					},
-					{
-						"name": "Y_COORD",
-						"type": "String"
-					},
-					{
-						"name": "KULT_GEB_K",
-						"type": "String"
-					},
-					{
-						"name": "GROOTTE",
-						"type": "String"
-					},
-					{
-						"name": "K_SOM",
-						"type": "String"
-					},
-					{
-						"name": "IND_M_O_G",
-						"type": "String"
-					},
-					{
-						"name": "ZAK_R",
-						"type": "String"
-					},
-					{
-						"name": "KULT_TEKST",
-						"type": "String"
-					},
-					{
-						"name": "OBJ_BEL",
-						"type": "String"
-					},
-					{
-						"name": "ERFDIENSTBH",
-						"type": "String"
-					},
-					{
-						"name": "KULT_GEB_K1",
-						"type": "String"
-					},
-					{
-						"name": "KULT_ONGEB_K1",
-						"type": "String"
-					},
-					{
-						"name": "INDEX_LR1",
-						"type": "String"
-					},
-					{
-						"name": "GROOTTE1",
-						"type": "String"
-					},
-					{
-						"name": "PTT_K1",
-						"type": "String"
-					},
-					{
-						"name": "PLTSNAAM1",
-						"type": "String"
-					},
-					{
-						"name": "STRAAT1",
-						"type": "String"
-					},
-					{
-						"name": "HUISNR1",
-						"type": "String"
-					},
-					{
-						"name": "TOEV1",
-						"type": "String"
-					},
-					{
-						"name": "KULT_GEB_K2",
-						"type": "String"
-					},
-					{
-						"name": "KULT_ONGEB_K2",
-						"type": "String"
-					},
-					{
-						"name": "INDEX_LR2",
-						"type": "String"
-					},
-					{
-						"name": "GROOTTE2",
-						"type": "String"
-					},
-					{
-						"name": "PTT_K2",
-						"type": "String"
-					},
-					{
-						"name": "PLTSNAAM2",
-						"type": "String"
-					},
-					{
-						"name": "STRAAT2",
-						"type": "String"
-					},
-					{
-						"name": "HUISNR2",
-						"type": "String"
-					},
-					{
-						"name": "TOEV2",
-						"type": "String"
-					},
-					{
-						"name": "KULT_GEB_K3",
-						"type": "String"
-					},
-					{
-						"name": "KULT_ONGEB_K3",
-						"type": "String"
-					},
-					{
-						"name": "INDEX_LR3",
-						"type": "String"
-					},
-					{
-						"name": "GROOTTE3",
-						"type": "String"
-					},
-					{
-						"name": "PTT_K3",
-						"type": "String"
-					},
-					{
-						"name": "PLTSNAAM3",
-						"type": "String"
-					},
-					{
-						"name": "STRAAT3",
-						"type": "String"
-					},
-					{
-						"name": "HUISNR3",
-						"type": "String"
-					},
-					{
-						"name": "TOEV3",
-						"type": "String"
-					},
-					{
-						"name": "KULT_GEB_K4",
-						"type": "String"
-					},
-					{
-						"name": "KULT_ONGEB_K4",
-						"type": "String"
-					},
-					{
-						"name": "INDEX_LR4",
-						"type": "String"
-					},
-					{
-						"name": "GROOTTE4",
-						"type": "String"
-					},
-					{
-						"name": "PTT_K4",
-						"type": "String"
-					},
-					{
-						"name": "PLTSNAAM4",
-						"type": "String"
-					},
-					{
-						"name": "STRAAT4",
-						"type": "String"
-					},
-					{
-						"name": "HUISNR4",
-						"type": "String"
-					},
-					{
-						"name": "TOEV4",
-						"type": "String"
-					},
-					{
-						"name": "IND_HUURDER",
-						"type": "String"
-					},
-					{
-						"name": "BEWARINGKODE",
-						"type": "String"
-					},
-					{
-						"name": "STUK_ID",
-						"type": "String"
-					},
-					{
-						"name": "MUT_SRT",
-						"type": "String"
-					},
-					{
-						"name": "BURGEM_NR",
-						"type": "String"
-					},
-					{
-						"name": "OBJECT",
-						"type": "String"
-					},
-					{
-						"name": "NNP_1E_VERKR",
-						"type": "String"
-					},
-					{
-						"name": "NNP_1E_VERVR",
-						"type": "String"
-					},
-					{
-						"name": "FAM_TRANS",
-						"type": "String"
-					},
-					{
-						"name": "PHT",
-						"type": "String"
-					},
-					{
-						"name": "KAD_GEM",
-						"type": "String"
-					},
-					{
-						"name": "SECTIE",
-						"type": "String"
-					},
-					{
-						"name": "BAG_ID",
-						"type": "String"
-					}
-				]
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/datapipeline_blob_storage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/OV20_Input_files')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "datapipeline_blob_storage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Catella_OV20*.csv",
-						"folderPath": "nl/kadaster/to_upload",
-						"container": "data-pipeline-input-files"
-					},
-					"columnDelimiter": ";",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": [
-					{
-						"name": "OVER_BEW_K",
-						"type": "String"
-					},
-					{
-						"name": "STUK_ONTV_DATUM",
-						"type": "String"
-					},
-					{
-						"name": "OVER_STUK",
-						"type": "String"
-					},
-					{
-						"name": "VV_NAAM",
-						"type": "String"
-					},
-					{
-						"name": "VV_WOONPLAATS",
-						"type": "String"
-					},
-					{
-						"name": "NNP_VV_K",
-						"type": "String"
-					},
-					{
-						"name": "VK_NAAM",
-						"type": "String"
-					},
-					{
-						"name": "VK_WOONPLAATS",
-						"type": "String"
-					},
-					{
-						"name": "NNP_VK_K",
-						"type": "String"
-					},
-					{
-						"name": "OBJE_MUT_SRT_K",
-						"type": "String"
-					},
-					{
-						"name": "IND_FAM_TRANS",
-						"type": "String"
-					},
-					{
-						"name": "OBJE_OBJEKT",
-						"type": "String"
-					},
-					{
-						"name": "KAD_GEM",
-						"type": "String"
-					},
-					{
-						"name": "SECTIE",
-						"type": "String"
-					},
-					{
-						"name": "PERCEELNR",
-						"type": "String"
-					},
-					{
-						"name": "INDEXLT",
-						"type": "String"
-					},
-					{
-						"name": "INDEXNR",
-						"type": "String"
-					},
-					{
-						"name": "OBJE_GROOTTE",
-						"type": "String"
-					},
-					{
-						"name": "OBJE_KOOP_SOM",
-						"type": "String"
-					},
-					{
-						"name": "OBJE_IND_MEER_O_G",
-						"type": "String"
-					},
-					{
-						"name": "OBJE_BURG_GEM_NR",
-						"type": "String"
-					},
-					{
-						"name": "OBJE_BURG_GEM_NAAM",
-						"type": "String"
-					},
-					{
-						"name": "OBJE_KULT_ONGEB_K",
-						"type": "String"
-					},
-					{
-						"name": "ZAKR_ZR_K",
-						"type": "String"
-					},
-					{
-						"name": "OBJB_OBJ_BEL_K",
-						"type": "String"
-					},
-					{
-						"name": "OBJE_X_COORD",
-						"type": "String"
-					},
-					{
-						"name": "OBJE_Y_COORD",
-						"type": "String"
-					},
-					{
-						"name": "OBJE_KULT_TEXT",
-						"type": "String"
-					},
-					{
-						"name": "OBJA_KULT_GEB_K",
-						"type": "String"
-					},
-					{
-						"name": "OBJA_PLTS_NAAM",
-						"type": "String"
-					},
-					{
-						"name": "OBJA_STRAAT",
-						"type": "String"
-					},
-					{
-						"name": "OBJA_HUIS_NR",
-						"type": "String"
-					},
-					{
-						"name": "OBJA_HUIS_LR",
-						"type": "String"
-					},
-					{
-						"name": "OBJA_TOEVOEGING",
-						"type": "String"
-					},
-					{
-						"name": "OBJA_PTT_K",
-						"type": "String"
-					},
-					{
-						"name": "PHT",
-						"type": "String"
-					},
-					{
-						"name": "OVER_ID",
-						"type": "String"
-					},
-					{
-						"name": "BAG_ID",
-						"type": "String"
-					}
-				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/datapipeline_blob_storage')]"
