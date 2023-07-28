@@ -5724,7 +5724,14 @@
 					{
 						"name": "Upload-Data-to-DB",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Get Uploaded Filenames",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "1.00:00:00",
 							"retry": 0,
@@ -6567,6 +6574,241 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Insert_Log",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "move-files-to-archive",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Insert_ADF_Logs]",
+							"storedProcedureParameters": {
+								"CopyActivityRunID": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').ActivityRunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Date": {
+									"value": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"type": "DateTime"
+								},
+								"ErrorMessage": {
+									"value": null,
+									"type": "String"
+								},
+								"Filenames": {
+									"value": {
+										"value": "@activity('Get Uploaded Filenames').output.itemName",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineName": {
+									"value": {
+										"value": "@pipeline().Pipeline",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Rows_skipped": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.rowsSkipped",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"Rows_written": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.rowsCopied",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"StatusMessage": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.executionDetails[0].status",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "datapipeline_dev_db",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Insert_Error_Log",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "move-files-to-archive",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Insert_ADF_Logs]",
+							"storedProcedureParameters": {
+								"CopyActivityRunID": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').ActivityRunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Date": {
+									"value": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"type": "DateTime"
+								},
+								"ErrorMessage": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.errors[0].Message",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Filenames": {
+									"value": {
+										"value": "@activity('Get Uploaded Filenames').output.itemName",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineName": {
+									"value": {
+										"value": "@pipeline().Pipeline",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Rows_skipped": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.rowsSkipped",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"Rows_written": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.rowsCopied",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"StatusMessage": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.executionDetails[0].status",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "datapipeline_dev_db",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Get Uploaded Filenames",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "geomap_to_be_uploaded_files",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"itemName"
+							],
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "JsonReadSettings"
+							}
+						}
+					},
+					{
+						"name": "Raise_Failed",
+						"type": "Fail",
+						"dependsOn": [
+							{
+								"activity": "Insert_Error_Log",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"message": {
+								"value": "@activity('Upload-Data-to-DB').output.errors[0].Message",
+								"type": "Expression"
+							},
+							"errorCode": {
+								"value": "@activity('Upload-Data-to-DB').output.errors[0].Code",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"policy": {
@@ -6581,6 +6823,8 @@
 				"[concat(variables('factoryId'), '/datasets/AzureSql_Geomap_Input_Table')]",
 				"[concat(variables('factoryId'), '/datasets/geomap_to_be_uploaded_files_zip')]",
 				"[concat(variables('factoryId'), '/datasets/geomap_uploaded_zip_folder')]",
+				"[concat(variables('factoryId'), '/linkedServices/datapipeline_dev_db')]",
+				"[concat(variables('factoryId'), '/datasets/geomap_to_be_uploaded_files')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorageLogs')]"
 			]
 		},
@@ -16342,6 +16586,33 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/WH_FTP_csv_file')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "WHSftpServer",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "SftpLocation",
+						"folderPath": "/data/Input"
+					},
+					"columnDelimiter": "|",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/WHSftpServer')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/WH_archive')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -16367,33 +16638,6 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/datapipeline_blob_storage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WH_FTP_csv_file')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "WHSftpServer",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "DelimitedText",
-				"typeProperties": {
-					"location": {
-						"type": "SftpLocation",
-						"folderPath": "/data/Input"
-					},
-					"columnDelimiter": "|",
-					"escapeChar": "\\",
-					"firstRowAsHeader": true,
-					"quoteChar": "\""
-				},
-				"schema": []
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/WHSftpServer')]"
 			]
 		},
 		{
