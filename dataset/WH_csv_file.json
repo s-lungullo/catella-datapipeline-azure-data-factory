@@ -12,7 +12,7 @@
 				"type": "SftpLocation",
 				"folderPath": "/data/Input"
 			},
-			"columnDelimiter": ",",
+			"columnDelimiter": "|",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
