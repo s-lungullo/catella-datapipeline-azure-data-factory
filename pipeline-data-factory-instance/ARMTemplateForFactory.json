@@ -11581,7 +11581,7 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataset": {
-								"referenceName": "WH_csv_file",
+								"referenceName": "WH_FTP_csv_file",
 								"type": "DatasetReference",
 								"parameters": {}
 							},
@@ -11702,7 +11702,7 @@
 												},
 												"inputs": [
 													{
-														"referenceName": "WH_csv_file",
+														"referenceName": "WH_FTP_csv_file",
 														"type": "DatasetReference",
 														"parameters": {}
 													}
@@ -11733,7 +11733,7 @@
 				"[concat(variables('factoryId'), '/datasets/WH_input_csv')]",
 				"[concat(variables('factoryId'), '/datasets/AzureSQL_WH_Input_Table')]",
 				"[concat(variables('factoryId'), '/datasets/WH_archive')]",
-				"[concat(variables('factoryId'), '/datasets/WH_csv_file')]",
+				"[concat(variables('factoryId'), '/datasets/WH_FTP_csv_file')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorageLogs')]"
 			]
 		},
@@ -16370,7 +16370,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/WH_csv_file')]",
+			"name": "[concat(parameters('factoryName'), '/WH_FTP_csv_file')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
