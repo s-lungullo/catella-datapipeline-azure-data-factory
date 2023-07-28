@@ -1,5 +1,5 @@
 {
-	"name": "WH_csv_file",
+	"name": "WH_FTP_csv_file",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "WHSftpServer",
