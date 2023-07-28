@@ -1048,18 +1048,19 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "geomap_to_be_uploaded_files",
+						"referenceName": "geomap_to_be_uploaded_zip_folder",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
-						"itemName"
+						"childItems"
 					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
-						"type": "JsonReadSettings"
+						"type": "BinaryReadSettings"
 					}
 				}
 			},
@@ -1076,11 +1077,22 @@
 				],
 				"userProperties": [],
 				"typeProperties": {
-					"message": "@activity('Upload-Data-to-DB').output.errors[0].Message",
-					"errorCode": "@activity('Upload-Data-to-DB').output.errors[0].Code"
+					"message": {
+						"value": "@activity('Upload-Data-to-DB').output.errors[0].Message",
+						"type": "Expression"
+					},
+					"errorCode": {
+						"value": "@activity('Upload-Data-to-DB').output.errors[0].Code",
+						"type": "Expression"
+					}
 				}
 			}
 		],
+		"variables": {
+			"FileName": {
+				"type": "String"
+			}
+		},
 		"annotations": [],
 		"lastPublishTime": "2023-07-18T20:44:05Z"
 	},
