@@ -858,7 +858,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "move-files-to-archive",
+						"activity": "Upload-Data-to-DB",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -895,7 +895,7 @@
 						},
 						"Filenames": {
 							"value": {
-								"value": "@activity('Get Uploaded Filenames').output.itemName",
+								"value": "@activity('Get Uploaded Filenames').output.childItems",
 								"type": "Expression"
 							},
 							"type": "String"
@@ -947,7 +947,7 @@
 				"type": "SqlServerStoredProcedure",
 				"dependsOn": [
 					{
-						"activity": "move-files-to-archive",
+						"activity": "Upload-Data-to-DB",
 						"dependencyConditions": [
 							"Failed"
 						]
@@ -987,7 +987,7 @@
 						},
 						"Filenames": {
 							"value": {
-								"value": "@activity('Get Uploaded Filenames').output.itemName",
+								"value": "@activity('Get Uploaded Filenames').output.childItems",
 								"type": "Expression"
 							},
 							"type": "String"
