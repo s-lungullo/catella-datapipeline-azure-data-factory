@@ -7471,7 +7471,7 @@
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [
 							{
-								"activity": "move-files-to-archive",
+								"activity": "Upload-Data-to-DB",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -7508,7 +7508,7 @@
 								},
 								"Filenames": {
 									"value": {
-										"value": "@activity('Get Uploaded Filenames').output.itemName",
+										"value": "@activity('Get Uploaded Filenames').output.childItems",
 										"type": "Expression"
 									},
 									"type": "String"
@@ -7560,7 +7560,7 @@
 						"type": "SqlServerStoredProcedure",
 						"dependsOn": [
 							{
-								"activity": "move-files-to-archive",
+								"activity": "Upload-Data-to-DB",
 								"dependencyConditions": [
 									"Failed"
 								]
@@ -7600,7 +7600,7 @@
 								},
 								"Filenames": {
 									"value": {
-										"value": "@activity('Get Uploaded Filenames').output.itemName",
+										"value": "@activity('Get Uploaded Filenames').output.childItems",
 										"type": "Expression"
 									},
 									"type": "String"
@@ -7661,12 +7661,12 @@
 						"userProperties": [],
 						"typeProperties": {
 							"dataset": {
-								"referenceName": "geomap_to_be_uploaded_files",
+								"referenceName": "geomap_to_be_uploaded_zip_folder",
 								"type": "DatasetReference",
 								"parameters": {}
 							},
 							"fieldList": [
-								"itemName"
+								"childItems"
 							],
 							"storeSettings": {
 								"type": "AzureBlobStorageReadSettings",
@@ -7674,7 +7674,7 @@
 								"enablePartitionDiscovery": false
 							},
 							"formatSettings": {
-								"type": "JsonReadSettings"
+								"type": "BinaryReadSettings"
 							}
 						}
 					},
@@ -7706,6 +7706,11 @@
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
 				},
+				"variables": {
+					"FileName": {
+						"type": "String"
+					}
+				},
 				"annotations": [],
 				"lastPublishTime": "2023-07-18T20:44:05Z"
 			},
@@ -7713,7 +7718,7 @@
 				"[concat(variables('factoryId'), '/datasets/geomap_to_be_uploaded_folder')]",
 				"[concat(variables('factoryId'), '/datasets/geomap_to_be_uploaded_files_zip')]",
 				"[concat(variables('factoryId'), '/datasets/geomap_uploaded_zip_folder')]",
-				"[concat(variables('factoryId'), '/datasets/geomap_to_be_uploaded_files')]"
+				"[concat(variables('factoryId'), '/datasets/geomap_to_be_uploaded_zip_folder')]"
 			]
 		}
 	]
