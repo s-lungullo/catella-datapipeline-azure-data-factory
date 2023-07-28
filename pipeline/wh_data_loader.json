@@ -1327,6 +1327,10 @@
 												"storeSettings": {
 													"type": "SftpReadSettings",
 													"recursive": true,
+													"wildcardFileName": {
+														"value": "@item().name",
+														"type": "Expression"
+													},
 													"enablePartitionDiscovery": false,
 													"disableChunking": false
 												},
