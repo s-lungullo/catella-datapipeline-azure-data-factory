@@ -8,7 +8,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Get Uploaded Filenames",
+						"activity": "Set filenames array",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -894,7 +894,10 @@
 							"type": "String"
 						},
 						"Filenames": {
-							"value": null,
+							"value": {
+								"value": "@variables('filenames_lst')",
+								"type": "Expression"
+							},
 							"type": "String"
 						},
 						"PipelineName": {
@@ -1083,10 +1086,61 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "Convert output to array",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Uploaded Filenames",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "af",
+					"value": {
+						"value": "@split(replace(replace(replace(replace(replace(replace(replace(replace(replace(string(activity('Get Uploaded Filenames').output.childItems),'[{',''),'}]',''),'{',''),'}',''),'\"type\":\"Folder\"',''),'\"type\":\"File\"',''),'\"',''),'name:',''),',,',','),',')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set filenames array",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Convert output to array",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "filenames_lst",
+					"value": {
+						"value": "@take(variables('af'),add(length(variables('af')),-1))",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"variables": {
-			"filename": {
+			"af": {
+				"type": "Array"
+			},
+			"filenames_lst": {
 				"type": "Array"
 			}
 		},
