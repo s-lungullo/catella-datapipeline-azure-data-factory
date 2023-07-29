@@ -987,7 +987,7 @@
 						},
 						"Filenames": {
 							"value": {
-								"value": "@activity('Get Uploaded Filenames').output.childItems",
+								"value": "@variables('filenames_str')",
 								"type": "Expression"
 							},
 							"type": "String"
