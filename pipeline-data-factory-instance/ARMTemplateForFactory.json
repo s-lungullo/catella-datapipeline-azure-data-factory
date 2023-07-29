@@ -5726,7 +5726,7 @@
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "Get Uploaded Filenames",
+								"activity": "Set filenames string",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -6617,7 +6617,7 @@
 								},
 								"Filenames": {
 									"value": {
-										"value": "@activity('Get Uploaded Filenames').output.childItems",
+										"value": "@variables('filenames_str')",
 										"type": "Expression"
 									},
 									"type": "String"
@@ -6809,6 +6809,54 @@
 								"type": "Expression"
 							}
 						}
+					},
+					{
+						"name": "Convert output to array",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Uploaded Filenames",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "af",
+							"value": {
+								"value": "@split(replace(replace(replace(replace(replace(replace(replace(replace(replace(string(activity('Get Uploaded Filenames').output.childItems),'[{',''),'}]',''),'{',''),'}',''),'\"type\":\"Folder\"',''),'\"type\":\"File\"',''),'\"',''),'name:',''),',,',','),',')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set filenames string",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Convert output to array",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "filenames_str",
+							"value": {
+								"value": "@join(take(variables('af'),add(length(variables('af')),-1)),',')",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"policy": {
@@ -6816,7 +6864,13 @@
 					"cancelAfter": {}
 				},
 				"variables": {
-					"FileName": {
+					"af": {
+						"type": "Array"
+					},
+					"filenames_lst": {
+						"type": "Array"
+					},
+					"filenames_str": {
 						"type": "String"
 					}
 				},
