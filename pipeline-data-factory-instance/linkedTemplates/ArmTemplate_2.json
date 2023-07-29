@@ -6617,7 +6617,7 @@
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "Set filenames string",
+								"activity": "Remove last comma",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -7702,7 +7702,7 @@
 						}
 					},
 					{
-						"name": "Convert output to array",
+						"name": "Set filenames string",
 						"type": "SetVariable",
 						"dependsOn": [
 							{
@@ -7720,17 +7720,17 @@
 						"typeProperties": {
 							"variableName": "af",
 							"value": {
-								"value": "@split(replace(replace(replace(replace(replace(replace(replace(replace(replace(string(activity('Get Uploaded Filenames').output.childItems),'[{',''),'}]',''),'{',''),'}',''),'\"type\":\"Folder\"',''),'\"type\":\"File\"',''),'\"',''),'name:',''),',,',','),',')",
+								"value": "@replace(replace(replace(replace(replace(replace(replace(replace(replace(string(activity('Get Uploaded Filenames').output.childItems),'[{',''),'}]',''),'{',''),'}',''),'\"type\":\"Folder\"',''),'\"type\":\"File\"',''),'\"',''),'name:',''),',,',', ')",
 								"type": "Expression"
 							}
 						}
 					},
 					{
-						"name": "Set filenames string",
+						"name": "Remove last comma",
 						"type": "SetVariable",
 						"dependsOn": [
 							{
-								"activity": "Convert output to array",
+								"activity": "Set filenames string",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -7744,7 +7744,7 @@
 						"typeProperties": {
 							"variableName": "filenames_str",
 							"value": {
-								"value": "@join(take(variables('af'),add(length(variables('af')),-1)),',')",
+								"value": "@substring(variables('af'), 0, add(length(variables('af')),-1))",
 								"type": "Expression"
 							}
 						}
@@ -7756,10 +7756,7 @@
 				},
 				"variables": {
 					"af": {
-						"type": "Array"
-					},
-					"filenames_lst": {
-						"type": "Array"
+						"type": "String"
 					},
 					"filenames_str": {
 						"type": "String"
