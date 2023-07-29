@@ -894,10 +894,7 @@
 							"type": "String"
 						},
 						"Filenames": {
-							"value": {
-								"value": "@activity('Get Uploaded Filenames').output.childItems",
-								"type": "Expression"
-							},
+							"value": null,
 							"type": "String"
 						},
 						"PipelineName": {
@@ -1089,8 +1086,8 @@
 			}
 		],
 		"variables": {
-			"FileName": {
-				"type": "String"
+			"filename": {
+				"type": "Array"
 			}
 		},
 		"annotations": [],
