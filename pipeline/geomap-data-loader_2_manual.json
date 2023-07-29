@@ -1140,9 +1140,6 @@
 			"af": {
 				"type": "String"
 			},
-			"filenames_lst": {
-				"type": "Array"
-			},
 			"filenames_str": {
 				"type": "String"
 			}
