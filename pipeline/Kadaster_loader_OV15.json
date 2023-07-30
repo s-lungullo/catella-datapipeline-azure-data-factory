@@ -5,9 +5,14 @@
 			{
 				"name": "Upload OV15 data",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Remove last comma",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -870,8 +875,6 @@
 			{
 				"name": "Copy file_to_archive",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copy OV15 from staging",
@@ -940,8 +943,6 @@
 			{
 				"name": "delete_from_toUpload_folder",
 				"type": "Delete",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copy file_to_archive",
@@ -975,8 +976,6 @@
 			{
 				"name": "Copy OV15 from staging",
 				"type": "SqlServerStoredProcedure",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Upload OV15 data",
@@ -1097,6 +1096,210 @@
 					},
 					"condition": {
 						"value": "@contains(string(item()), 'OV15')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Insert_Log",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Upload OV15 data",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[Insert_ADF_Logs]",
+					"storedProcedureParameters": {
+						"CopyActivityRunID": {
+							"value": {
+								"value": "@activity('Upload OV15 data').ActivityRunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Date": {
+							"value": {
+								"value": "@utcnow()",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"ErrorMessage": {
+							"value": null,
+							"type": "String"
+						},
+						"Filenames": {
+							"value": {
+								"value": "@variables('filenames_str')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PipelineName": {
+							"value": {
+								"value": "@pipeline().Pipeline",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PipelineRunID": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Rows_skipped": {
+							"value": {
+								"value": "@activity('Upload OV15 data').output.rowsSkipped",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"Rows_written": {
+							"value": {
+								"value": "@activity('Upload OV15 data').output.rowsCopied",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"StatusMessage": {
+							"value": {
+								"value": "@activity('Upload OV15 data').output.executionDetails[0].status",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "datapipeline_dev_db",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Insert_Error_Log",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Upload OV15 data",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[Insert_ADF_Logs]",
+					"storedProcedureParameters": {
+						"CopyActivityRunID": {
+							"value": {
+								"value": "@activity('Upload OV15 data').ActivityRunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Date": {
+							"value": {
+								"value": "@utcnow()",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"ErrorMessage": {
+							"value": {
+								"value": "@activity('Upload OV15 data').output.errors[0].Message",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Filenames": {
+							"value": {
+								"value": "@variables('filenames_str')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PipelineName": {
+							"value": {
+								"value": "@pipeline().Pipeline",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PipelineRunID": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Rows_skipped": {
+							"value": {
+								"value": "@activity('Upload OV15 data').output.rowsSkipped",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"Rows_written": {
+							"value": {
+								"value": "@activity('Upload OV15 data').output.rowsCopied",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"StatusMessage": {
+							"value": {
+								"value": "@activity('Upload OV15 data').output.executionDetails[0].status",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "datapipeline_dev_db",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Raise_Failed",
+				"type": "Fail",
+				"dependsOn": [
+					{
+						"activity": "Insert_Error_Log",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"message": {
+						"value": "@activity('Upload-Data-to-DB').output.errors[0].Message",
+						"type": "Expression"
+					},
+					"errorCode": {
+						"value": "@activity('Upload-Data-to-DB').output.errors[0].Code",
 						"type": "Expression"
 					}
 				}
