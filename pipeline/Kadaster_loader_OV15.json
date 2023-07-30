@@ -1295,11 +1295,11 @@
 				"userProperties": [],
 				"typeProperties": {
 					"message": {
-						"value": "@activity('Upload-Data-to-DB').output.errors[0].Message",
+						"value": "@activity('Upload OV15 data').output.errors[0].Message",
 						"type": "Expression"
 					},
 					"errorCode": {
-						"value": "@activity('Upload-Data-to-DB').output.errors[0].Code",
+						"value": "@activity('Upload OV15 data').output.errors[0].Code",
 						"type": "Expression"
 					}
 				}
