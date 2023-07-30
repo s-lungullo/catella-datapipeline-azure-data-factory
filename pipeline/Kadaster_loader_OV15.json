@@ -1049,7 +1049,7 @@
 				"typeProperties": {
 					"variableName": "af",
 					"value": {
-						"value": "@replace(replace(replace(replace(replace(replace(replace(replace(replace(string(activity('Filter OV15 files').output.childItems),'[{',''),'}]',''),'{',''),'}',''),'\"type\":\"Folder\"',''),'\"type\":\"File\"',''),'\"',''),'name:',''),',,',', ')",
+						"value": "@replace(replace(replace(replace(replace(replace(replace(replace(replace(string(activity('Filter OV15 files').output.Value),'[{',''),'}]',''),'{',''),'}',''),'\"type\":\"Folder\"',''),'\"type\":\"File\"',''),'\"',''),'name:',''),',,',', ')",
 						"type": "Expression"
 					}
 				}
