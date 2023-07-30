@@ -2187,7 +2187,14 @@
 					{
 						"name": "Upload OV15 data",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Remove last comma",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "0.12:00:00",
 							"retry": 0,
@@ -3179,11 +3186,325 @@
 							"referenceName": "DataPipelineSQLDev",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Get Uploaded Filenames",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "kadaster_to_be_uploaded",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "DelimitedTextReadSettings"
+							}
+						}
+					},
+					{
+						"name": "Set filenames string",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Filter OV15 files",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "af",
+							"value": {
+								"value": "@replace(replace(replace(replace(replace(replace(replace(replace(replace(string(activity('Filter OV15 files').output.Value),'[{',''),'}]',''),'{',''),'}',''),'\"type\":\"Folder\"',''),'\"type\":\"File\"',''),'\"',''),'name:',''),',,',', ')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Remove last comma",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Set filenames string",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "filenames_str",
+							"value": {
+								"value": "@substring(variables('af'), 0, add(length(variables('af')),-1))",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Filter OV15 files",
+						"type": "Filter",
+						"dependsOn": [
+							{
+								"activity": "Get Uploaded Filenames",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Get Uploaded Filenames').output.childItems",
+								"type": "Expression"
+							},
+							"condition": {
+								"value": "@contains(string(item()), 'OV15')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Insert_Log",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Upload OV15 data",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Insert_ADF_Logs]",
+							"storedProcedureParameters": {
+								"CopyActivityRunID": {
+									"value": {
+										"value": "@activity('Upload OV15 data').ActivityRunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Date": {
+									"value": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"type": "DateTime"
+								},
+								"ErrorMessage": {
+									"value": null,
+									"type": "String"
+								},
+								"Filenames": {
+									"value": {
+										"value": "@variables('filenames_str')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineName": {
+									"value": {
+										"value": "@pipeline().Pipeline",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Rows_skipped": {
+									"value": {
+										"value": "@activity('Upload OV15 data').output.rowsSkipped",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"Rows_written": {
+									"value": {
+										"value": "@activity('Upload OV15 data').output.rowsCopied",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"StatusMessage": {
+									"value": {
+										"value": "@activity('Upload OV15 data').output.executionDetails[0].status",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "datapipeline_dev_db",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Insert_Error_Log",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Upload OV15 data",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Insert_ADF_Logs]",
+							"storedProcedureParameters": {
+								"CopyActivityRunID": {
+									"value": {
+										"value": "@activity('Upload OV15 data').ActivityRunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Date": {
+									"value": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"type": "DateTime"
+								},
+								"ErrorMessage": {
+									"value": {
+										"value": "@activity('Upload OV15 data').output.errors[0].Message",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Filenames": {
+									"value": {
+										"value": "@variables('filenames_str')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineName": {
+									"value": {
+										"value": "@pipeline().Pipeline",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Rows_skipped": {
+									"value": {
+										"value": "@activity('Upload OV15 data').output.rowsSkipped",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"Rows_written": {
+									"value": {
+										"value": "@activity('Upload OV15 data').output.rowsCopied",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"StatusMessage": {
+									"value": {
+										"value": "@activity('Upload OV15 data').output.executionDetails[0].status",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "datapipeline_dev_db",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Raise_Failed",
+						"type": "Fail",
+						"dependsOn": [
+							{
+								"activity": "Insert_Error_Log",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"message": {
+								"value": "@activity('Upload OV15 data').output.errors[0].Message",
+								"type": "Expression"
+							},
+							"errorCode": {
+								"value": "@activity('Upload OV15 data').output.errors[0].Code",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"policy": {
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
+				},
+				"variables": {
+					"af": {
+						"type": "String"
+					},
+					"filenames_str": {
+						"type": "String"
+					}
 				},
 				"annotations": [],
 				"lastPublishTime": "2023-07-18T20:44:05Z"
@@ -3202,7 +3523,14 @@
 					{
 						"name": "Upload OV20 data",
 						"type": "Copy",
-						"dependsOn": [],
+						"dependsOn": [
+							{
+								"activity": "Remove last comma",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
 						"policy": {
 							"timeout": "0.12:00:00",
 							"retry": 0,
@@ -3858,11 +4186,325 @@
 							"referenceName": "DataPipelineSQLDev",
 							"type": "LinkedServiceReference"
 						}
+					},
+					{
+						"name": "Get Uploaded Filenames",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "kadaster_to_be_uploaded",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "DelimitedTextReadSettings"
+							}
+						}
+					},
+					{
+						"name": "Set filenames string",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Filter OV20 files",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "af",
+							"value": {
+								"value": "@replace(replace(replace(replace(replace(replace(replace(replace(replace(string(activity('Filter OV20 files').output.Value),'[{',''),'}]',''),'{',''),'}',''),'\"type\":\"Folder\"',''),'\"type\":\"File\"',''),'\"',''),'name:',''),',,',', ')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Remove last comma",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Set filenames string",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "filenames_str",
+							"value": {
+								"value": "@substring(variables('af'), 0, add(length(variables('af')),-1))",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Filter OV20 files",
+						"type": "Filter",
+						"dependsOn": [
+							{
+								"activity": "Get Uploaded Filenames",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Get Uploaded Filenames').output.childItems",
+								"type": "Expression"
+							},
+							"condition": {
+								"value": "@contains(string(item()), 'OV20')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Insert_Log",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Upload OV20 data",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Insert_ADF_Logs]",
+							"storedProcedureParameters": {
+								"CopyActivityRunID": {
+									"value": {
+										"value": "@activity('Upload OV20 data').ActivityRunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Date": {
+									"value": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"type": "DateTime"
+								},
+								"ErrorMessage": {
+									"value": null,
+									"type": "String"
+								},
+								"Filenames": {
+									"value": {
+										"value": "@variables('filenames_str')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineName": {
+									"value": {
+										"value": "@pipeline().Pipeline",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Rows_skipped": {
+									"value": {
+										"value": "@activity('Upload OV20 data').output.rowsSkipped",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"Rows_written": {
+									"value": {
+										"value": "@activity('Upload OV20 data').output.rowsCopied",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"StatusMessage": {
+									"value": {
+										"value": "@activity('Upload OV20 data').output.executionDetails[0].status",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "datapipeline_dev_db",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Insert_Error_Log",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Upload OV20 data",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Insert_ADF_Logs]",
+							"storedProcedureParameters": {
+								"CopyActivityRunID": {
+									"value": {
+										"value": "@activity('Upload OV20 data').ActivityRunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Date": {
+									"value": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"type": "DateTime"
+								},
+								"ErrorMessage": {
+									"value": {
+										"value": "@activity('Upload OV20 data').output.errors[0].Message",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Filenames": {
+									"value": {
+										"value": "@variables('filenames_str')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineName": {
+									"value": {
+										"value": "@pipeline().Pipeline",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Rows_skipped": {
+									"value": {
+										"value": "@activity('Upload OV20 data').output.rowsSkipped",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"Rows_written": {
+									"value": {
+										"value": "@activity('Upload OV20 data').output.rowsCopied",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"StatusMessage": {
+									"value": {
+										"value": "@activity('Upload OV20 data').output.executionDetails[0].status",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "datapipeline_dev_db",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Raise_Failed",
+						"type": "Fail",
+						"dependsOn": [
+							{
+								"activity": "Insert_Error_Log",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"message": {
+								"value": "@activity('Upload OV20 data').output.errors[0].Message",
+								"type": "Expression"
+							},
+							"errorCode": {
+								"value": "@activity('Upload OV20 data').output.errors[0].Code",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"policy": {
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
+				},
+				"variables": {
+					"af": {
+						"type": "String"
+					},
+					"filenames_str": {
+						"type": "String"
+					}
 				},
 				"annotations": [],
 				"lastPublishTime": "2023-07-18T20:44:05Z"
@@ -5797,7 +6439,7 @@
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "ForEachIncominFile",
+								"activity": "Remove last comma",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -6589,11 +7231,309 @@
 								"parameters": {}
 							}
 						]
+					},
+					{
+						"name": "Get Uploaded Filenames",
+						"type": "GetMetadata",
+						"dependsOn": [
+							{
+								"activity": "ForEachIncominFile",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "geomap_to_be_uploaded_zip_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					},
+					{
+						"name": "Set filenames string",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Uploaded Filenames",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "af",
+							"value": {
+								"value": "@replace(replace(replace(replace(replace(replace(replace(replace(replace(string(activity('Get Uploaded Filenames').output.childItems),'[{',''),'}]',''),'{',''),'}',''),'\"type\":\"Folder\"',''),'\"type\":\"File\"',''),'\"',''),'name:',''),',,',', ')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Remove last comma",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Set filenames string",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "filenames_str",
+							"value": {
+								"value": "@substring(variables('af'), 0, add(length(variables('af')),-1))",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Insert_Log",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Upload-Data-to-DB",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Insert_ADF_Logs]",
+							"storedProcedureParameters": {
+								"CopyActivityRunID": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').ActivityRunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Date": {
+									"value": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"type": "DateTime"
+								},
+								"ErrorMessage": {
+									"value": null,
+									"type": "String"
+								},
+								"Filenames": {
+									"value": {
+										"value": "@variables('filenames_str')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineName": {
+									"value": {
+										"value": "@pipeline().Pipeline",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Rows_skipped": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.rowsSkipped",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"Rows_written": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.rowsCopied",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"StatusMessage": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.executionDetails[0].status",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "datapipeline_dev_db",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Insert_Error_Log",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Upload-Data-to-DB",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Insert_ADF_Logs]",
+							"storedProcedureParameters": {
+								"CopyActivityRunID": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').ActivityRunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Date": {
+									"value": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"type": "DateTime"
+								},
+								"ErrorMessage": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.errors[0].Message",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Filenames": {
+									"value": {
+										"value": "@variables('filenames_str')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineName": {
+									"value": {
+										"value": "@pipeline().Pipeline",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Rows_skipped": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.rowsSkipped",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"Rows_written": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.rowsCopied",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"StatusMessage": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.executionDetails[0].status",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "datapipeline_dev_db",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Raise_Failed",
+						"type": "Fail",
+						"dependsOn": [
+							{
+								"activity": "Insert_Error_Log",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"message": {
+								"value": "@activity('Upload-Data-to-DB').output.errors[0].Message",
+								"type": "Expression"
+							},
+							"errorCode": {
+								"value": "@activity('Upload-Data-to-DB').output.errors[0].Code",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"policy": {
 					"elapsedTimeMetric": {},
 					"cancelAfter": {}
+				},
+				"variables": {
+					"af": {
+						"type": "String"
+					},
+					"filenames_str": {
+						"type": "String"
+					}
 				},
 				"annotations": [],
 				"lastPublishTime": "2023-07-18T20:44:05Z"
