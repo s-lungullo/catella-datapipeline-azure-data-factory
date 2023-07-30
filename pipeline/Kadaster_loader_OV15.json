@@ -5,6 +5,8 @@
 			{
 				"name": "Upload OV15 data",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -868,6 +870,8 @@
 			{
 				"name": "Copy file_to_archive",
 				"type": "Copy",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copy OV15 from staging",
@@ -936,6 +940,8 @@
 			{
 				"name": "delete_from_toUpload_folder",
 				"type": "Delete",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Copy file_to_archive",
@@ -969,6 +975,8 @@
 			{
 				"name": "Copy OV15 from staging",
 				"type": "SqlServerStoredProcedure",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Upload OV15 data",
@@ -992,8 +1000,116 @@
 					"referenceName": "DataPipelineSQLDev",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "Get Uploaded Filenames",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "kadaster_to_be_uploaded",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "Set filenames string",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Filter OV15 files",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "af",
+					"value": {
+						"value": "@replace(replace(replace(replace(replace(replace(replace(replace(replace(string(activity('Filter OV15 files').output.childItems),'[{',''),'}]',''),'{',''),'}',''),'\"type\":\"Folder\"',''),'\"type\":\"File\"',''),'\"',''),'name:',''),',,',', ')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Remove last comma",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set filenames string",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "filenames_str",
+					"value": {
+						"value": "@substring(variables('af'), 0, add(length(variables('af')),-1))",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Filter OV15 files",
+				"type": "Filter",
+				"dependsOn": [
+					{
+						"activity": "Get Uploaded Filenames",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Get Uploaded Filenames').output.childItems",
+						"type": "Expression"
+					},
+					"condition": {
+						"value": "@contains(item(), 'OV15')",
+						"type": "Expression"
+					}
+				}
 			}
 		],
+		"variables": {
+			"af": {
+				"type": "String"
+			},
+			"filenames_str": {
+				"type": "String"
+			}
+		},
 		"annotations": [],
 		"lastPublishTime": "2023-07-18T20:44:05Z"
 	},
