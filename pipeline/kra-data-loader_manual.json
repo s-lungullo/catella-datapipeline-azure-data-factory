@@ -1037,6 +1037,8 @@
 			{
 				"name": "Get Uploaded Filenames",
 				"type": "GetMetadata",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -1090,6 +1092,8 @@
 			{
 				"name": "Set filenames string",
 				"type": "SetVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Get Uploaded Filenames",
@@ -1114,6 +1118,8 @@
 			{
 				"name": "Remove last comma",
 				"type": "SetVariable",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Set filenames string",
