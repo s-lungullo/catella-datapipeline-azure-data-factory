@@ -39,7 +39,10 @@
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
-							"type": "JsonReadSettings"
+							"type": "JsonReadSettings",
+							"compressionProperties": {
+								"type": "ZipDeflateReadSettings"
+							}
 						}
 					},
 					"sink": {
@@ -69,703 +72,325 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['crawlerObject']['kaufMiete']"
+									"path": "$['_id']['$oid']"
 								},
 								"sink": {
-									"name": "kaufMiete",
+									"name": "id",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['crawlerObject']['lage']['geoLongitude']"
+									"path": "$['source']"
 								},
 								"sink": {
-									"name": "geoLongitude",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['lage']['geoLatitude']"
-								},
-								"sink": {
-									"name": "geoLatitude",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['lage']['land']"
-								},
-								"sink": {
-									"name": "land",
+									"name": "source",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['crawlerObject']['objektTyp']"
+									"path": "$['sourceUrl']"
 								},
 								"sink": {
-									"name": "objektTyp",
+									"name": "sourceUrl",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['crawlerObject']['anbieter']"
+									"path": "$['sourceId']"
 								},
 								"sink": {
-									"name": "anbieter",
+									"name": "sourceId",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['crawlerObject']['angebotsInformationen']['titel']"
+									"path": "$['referenceDate']"
 								},
 								"sink": {
-									"name": "titel",
-									"type": "String"
+									"name": "referenceDate",
+									"type": "DateTime"
 								}
 							},
 							{
 								"source": {
-									"path": "$['crawlerObject']['angebotsInformationen']['portalUrl']"
+									"path": "$['isSale']"
 								},
 								"sink": {
-									"name": "portalUrl",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektTypText']"
-								},
-								"sink": {
-									"name": "objektTypText",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['saniert']"
-								},
-								"sink": {
-									"name": "saniert",
+									"name": "isSale",
 									"type": "Boolean"
 								}
 							},
 							{
 								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['heizungsart']"
+									"path": "$['askingprice']"
 								},
 								"sink": {
-									"name": "heizungsart",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['sanitär']"
-								},
-								"sink": {
-									"name": "sanitar",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['ausweisTyp']"
-								},
-								"sink": {
-									"name": "ausweisTyp",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['ausweisInfo']"
-								},
-								"sink": {
-									"name": "ausweisInfo",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['energieKennwerte']['ENERGIEKENNWERT']['KennwertKlasse']"
-								},
-								"sink": {
-									"name": "KennwertKlasse",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['energieKennwerte']['ENERGIEKENNWERT']['kennwert']"
-								},
-								"sink": {
-									"name": "kennwert",
+									"name": "askingprice",
 									"type": "Double"
 								}
 							},
 							{
 								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Grundstuecksflaeche']"
+									"path": "$['including_purchase_cost']"
 								},
 								"sink": {
-									"name": "Grundstuecksflaeche",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Wohnflaeche']"
-								},
-								"sink": {
-									"name": "Wohnflaeche",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Nutzflaeche']"
-								},
-								"sink": {
-									"name": "Nutzflaeche",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['zustand']"
-								},
-								"sink": {
-									"name": "zustand",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['ausstattungsQualität']"
-								},
-								"sink": {
-									"name": "ausstattungsQualitat",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['etage']"
-								},
-								"sink": {
-									"name": "etage",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['ZIMMER']"
-								},
-								"sink": {
-									"name": "ZIMMER",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['ETAGEN']"
-								},
-								"sink": {
-									"name": "ETAGEN",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['BADEZIMMER']"
-								},
-								"sink": {
-									"name": "BADEZIMMER",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['SCHLAFZIMMER']"
-								},
-								"sink": {
-									"name": "SCHLAFZIMMER",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['STELLPLAETZE']"
-								},
-								"sink": {
-									"name": "STELLPLAETZE",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['jahreszahlen']['BAUJAHR']"
-								},
-								"sink": {
-									"name": "BAUJAHR",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['jahreszahlen']['SANIERUNG']"
-								},
-								"sink": {
-									"name": "SANIERUNG",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['küche']"
-								},
-								"sink": {
-									"name": "kuche",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['balkonTerrasse']"
-								},
-								"sink": {
-									"name": "balkonTerrasse",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['keller']"
-								},
-								"sink": {
-									"name": "keller",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['kommunikation']"
-								},
-								"sink": {
-									"name": "kommunikation",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['boden']"
-								},
-								"sink": {
-									"name": "boden",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['energieträger']"
-								},
-								"sink": {
-									"name": "energietrager",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['aufzug']"
-								},
-								"sink": {
-									"name": "aufzug",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['stellplatz']"
-								},
-								"sink": {
-									"name": "stellplatz",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['lageEinheit']"
-								},
-								"sink": {
-									"name": "lageEinheit",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['sonstiges']"
-								},
-								"sink": {
-									"name": "sonstiges",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['objektArt']"
-								},
-								"sink": {
-									"name": "objektArt",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['preise']['provisionsfrei']"
-								},
-								"sink": {
-									"name": "provisionsfrei",
+									"name": "including_purchase_cost",
 									"type": "Boolean"
 								}
 							},
 							{
 								"source": {
-									"path": "$['crawlerObject']['preise']['heizkostenInNebenkostenEnthalten']"
+									"path": "$['service_charges']"
 								},
 								"sink": {
-									"name": "heizkostenInNebenkostenEnthalten",
-									"type": "Boolean"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['preise']['currency']"
-								},
-								"sink": {
-									"name": "currency",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatOhneNebenkosten']"
-								},
-								"sink": {
-									"name": "MieteProMonatOhneNebenkosten",
+									"name": "service_charges",
 									"type": "Double"
 								}
 							},
 							{
 								"source": {
-									"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatMitNebenkosten']"
+									"path": "$['services_included']"
 								},
 								"sink": {
-									"name": "MieteProMonatMitNebenkosten",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['preise']['preisValues']['NebenkostenProMonat']"
-								},
-								"sink": {
-									"name": "NebenkostenProMonat",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['preise']['preisValues']['MietKaution']"
-								},
-								"sink": {
-									"name": "MietKaution",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['preise']['preisValues']['HeizkostenProMonat']"
-								},
-								"sink": {
-									"name": "HeizkostenProMonat",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatProStellplatz']"
-								},
-								"sink": {
-									"name": "MieteProMonatProStellplatz",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['preise']['preisValues']['Kaufpreis']"
-								},
-								"sink": {
-									"name": "Kaufpreis",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['preise']['preisValues']['HausgeldProMonat']"
-								},
-								"sink": {
-									"name": "HausgeldProMonat",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['addr']['stadtteil']"
-								},
-								"sink": {
-									"name": "stadtteil",
+									"name": "services_included",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['crawlerObject']['addr']['stadtbezirk']"
+									"path": "$['property_type']"
 								},
 								"sink": {
-									"name": "stadtbezirk",
+									"name": "property_type",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['crawlerObject']['addr']['kreis']"
+									"path": "$['broker']"
 								},
 								"sink": {
-									"name": "kreis",
+									"name": "broker",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['crawlerObject']['addr']['accuracy']"
+									"path": "$['construction_year']"
 								},
 								"sink": {
-									"name": "accuracy",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['addr']['ort']"
-								},
-								"sink": {
-									"name": "ort",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['addr']['bundesland']"
-								},
-								"sink": {
-									"name": "bundesland",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['addr']['plz']"
-								},
-								"sink": {
-									"name": "plz",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['addr']['strasse']"
-								},
-								"sink": {
-									"name": "strasse",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['addr']['hausnummer']"
-								},
-								"sink": {
-									"name": "hausnummer",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['firstSeenDay']"
-								},
-								"sink": {
-									"name": "firstSeenDay",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"path": "$['daysOnline']"
-								},
-								"sink": {
-									"name": "daysOnline",
+									"name": "construction_year",
 									"type": "Int32"
 								}
 							},
 							{
 								"source": {
-									"path": "$['preisProQm']"
+									"path": "$['renovation_year']"
 								},
 								"sink": {
-									"name": "preisProQm",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['onlineRanges']"
-								},
-								"sink": {
-									"name": "onlineRanges",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['rendite']['marktmieteProQm']"
-								},
-								"sink": {
-									"name": "marktmieteProQm",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['rendite']['marktmieteGebiet']"
-								},
-								"sink": {
-									"name": "marktmieteGebiet",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['rendite']['renditeAvg']"
-								},
-								"sink": {
-									"name": "renditeAvg",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['rendite']['renditeQuelle']"
-								},
-								"sink": {
-									"name": "renditeQuelle",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['rendite']['marktRendite']"
-								},
-								"sink": {
-									"name": "marktRendite",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['rendite']['zeitraumMarktmiete']['lt']"
-								},
-								"sink": {
-									"name": "zeitraumMarktmiete_lt",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"path": "$['rendite']['zeitraumMarktmiete']['gte']"
-								},
-								"sink": {
-									"name": "zeitraumMarktmiete_gte",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"path": "$['rendite']['anzahlAngeboteMarktmiete']"
-								},
-								"sink": {
-									"name": "anzahlAngeboteMarktmiete",
+									"name": "renovation_year",
 									"type": "Int32"
 								}
 							},
 							{
 								"source": {
-									"path": "$['eventDay']"
+									"path": "$['living_area']"
 								},
 								"sink": {
-									"name": "eventDay",
-									"type": "DateTime"
+									"name": "living_area",
+									"type": "Double"
 								}
 							},
 							{
 								"source": {
-									"path": "$['online']"
+									"path": "$['land_area']"
 								},
 								"sink": {
-									"name": "online",
-									"type": "Boolean"
+									"name": "land_area",
+									"type": "Double"
 								}
 							},
 							{
 								"source": {
-									"path": "$['lastOfflineDay']"
+									"path": "$['furnishing']"
 								},
 								"sink": {
-									"name": "lastOfflineDay",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"path": "$['lastSeenDay']"
-								},
-								"sink": {
-									"name": "lastSeenDay",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
-									"path": "$['state']"
-								},
-								"sink": {
-									"name": "state",
+									"name": "furnishing",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['groupId']"
+									"path": "$['floor']"
 								},
 								"sink": {
-									"name": "groupId",
+									"name": "floor",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['title']"
+								},
+								"sink": {
+									"name": "title",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['description']"
+								},
+								"sink": {
+									"name": "description",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['number_of_rooms']"
+								},
+								"sink": {
+									"name": "number_of_rooms",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['particularities']"
+								},
+								"sink": {
+									"name": "particularities",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['construction_type']"
+								},
+								"sink": {
+									"name": "construction_type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['energy_label']"
+								},
+								"sink": {
+									"name": "energy_label",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['new_construction']"
+								},
+								"sink": {
+									"name": "new_construction",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['street']"
+								},
+								"sink": {
+									"name": "street",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['house_number']"
+								},
+								"sink": {
+									"name": "house_number",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['house_number_add']"
+								},
+								"sink": {
+									"name": "house_number_add",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['city']"
+								},
+								"sink": {
+									"name": "city",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['zip_code']"
+								},
+								"sink": {
+									"name": "zip_code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['country']"
+								},
+								"sink": {
+									"name": "country",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['construction_number']"
+								},
+								"sink": {
+									"name": "construction_number",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['geodata']['latitude']"
+								},
+								"sink": {
+									"name": "latitude",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['geodata']['longitude']"
+								},
+								"sink": {
+									"name": "longitude",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['geodata']['precise']"
+								},
+								"sink": {
+									"name": "geodata_precise",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['thumbnail_image_url']"
+								},
+								"sink": {
+									"name": "thumbnail_image_url",
 									"type": "String"
 								}
 							},
@@ -791,7 +416,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSql_Geomap_Input_Table",
+						"referenceName": "AzureSql_KRA_Input_Table",
 						"type": "DatasetReference"
 					}
 				]

@@ -1,0 +1,176 @@
+{
+	"name": "AzureSql_KRA_Input_Table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datapipeline_dev_db",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "nvarchar"
+			},
+			{
+				"name": "source",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sourceUrl",
+				"type": "nvarchar"
+			},
+			{
+				"name": "sourceId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "referenceDate",
+				"type": "datetime2",
+				"scale": 7
+			},
+			{
+				"name": "isSale",
+				"type": "bit"
+			},
+			{
+				"name": "askingprice",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "including_purchase_cost",
+				"type": "bit"
+			},
+			{
+				"name": "service_charges",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "services_included",
+				"type": "nvarchar"
+			},
+			{
+				"name": "property_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "broker",
+				"type": "nvarchar"
+			},
+			{
+				"name": "construction_year",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "renovation_year",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "living_area",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "land_area",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "furnishing",
+				"type": "nvarchar"
+			},
+			{
+				"name": "floor",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "title",
+				"type": "nvarchar"
+			},
+			{
+				"name": "description",
+				"type": "nvarchar"
+			},
+			{
+				"name": "number_of_rooms",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "particularities",
+				"type": "nvarchar"
+			},
+			{
+				"name": "construction_type",
+				"type": "nvarchar"
+			},
+			{
+				"name": "energy_label",
+				"type": "nvarchar"
+			},
+			{
+				"name": "new_construction",
+				"type": "bit"
+			},
+			{
+				"name": "street",
+				"type": "nvarchar"
+			},
+			{
+				"name": "house_number",
+				"type": "nvarchar"
+			},
+			{
+				"name": "house_number_add",
+				"type": "nvarchar"
+			},
+			{
+				"name": "city",
+				"type": "nvarchar"
+			},
+			{
+				"name": "country",
+				"type": "nvarchar"
+			},
+			{
+				"name": "zip_code",
+				"type": "nvarchar"
+			},
+			{
+				"name": "construction_number",
+				"type": "nvarchar"
+			},
+			{
+				"name": "latitude",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "longitude",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "geodata_precise",
+				"type": "bit"
+			},
+			{
+				"name": "thumbnail_image_url",
+				"type": "nvarchar"
+			},
+			{
+				"name": "JsonFilePath",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "KRA_RawInput"
+		}
+	}
+}
