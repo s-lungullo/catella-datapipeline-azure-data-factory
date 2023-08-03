@@ -240,15 +240,6 @@
 							},
 							{
 								"source": {
-									"path": "$['description']"
-								},
-								"sink": {
-									"name": "description",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"path": "$['number_of_rooms']"
 								},
 								"sink": {
