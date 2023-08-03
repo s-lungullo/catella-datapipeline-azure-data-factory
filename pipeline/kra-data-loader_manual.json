@@ -64,7 +64,7 @@
 								"referenceName": "AzureBlobStorageLogs",
 								"type": "LinkedServiceReference"
 							},
-							"path": "data-pipeline-input-files/de/geomap/logs"
+							"path": "data-pipeline-input-files/benelux/kra/logs"
 						}
 					},
 					"translator": {
