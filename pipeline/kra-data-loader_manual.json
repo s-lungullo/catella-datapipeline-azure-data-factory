@@ -35,14 +35,11 @@
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": false,
 							"wildcardFolderPath": "benelux/kra/to_upload",
-							"wildcardFileName": "*",
+							"wildcardFileName": "*.json",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
-							"type": "JsonReadSettings",
-							"compressionProperties": {
-								"type": "ZipDeflateReadSettings"
-							}
+							"type": "JsonReadSettings"
 						}
 					},
 					"sink": {

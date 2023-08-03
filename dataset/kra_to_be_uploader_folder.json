@@ -12,9 +12,6 @@
 				"type": "AzureBlobStorageLocation",
 				"folderPath": "benelux/kra/to_upload",
 				"container": "data-pipeline-input-files"
-			},
-			"compression": {
-				"type": "ZipDeflate"
 			}
 		},
 		"schema": {
