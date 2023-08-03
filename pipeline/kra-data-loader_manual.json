@@ -34,7 +34,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": false,
-							"wildcardFolderPath": "de/geomap/to_upload",
+							"wildcardFolderPath": "benelux/kra/to_upload",
 							"wildcardFileName": "*",
 							"enablePartitionDiscovery": false
 						},
