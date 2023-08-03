@@ -93,10 +93,6 @@
 				"type": "nvarchar"
 			},
 			{
-				"name": "description",
-				"type": "nvarchar"
-			},
-			{
 				"name": "number_of_rooms",
 				"type": "int",
 				"precision": 10
