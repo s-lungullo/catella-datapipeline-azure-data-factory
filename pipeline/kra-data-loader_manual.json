@@ -39,10 +39,7 @@
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
-							"type": "JsonReadSettings",
-							"compressionProperties": {
-								"type": "ZipDeflateReadSettings"
-							}
+							"type": "JsonReadSettings"
 						}
 					},
 					"sink": {
@@ -788,7 +785,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "geomap_to_be_uploaded_folder",
+						"referenceName": "kra_to_be_uploader_folder",
 						"type": "DatasetReference"
 					}
 				],

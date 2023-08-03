@@ -1,0 +1,173 @@
+{
+	"name": "kra_to_be_uploader_folder",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "datapipeline_blob_storage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "*",
+				"folderPath": "benelux/kra/to_upload",
+				"container": "data-pipeline-input-files"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"_id": {
+					"type": "object",
+					"properties": {
+						"$oid": {
+							"type": "string"
+						}
+					}
+				},
+				"source": {
+					"type": "string"
+				},
+				"sourceUrl": {
+					"type": "string"
+				},
+				"sourceId": {
+					"type": "string"
+				},
+				"referenceDate": {
+					"type": "string"
+				},
+				"isSale": {
+					"type": "boolean"
+				},
+				"askingprice": {
+					"type": "integer"
+				},
+				"including_purchase_cost": {
+					"type": "null"
+				},
+				"service_charges": {
+					"type": "integer"
+				},
+				"services_included": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"name": {
+								"type": "string"
+							},
+							"amount": {
+								"type": "integer"
+							},
+							"frequency": {
+								"type": "string"
+							}
+						}
+					}
+				},
+				"property_type": {
+					"type": "string"
+				},
+				"broker": {
+					"type": "string"
+				},
+				"construction_year": {
+					"type": "null"
+				},
+				"renovation_year": {
+					"type": "null"
+				},
+				"living_area": {
+					"type": "integer"
+				},
+				"land_area": {
+					"type": "integer"
+				},
+				"furnishing": {
+					"type": "null"
+				},
+				"floor": {
+					"type": "null"
+				},
+				"title": {
+					"type": "string"
+				},
+				"description": {
+					"type": "string"
+				},
+				"number_of_rooms": {
+					"type": "integer"
+				},
+				"particularities": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"construction_type": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"energy_label": {
+					"type": "string"
+				},
+				"new_construction": {
+					"type": "boolean"
+				},
+				"address": {
+					"type": "object",
+					"properties": {
+						"street": {
+							"type": "string"
+						},
+						"house_number": {
+							"type": "integer"
+						},
+						"house_number_add": {
+							"type": "null"
+						},
+						"city": {
+							"type": "string"
+						},
+						"zip_code": {
+							"type": "string"
+						},
+						"country": {
+							"type": "string"
+						},
+						"construction_number": {
+							"type": "null"
+						}
+					}
+				},
+				"geodata": {
+					"type": "object",
+					"properties": {
+						"latitude": {
+							"type": "number"
+						},
+						"longitude": {
+							"type": "number"
+						},
+						"precise": {
+							"type": "boolean"
+						}
+					}
+				},
+				"thumbnail_image_url": {
+					"type": "string"
+				},
+				"picture_urls": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			}
+		}
+	}
+}
