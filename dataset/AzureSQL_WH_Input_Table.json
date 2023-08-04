@@ -385,6 +385,10 @@
 			{
 				"name": "WoningType",
 				"type": "nvarchar"
+			},
+			{
+				"name": "CsvFilePath",
+				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
