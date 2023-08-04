@@ -1096,6 +1096,14 @@
 									"type": "String",
 									"physicalType": "nvarchar"
 								}
+							},
+							{
+								"source": {
+									"name": "CsvFilePath"
+								},
+								"sink": {
+									"name": "CsvFilePath"
+								}
 							}
 						],
 						"typeConversion": true,
