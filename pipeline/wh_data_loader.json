@@ -1099,10 +1099,13 @@
 							},
 							{
 								"source": {
-									"name": "CsvFilePath"
+									"name": "CsvFilePath",
+									"type": "String"
 								},
 								"sink": {
-									"name": "CsvFilePath"
+									"name": "CsvFilePath",
+									"type": "String",
+									"physicalType": "nvarchar"
 								}
 							}
 						],
