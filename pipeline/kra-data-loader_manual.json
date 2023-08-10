@@ -437,7 +437,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": false,
-							"wildcardFolderPath": "de/geomap/to_upload",
+							"wildcardFolderPath": "benelux/kra/to_upload",
 							"wildcardFileName": "*.zip",
 							"deleteFilesAfterCompletion": true
 						},
@@ -455,13 +455,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "geomap_to_be_uploaded_files_zip",
+						"referenceName": "kra_to_be_uploaded_files_zip",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "geomap_uploaded_zip_folder",
+						"referenceName": "kra_uploaded_zip_folder",
 						"type": "DatasetReference"
 					}
 				]
