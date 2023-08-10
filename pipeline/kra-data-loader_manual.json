@@ -661,7 +661,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataset": {
-						"referenceName": "geomap_to_be_uploaded_zip_folder",
+						"referenceName": "kra_to_be_uploader_folder",
 						"type": "DatasetReference"
 					},
 					"fieldList": [
@@ -673,7 +673,7 @@
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
-						"type": "BinaryReadSettings"
+						"type": "JsonReadSettings"
 					}
 				}
 			},
