@@ -17,6 +17,4017 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/Kadaster_loader_OV20')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "Upload OV20 data",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Remove last comma",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFolderPath": "nl/kadaster/to_upload",
+									"wildcardFileName": "Catella_OV20*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorageLogs",
+										"type": "LinkedServiceReference"
+									},
+									"path": "data-pipeline-input-files/nl/kadaster/logs"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "OVER_BEW_K",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OVER_BEW_K",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "STUK_ONTV_DATUM",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "STUK_ONTV_DATUM",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OVER_STUK",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OVER_STUK",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "VV_NAAM",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "VV_NAAM",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "VV_WOONPLAATS",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "VV_WOONPLAATS",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "NNP_VV_K",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "NNP_VV_K",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "VK_NAAM",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "VK_NAAM",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "VK_WOONPLAATS",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "VK_WOONPLAATS",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "NNP_VK_K",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "NNP_VK_K",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJE_MUT_SRT_K",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJE_MUT_SRT_K",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "IND_FAM_TRANS",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "IND_FAM_TRANS",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJE_OBJEKT",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJE_OBJEKT",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "KAD_GEM",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "KAD_GEM",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "SECTIE",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "SECTIE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "PERCEELNR",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PERCEELNR",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "INDEXLT",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "INDEXLT",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "INDEXNR",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "INDEXNR",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJE_GROOTTE",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJE_GROOTTE",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJE_KOOP_SOM",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJE_KOOP_SOM",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJE_IND_MEER_O_G",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJE_IND_MEER_O_G",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJE_BURG_GEM_NR",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJE_BURG_GEM_NR",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJE_BURG_GEM_NAAM",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJE_BURG_GEM_NAAM",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJE_KULT_ONGEB_K",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJE_KULT_ONGEB_K",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "ZAKR_ZR_K",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "ZAKR_ZR_K",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJB_OBJ_BEL_K",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJB_OBJ_BEL_K",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJE_X_COORD",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJE_X_COORD",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJE_Y_COORD",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJE_Y_COORD",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJE_KULT_TEXT",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJE_KULT_TEXT",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJA_KULT_GEB_K",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJA_KULT_GEB_K",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJA_PLTS_NAAM",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJA_PLTS_NAAM",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJA_STRAAT",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJA_STRAAT",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJA_HUIS_NR",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJA_HUIS_NR",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJA_HUIS_LR",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJA_HUIS_LR",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJA_TOEVOEGING",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJA_TOEVOEGING",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OBJA_PTT_K",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OBJA_PTT_K",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "PHT",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "PHT",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "OVER_ID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "OVER_ID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "BAG_ID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "BAG_ID",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "OV20_Input_files",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSql_Kadaster_Input_Table",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Copy file_to_archive",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Copy OV20 from staging",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFolderPath": "nl/kadaster/to_upload",
+									"wildcardFileName": "Catella_OV20*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings",
+									"copyBehavior": "PreserveHierarchy"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "OV20_Input_files",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "Kadaster_archive",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "delete_from_toUpload_folder",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "Copy file_to_archive",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "kadaster_to_be_uploaded",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"enableLogging": false,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"wildcardFileName": "Catella_OV20*.csv",
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "Copy OV20 from staging",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Upload OV20 data",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_copykadaster_OV20data_from_staging]"
+						},
+						"linkedServiceName": {
+							"referenceName": "DataPipelineSQLDev",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Get Uploaded Filenames",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "kadaster_to_be_uploaded",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "DelimitedTextReadSettings"
+							}
+						}
+					},
+					{
+						"name": "Set filenames string",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Filter OV20 files",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "af",
+							"value": {
+								"value": "@replace(replace(replace(replace(replace(replace(replace(replace(replace(string(activity('Filter OV20 files').output.Value),'[{',''),'}]',''),'{',''),'}',''),'\"type\":\"Folder\"',''),'\"type\":\"File\"',''),'\"',''),'name:',''),',,',', ')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Remove last comma",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Set filenames string",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "filenames_str",
+							"value": {
+								"value": "@substring(variables('af'), 0, add(length(variables('af')),-1))",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Filter OV20 files",
+						"type": "Filter",
+						"dependsOn": [
+							{
+								"activity": "Get Uploaded Filenames",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Get Uploaded Filenames').output.childItems",
+								"type": "Expression"
+							},
+							"condition": {
+								"value": "@contains(string(item()), 'OV20')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Insert_Log",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Upload OV20 data",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Insert_ADF_Logs]",
+							"storedProcedureParameters": {
+								"CopyActivityRunID": {
+									"value": {
+										"value": "@activity('Upload OV20 data').ActivityRunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Date": {
+									"value": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"type": "DateTime"
+								},
+								"ErrorMessage": {
+									"value": null,
+									"type": "String"
+								},
+								"Filenames": {
+									"value": {
+										"value": "@variables('filenames_str')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineName": {
+									"value": {
+										"value": "@pipeline().Pipeline",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Rows_skipped": {
+									"value": {
+										"value": "@activity('Upload OV20 data').output.rowsSkipped",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"Rows_written": {
+									"value": {
+										"value": "@activity('Upload OV20 data').output.rowsCopied",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"StatusMessage": {
+									"value": {
+										"value": "@activity('Upload OV20 data').output.executionDetails[0].status",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "datapipeline_dev_db",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Insert_Error_Log",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Upload OV20 data",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Insert_ADF_Logs]",
+							"storedProcedureParameters": {
+								"CopyActivityRunID": {
+									"value": {
+										"value": "@activity('Upload OV20 data').ActivityRunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Date": {
+									"value": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"type": "DateTime"
+								},
+								"ErrorMessage": {
+									"value": {
+										"value": "@activity('Upload OV20 data').output.errors[0].Message",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Filenames": {
+									"value": {
+										"value": "@variables('filenames_str')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineName": {
+									"value": {
+										"value": "@pipeline().Pipeline",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Rows_skipped": {
+									"value": {
+										"value": "@activity('Upload OV20 data').output.rowsSkipped",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"Rows_written": {
+									"value": {
+										"value": "@activity('Upload OV20 data').output.rowsCopied",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"StatusMessage": {
+									"value": {
+										"value": "@activity('Upload OV20 data').output.executionDetails[0].status",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "datapipeline_dev_db",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Raise_Failed",
+						"type": "Fail",
+						"dependsOn": [
+							{
+								"activity": "Insert_Error_Log",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"message": {
+								"value": "@activity('Upload OV20 data').output.errors[0].Message",
+								"type": "Expression"
+							},
+							"errorCode": {
+								"value": "@activity('Upload OV20 data').output.errors[0].Code",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"af": {
+						"type": "String"
+					},
+					"filenames_str": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-07-18T20:44:05Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/debug')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "get-uploaded-filenames",
+						"type": "GetMetadata",
+						"dependsOn": [
+							{
+								"activity": "reset-to-be-uploaded-folder",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "geomap_uploaded_zip_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					},
+					{
+						"name": "get-incoming-filenames",
+						"type": "GetMetadata",
+						"dependsOn": [
+							{
+								"activity": "reset-to-be-uploaded-folder",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "zip_geomap_ftp_server",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "FtpReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false,
+								"useBinaryTransfer": true,
+								"disableChunking": false
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					},
+					{
+						"name": "ForEachIncominFile",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "get-uploaded-filenames",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "get-incoming-filenames",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('get-incoming-filenames').output.childItems",
+								"type": "Expression"
+							},
+							"isSequential": false,
+							"activities": [
+								{
+									"name": "if-file-is-not-uploaded",
+									"type": "IfCondition",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@not(contains(activity('get-uploaded-filenames').output.childItems, item()))",
+											"type": "Expression"
+										},
+										"ifTrueActivities": [
+											{
+												"name": "copy-incoming-files",
+												"description": "",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "0.01:00:00",
+													"retry": 2,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "BinarySource",
+														"storeSettings": {
+															"type": "FtpReadSettings",
+															"recursive": true,
+															"wildcardFileName": {
+																"value": "@item().name",
+																"type": "Expression"
+															},
+															"useBinaryTransfer": true,
+															"deleteFilesAfterCompletion": false,
+															"disableChunking": false
+														},
+														"formatSettings": {
+															"type": "BinaryReadSettings"
+														}
+													},
+													"sink": {
+														"type": "BinarySink",
+														"storeSettings": {
+															"type": "AzureBlobStorageWriteSettings"
+														}
+													},
+													"enableStaging": false,
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Warning",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "AzureBlobStorageLogs",
+																"type": "LinkedServiceReference"
+															},
+															"path": "logs/geomapupload"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "zip_geomap_ftp_server",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "geomap_to_be_uploaded_zip_folder",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "Upload-Data",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": true,
+									"wildcardFileName": "*.zip",
+									"deleteFilesAfterCompletion": false
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "old_geomap_data_zip",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "geomap_to_be_uploaded_zip_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "reset-to-be-uploaded-folder",
+						"type": "Delete",
+						"dependsOn": [
+							{
+								"activity": "copy-files-to-archive",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 3,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "kadaster_to_be_uploaded",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"logStorageSettings": {
+								"linkedServiceName": {
+									"referenceName": "AzureBlobStorageLogs",
+									"type": "LinkedServiceReference"
+								},
+								"path": "logs/geomapupload"
+							},
+							"enableLogging": true,
+							"storeSettings": {
+								"type": "AzureBlobFSReadSettings",
+								"recursive": true,
+								"wildcardFileName": "*",
+								"enablePartitionDiscovery": false
+							}
+						}
+					},
+					{
+						"name": "copy-files-to-archive",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Upload-Data",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobFSReadSettings",
+									"recursive": false,
+									"wildcardFolderPath": "nl/kadaster/to_upload/ov20",
+									"wildcardFileName": "*.csv",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"copyBehavior": "PreserveHierarchy"
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".csv"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "kadaster_to_be_uploaded",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "kadaster_uploaded",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-02-17T14:49:49Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/geomap-data-loader')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Data pipeline to laod all geomap files to the database",
+				"activities": [
+					{
+						"name": "Upload-Data",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "If Clean Upload",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"additionalColumns": [
+									{
+										"name": "JsonFilePath",
+										"value": "$$FILEPATH"
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": false,
+									"wildcardFolderPath": "de/geomap/to_upload",
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings",
+									"compressionProperties": {
+										"type": "ZipDeflateReadSettings"
+									}
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorageLogs",
+										"type": "LinkedServiceReference"
+									},
+									"path": "logs/geomapupload"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['crawlerObject']['kaufMiete']"
+										},
+										"sink": {
+											"name": "RentOrSale",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['lage']['land']"
+										},
+										"sink": {
+											"name": "Country",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['titel']"
+										},
+										"sink": {
+											"name": "Titel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['portalUrl']"
+										},
+										"sink": {
+											"name": "DetailedUrl",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['BESCHREIBUNG']"
+										},
+										"sink": {
+											"name": "Description_Main",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['LAGE']"
+										},
+										"sink": {
+											"name": "Description_Location",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['SONSTIGES']"
+										},
+										"sink": {
+											"name": "Description_Other",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['AUSSTATTUNG']"
+										},
+										"sink": {
+											"name": "Description_Furnishing",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['verfugbarAb']"
+										},
+										"sink": {
+											"name": "AvailableFrom",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['ZIMMER']"
+										},
+										"sink": {
+											"name": "NumberOfRooms",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['BADEZIMMER']"
+										},
+										"sink": {
+											"name": "NumberOfBathrooms",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['SCHLAFZIMMER']"
+										},
+										"sink": {
+											"name": "NumberOfBedRooms",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['ETAGEN']"
+										},
+										"sink": {
+											"name": "NumberOfFloors",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Wohnflaeche']"
+										},
+										"sink": {
+											"name": "LivingArea",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Grundstuecksflaeche']"
+										},
+										"sink": {
+											"name": "LandArea",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['saniert']"
+										},
+										"sink": {
+											"name": "IsSanitized",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['energieKennwerte']['ENERGIEKENNWERT']['KennwertKlasse']"
+										},
+										"sink": {
+											"name": "EnergyLabel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['energieKennwerte']['ENERGIEKENNWERT']['kennwert']"
+										},
+										"sink": {
+											"name": "EnergyValue",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['etage']"
+										},
+										"sink": {
+											"name": "Floor",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['jahreszahlen']['SANIERUNG']"
+										},
+										"sink": {
+											"name": "RenovationYear",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['jahreszahlen']['BAUJAHR']"
+										},
+										"sink": {
+											"name": "ConstructionYear",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektArt']"
+										},
+										"sink": {
+											"name": "PropertyType",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['currency']"
+										},
+										"sink": {
+											"name": "Currency",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatOhneNebenkosten']"
+										},
+										"sink": {
+											"name": "RentPerMonthNoAdditionalCosts",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatMitNebenkosten']"
+										},
+										"sink": {
+											"name": "RentPerMonthWithAdditionalCosts",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['NebenkostenProMonat']"
+										},
+										"sink": {
+											"name": "AdditionalCostsPerMonth",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatProStellplatz']"
+										},
+										"sink": {
+											"name": "RentPerMonthPerParking",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['MietKaution']"
+										},
+										"sink": {
+											"name": "RentalDeposit",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['HeizkostenProMonat']"
+										},
+										"sink": {
+											"name": "HeatingCostsPerMonth",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['heizkostenInNebenkostenEnthalten']"
+										},
+										"sink": {
+											"name": "HeatingCostsIncludedInAdditionalCosts",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['ort']"
+										},
+										"sink": {
+											"name": "City",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['kreis']"
+										},
+										"sink": {
+											"name": "District",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['accuracy']"
+										},
+										"sink": {
+											"name": "LocationAccuracy",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['location']['lon']"
+										},
+										"sink": {
+											"name": "Longitude",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['location']['lat']"
+										},
+										"sink": {
+											"name": "Latitude",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['plz']"
+										},
+										"sink": {
+											"name": "PostalCode",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['stadtteil']"
+										},
+										"sink": {
+											"name": "CityDistrict2",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['stadtbezirk']"
+										},
+										"sink": {
+											"name": "CityDistrict1",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['strasse']"
+										},
+										"sink": {
+											"name": "Street",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['hausnummer']"
+										},
+										"sink": {
+											"name": "HouseNumber",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektTyp']"
+										},
+										"sink": {
+											"name": "DwellingType",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['anbieter']"
+										},
+										"sink": {
+											"name": "Brokers_JsonArray",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['firstSeenDay']"
+										},
+										"sink": {
+											"name": "FirstSeenDay",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['daysOnline']"
+										},
+										"sink": {
+											"name": "DaysOnline",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['preisProQm']"
+										},
+										"sink": {
+											"name": "PricePerSqm",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['eventDay']"
+										},
+										"sink": {
+											"name": "ScrapingDay",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['preis']"
+										},
+										"sink": {
+											"name": "AskingPrice",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['online']"
+										},
+										"sink": {
+											"name": "IsOnline",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"path": "$['state']"
+										},
+										"sink": {
+											"name": "Status",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['lastSeenDay']"
+										},
+										"sink": {
+											"name": "LastSeenDay",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['nutzflaeche']"
+										},
+										"sink": {
+											"name": "UsableArea",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['groupId']"
+										},
+										"sink": {
+											"name": "GeomapId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['JsonFilePath']"
+										},
+										"sink": {
+											"name": "JsonFilePath",
+											"type": "String"
+										}
+									}
+								],
+								"collectionReference": "",
+								"mapComplexValuesToString": true
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "geomap_to_be_uploaded_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "DataPipelineTest_GeomapRawInput",
+								"type": "DatasetReference",
+								"parameters": {
+									"sinkTableName": "GeoMapRawImport"
+								}
+							}
+						]
+					},
+					{
+						"name": "If Clean Upload",
+						"type": "IfCondition",
+						"dependsOn": [
+							{
+								"activity": "ForEachIncominFile",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"expression": {
+								"value": "@variables('varCleanUpload')",
+								"type": "Expression"
+							},
+							"ifTrueActivities": [
+								{
+									"name": "Drop and recreate GeomapRawInputTable_copy1_copy1",
+									"type": "SqlServerStoredProcedure",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"storedProcedureName": {
+											"value": "@variables('varStoredProcedureForTableReset')",
+											"type": "Expression"
+										}
+									},
+									"linkedServiceName": {
+										"referenceName": "DataPipelineSQLTest",
+										"type": "LinkedServiceReference"
+									}
+								},
+								{
+									"name": "SetCleanUploadToFalse_copy1",
+									"type": "SetVariable",
+									"dependsOn": [
+										{
+											"activity": "Drop and recreate GeomapRawInputTable_copy1_copy1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"variableName": "varCleanUpload",
+										"value": {
+											"value": "@bool(0)",
+											"type": "Expression"
+										}
+									}
+								},
+								{
+									"name": "move-files-from archive",
+									"type": "Copy",
+									"dependsOn": [
+										{
+											"activity": "SetCleanUploadToFalse_copy1",
+											"dependencyConditions": [
+												"Succeeded"
+											]
+										}
+									],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "BinarySource",
+											"storeSettings": {
+												"type": "AzureBlobStorageReadSettings",
+												"recursive": true,
+												"wildcardFolderPath": "de/geomap/uploaded",
+												"wildcardFileName": "*.zip",
+												"deleteFilesAfterCompletion": true
+											},
+											"formatSettings": {
+												"type": "BinaryReadSettings"
+											}
+										},
+										"sink": {
+											"type": "BinarySink",
+											"storeSettings": {
+												"type": "AzureBlobStorageWriteSettings"
+											}
+										},
+										"enableStaging": false
+									},
+									"inputs": [
+										{
+											"referenceName": "geomap_uploaded_files_zip",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "geomap_uploaded_zip_folder",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									]
+								}
+							]
+						}
+					},
+					{
+						"name": "SP_Pipeline_Log",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Upload-Data",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_UpdateCatellaDataPipeline_LogTable]",
+							"storedProcedureParameters": {
+								"DataFactory_Name": {
+									"value": {
+										"value": "@{pipeline().DataFactory}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Pipeline_Name": {
+									"value": {
+										"value": "@{pipeline().Pipeline}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"RunId": {
+									"value": {
+										"value": "@{pipeline().RunId}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Source": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.executionDetails[0].source.type}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Destination": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.executionDetails[0].sink.type}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"TriggerType": {
+									"value": {
+										"value": "@{pipeline().TriggerType}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"TriggerId": {
+									"value": {
+										"value": "@{pipeline().TriggerId}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"TriggerName": {
+									"value": {
+										"value": "@{pipeline().TriggerName}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"TriggerTime": {
+									"value": {
+										"value": "@{pipeline().TriggerTime}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"rowsCopied": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.rowsCopied}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"DataRead": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.rowsRead}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"No_ParallelCopies": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.usedParallelCopies}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"copyDuration_in_secs": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.copyDuration}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"effectiveIntegrationRuntime": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.effectiveIntegrationRuntime}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Source_Type": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.executionDetails[0].source.type}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Sink_Type": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.executionDetails[0].sink.type}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Execution_Status": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.executionDetails[0].status}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"CopyActivity_Start_Time": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.executionDetails[0].start}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"CopyActivity_End_Time": {
+									"value": {
+										"value": "@{utcnow()}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"CopyActivity_queuingDuration_in_secs": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.executionDetails[0]. detailedDurations.queuingDuration}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"CopyActivity_transferDuration_in_secs": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.executionDetails[0]. detailedDurations.transferDuration}",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DataPipelineSQLTest",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "SP_Pipeline_Error",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Upload-Data",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[sp_UpdateCatellaDataPipeline_ErrorsTable]",
+							"storedProcedureParameters": {
+								"DataFactory_Name": {
+									"value": {
+										"value": "@{pipeline().DataFactory}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Pipeline_Name": {
+									"value": {
+										"value": "@{pipeline().Pipeline}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"RunId": {
+									"value": {
+										"value": "@{pipeline().RunId}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Source": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.executionDetails[0].source.type}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Destination": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.executionDetails[0].sink.type}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"TriggerType": {
+									"value": {
+										"value": "@{pipeline().TriggerType}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"TriggerId": {
+									"value": {
+										"value": "@{pipeline().TriggerId}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"TriggerName": {
+									"value": {
+										"value": "@{pipeline().TriggerName}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"TriggerTime": {
+									"value": {
+										"value": "@{pipeline().TriggerTime}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"No_ParallelCopies": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.usedParallelCopies}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"CopyDuration_in_secs": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.copyDuration}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"EffectiveIntegrationRuntime": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.effectiveIntegrationRuntime}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Source_Type": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.executionDetails[0].source.type}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Sink_Type": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.executionDetails[0].sink.type}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Execution_Status": {
+									"value": {
+										"value": "@{activity('Upload-Data').output.executionDetails[0].status}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"ErrorCode": {
+									"value": {
+										"value": "@{activity('Upload-Data').error.errorCode}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"ErrorDescription": {
+									"value": {
+										"value": "@{activity('Upload-Data').error.message}",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"ErrorLoggedTIme": {
+									"value": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"FailureType": {
+									"value": {
+										"value": "@concat(activity('Upload-Data').error.message,'failureType:',activity('Upload-Data').error.failureType)",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "DataPipelineSQLTest",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "PipelineThrow",
+						"type": "Fail",
+						"dependsOn": [
+							{
+								"activity": "SP_Pipeline_Error",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"message": {
+								"value": "@activity('Upload-Data').error.message",
+								"type": "Expression"
+							},
+							"errorCode": {
+								"value": "@activity('Upload-Data').error.errorCode",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "move-files-to-archive",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Upload-Data",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": false,
+									"wildcardFolderPath": "de/geomap/to_upload",
+									"wildcardFileName": "*.zip",
+									"deleteFilesAfterCompletion": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "geomap_to_be_uploaded_files_zip",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "geomap_uploaded_zip_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "get-uploaded-filenames",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "geomap_uploaded_zip_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					},
+					{
+						"name": "get-incoming-filenames",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "zip_geomap_ftp_server",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "FtpReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false,
+								"useBinaryTransfer": true,
+								"disableChunking": false
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					},
+					{
+						"name": "ForEachIncominFile",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "get-uploaded-filenames",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "get-incoming-filenames",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('get-incoming-filenames').output.childItems",
+								"type": "Expression"
+							},
+							"isSequential": false,
+							"activities": [
+								{
+									"name": "if-file-is-not-uploaded",
+									"type": "IfCondition",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@not(contains(activity('get-uploaded-filenames').output.childItems, item()))",
+											"type": "Expression"
+										},
+										"ifTrueActivities": [
+											{
+												"name": "copy-incoming-files",
+												"description": "",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "0.01:00:00",
+													"retry": 2,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "BinarySource",
+														"storeSettings": {
+															"type": "FtpReadSettings",
+															"recursive": true,
+															"wildcardFileName": {
+																"value": "@item().name",
+																"type": "Expression"
+															},
+															"useBinaryTransfer": true,
+															"deleteFilesAfterCompletion": false,
+															"disableChunking": false
+														},
+														"formatSettings": {
+															"type": "BinaryReadSettings"
+														}
+													},
+													"sink": {
+														"type": "BinarySink",
+														"storeSettings": {
+															"type": "AzureBlobStorageWriteSettings"
+														}
+													},
+													"enableStaging": false,
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Warning",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "AzureBlobStorageLogs",
+																"type": "LinkedServiceReference"
+															},
+															"path": "logs/geomapupload"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "zip_geomap_ftp_server",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "geomap_to_be_uploaded_zip_folder",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"varCleanUpload": {
+						"type": "Boolean",
+						"defaultValue": false
+					},
+					"varStoredProcedureForTableReset": {
+						"type": "String",
+						"defaultValue": "[[dbo].[sp_dropand_recreate_geomap_raw_input_table]"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-02-17T17:43:33Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/geomap-data-loader_2')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Data pipeline to load all geomap files to the database",
+				"activities": [
+					{
+						"name": "move-files-to-archive",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Upload-Data-to-DB",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": false,
+									"wildcardFolderPath": "de/geomap/to_upload",
+									"wildcardFileName": "*.zip",
+									"deleteFilesAfterCompletion": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "geomap_to_be_uploaded_files_zip",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "geomap_uploaded_zip_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "get-uploaded-filenames",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "geomap_uploaded_zip_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					},
+					{
+						"name": "get-incoming-filenames",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "zip_geomap_ftp_server",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "FtpReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false,
+								"useBinaryTransfer": true,
+								"disableChunking": false
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					},
+					{
+						"name": "ForEachIncominFile",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "get-uploaded-filenames",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							},
+							{
+								"activity": "get-incoming-filenames",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('get-incoming-filenames').output.childItems",
+								"type": "Expression"
+							},
+							"isSequential": false,
+							"activities": [
+								{
+									"name": "if-file-is-not-uploaded",
+									"type": "IfCondition",
+									"dependsOn": [],
+									"userProperties": [],
+									"typeProperties": {
+										"expression": {
+											"value": "@not(contains(activity('get-uploaded-filenames').output.childItems, item()))",
+											"type": "Expression"
+										},
+										"ifTrueActivities": [
+											{
+												"name": "copy-incoming-files",
+												"description": "",
+												"type": "Copy",
+												"dependsOn": [],
+												"policy": {
+													"timeout": "0.01:00:00",
+													"retry": 2,
+													"retryIntervalInSeconds": 30,
+													"secureOutput": false,
+													"secureInput": false
+												},
+												"userProperties": [],
+												"typeProperties": {
+													"source": {
+														"type": "BinarySource",
+														"storeSettings": {
+															"type": "FtpReadSettings",
+															"recursive": true,
+															"wildcardFileName": {
+																"value": "@item().name",
+																"type": "Expression"
+															},
+															"useBinaryTransfer": true,
+															"deleteFilesAfterCompletion": false,
+															"disableChunking": false
+														},
+														"formatSettings": {
+															"type": "BinaryReadSettings"
+														}
+													},
+													"sink": {
+														"type": "BinarySink",
+														"storeSettings": {
+															"type": "AzureBlobStorageWriteSettings"
+														}
+													},
+													"enableStaging": false,
+													"logSettings": {
+														"enableCopyActivityLog": true,
+														"copyActivityLogSettings": {
+															"logLevel": "Warning",
+															"enableReliableLogging": false
+														},
+														"logLocationSettings": {
+															"linkedServiceName": {
+																"referenceName": "AzureBlobStorageLogs",
+																"type": "LinkedServiceReference"
+															},
+															"path": "data-pipeline-input-files/de/geomap/logs"
+														}
+													}
+												},
+												"inputs": [
+													{
+														"referenceName": "zip_geomap_ftp_server",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
+												],
+												"outputs": [
+													{
+														"referenceName": "geomap_to_be_uploaded_zip_folder",
+														"type": "DatasetReference",
+														"parameters": {}
+													}
+												]
+											}
+										]
+									}
+								}
+							]
+						}
+					},
+					{
+						"name": "Upload-Data-to-DB",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Remove last comma",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"additionalColumns": [
+									{
+										"name": "JsonFilePath",
+										"value": "$$FILEPATH"
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": false,
+									"wildcardFolderPath": "de/geomap/to_upload",
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings",
+									"compressionProperties": {
+										"type": "ZipDeflateReadSettings"
+									}
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorageLogs",
+										"type": "LinkedServiceReference"
+									},
+									"path": "data-pipeline-input-files/de/geomap/logs"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['crawlerObject']['kaufMiete']"
+										},
+										"sink": {
+											"name": "kaufMiete",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['lage']['geoLongitude']"
+										},
+										"sink": {
+											"name": "geoLongitude",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['lage']['geoLatitude']"
+										},
+										"sink": {
+											"name": "geoLatitude",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['lage']['land']"
+										},
+										"sink": {
+											"name": "land",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektTyp']"
+										},
+										"sink": {
+											"name": "objektTyp",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['anbieter']"
+										},
+										"sink": {
+											"name": "anbieter",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['titel']"
+										},
+										"sink": {
+											"name": "titel",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['portalUrl']"
+										},
+										"sink": {
+											"name": "portalUrl",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektTypText']"
+										},
+										"sink": {
+											"name": "objektTypText",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['saniert']"
+										},
+										"sink": {
+											"name": "saniert",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['heizungsart']"
+										},
+										"sink": {
+											"name": "heizungsart",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['sanitär']"
+										},
+										"sink": {
+											"name": "sanitar",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['ausweisTyp']"
+										},
+										"sink": {
+											"name": "ausweisTyp",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['ausweisInfo']"
+										},
+										"sink": {
+											"name": "ausweisInfo",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['energieKennwerte']['ENERGIEKENNWERT']['KennwertKlasse']"
+										},
+										"sink": {
+											"name": "KennwertKlasse",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['energieKennwerte']['ENERGIEKENNWERT']['kennwert']"
+										},
+										"sink": {
+											"name": "kennwert",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Grundstuecksflaeche']"
+										},
+										"sink": {
+											"name": "Grundstuecksflaeche",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Wohnflaeche']"
+										},
+										"sink": {
+											"name": "Wohnflaeche",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Nutzflaeche']"
+										},
+										"sink": {
+											"name": "Nutzflaeche",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['zustand']"
+										},
+										"sink": {
+											"name": "zustand",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['ausstattungsQualität']"
+										},
+										"sink": {
+											"name": "ausstattungsQualitat",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['etage']"
+										},
+										"sink": {
+											"name": "etage",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['ZIMMER']"
+										},
+										"sink": {
+											"name": "ZIMMER",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['ETAGEN']"
+										},
+										"sink": {
+											"name": "ETAGEN",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['BADEZIMMER']"
+										},
+										"sink": {
+											"name": "BADEZIMMER",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['SCHLAFZIMMER']"
+										},
+										"sink": {
+											"name": "SCHLAFZIMMER",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['STELLPLAETZE']"
+										},
+										"sink": {
+											"name": "STELLPLAETZE",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['jahreszahlen']['BAUJAHR']"
+										},
+										"sink": {
+											"name": "BAUJAHR",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['jahreszahlen']['SANIERUNG']"
+										},
+										"sink": {
+											"name": "SANIERUNG",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['küche']"
+										},
+										"sink": {
+											"name": "kuche",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['balkonTerrasse']"
+										},
+										"sink": {
+											"name": "balkonTerrasse",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['keller']"
+										},
+										"sink": {
+											"name": "keller",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['kommunikation']"
+										},
+										"sink": {
+											"name": "kommunikation",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['boden']"
+										},
+										"sink": {
+											"name": "boden",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['energieträger']"
+										},
+										"sink": {
+											"name": "energietrager",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['aufzug']"
+										},
+										"sink": {
+											"name": "aufzug",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['stellplatz']"
+										},
+										"sink": {
+											"name": "stellplatz",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['lageEinheit']"
+										},
+										"sink": {
+											"name": "lageEinheit",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['sonstiges']"
+										},
+										"sink": {
+											"name": "sonstiges",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektArt']"
+										},
+										"sink": {
+											"name": "objektArt",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['provisionsfrei']"
+										},
+										"sink": {
+											"name": "provisionsfrei",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['heizkostenInNebenkostenEnthalten']"
+										},
+										"sink": {
+											"name": "heizkostenInNebenkostenEnthalten",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['currency']"
+										},
+										"sink": {
+											"name": "currency",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatOhneNebenkosten']"
+										},
+										"sink": {
+											"name": "MieteProMonatOhneNebenkosten",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatMitNebenkosten']"
+										},
+										"sink": {
+											"name": "MieteProMonatMitNebenkosten",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['NebenkostenProMonat']"
+										},
+										"sink": {
+											"name": "NebenkostenProMonat",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['MietKaution']"
+										},
+										"sink": {
+											"name": "MietKaution",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['HeizkostenProMonat']"
+										},
+										"sink": {
+											"name": "HeizkostenProMonat",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatProStellplatz']"
+										},
+										"sink": {
+											"name": "MieteProMonatProStellplatz",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['Kaufpreis']"
+										},
+										"sink": {
+											"name": "Kaufpreis",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['preise']['preisValues']['HausgeldProMonat']"
+										},
+										"sink": {
+											"name": "HausgeldProMonat",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['stadtteil']"
+										},
+										"sink": {
+											"name": "stadtteil",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['stadtbezirk']"
+										},
+										"sink": {
+											"name": "stadtbezirk",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['kreis']"
+										},
+										"sink": {
+											"name": "kreis",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['accuracy']"
+										},
+										"sink": {
+											"name": "accuracy",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['ort']"
+										},
+										"sink": {
+											"name": "ort",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['bundesland']"
+										},
+										"sink": {
+											"name": "bundesland",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['plz']"
+										},
+										"sink": {
+											"name": "plz",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['strasse']"
+										},
+										"sink": {
+											"name": "strasse",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['addr']['hausnummer']"
+										},
+										"sink": {
+											"name": "hausnummer",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['firstSeenDay']"
+										},
+										"sink": {
+											"name": "firstSeenDay",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['daysOnline']"
+										},
+										"sink": {
+											"name": "daysOnline",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['preisProQm']"
+										},
+										"sink": {
+											"name": "preisProQm",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['onlineRanges']"
+										},
+										"sink": {
+											"name": "onlineRanges",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['rendite']['marktmieteProQm']"
+										},
+										"sink": {
+											"name": "marktmieteProQm",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['rendite']['marktmieteGebiet']"
+										},
+										"sink": {
+											"name": "marktmieteGebiet",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['rendite']['renditeAvg']"
+										},
+										"sink": {
+											"name": "renditeAvg",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['rendite']['renditeQuelle']"
+										},
+										"sink": {
+											"name": "renditeQuelle",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['rendite']['marktRendite']"
+										},
+										"sink": {
+											"name": "marktRendite",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['rendite']['zeitraumMarktmiete']['lt']"
+										},
+										"sink": {
+											"name": "zeitraumMarktmiete_lt",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['rendite']['zeitraumMarktmiete']['gte']"
+										},
+										"sink": {
+											"name": "zeitraumMarktmiete_gte",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['rendite']['anzahlAngeboteMarktmiete']"
+										},
+										"sink": {
+											"name": "anzahlAngeboteMarktmiete",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['eventDay']"
+										},
+										"sink": {
+											"name": "eventDay",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['online']"
+										},
+										"sink": {
+											"name": "online",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"path": "$['lastOfflineDay']"
+										},
+										"sink": {
+											"name": "lastOfflineDay",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['lastSeenDay']"
+										},
+										"sink": {
+											"name": "lastSeenDay",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['state']"
+										},
+										"sink": {
+											"name": "state",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['groupId']"
+										},
+										"sink": {
+											"name": "groupId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['JsonFilePath']"
+										},
+										"sink": {
+											"name": "JsonFilePath",
+											"type": "String"
+										}
+									}
+								],
+								"collectionReference": "",
+								"mapComplexValuesToString": true
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "geomap_to_be_uploaded_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSql_Geomap_Input_Table",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Get Uploaded Filenames",
+						"type": "GetMetadata",
+						"dependsOn": [
+							{
+								"activity": "ForEachIncominFile",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "geomap_to_be_uploaded_zip_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "BinaryReadSettings"
+							}
+						}
+					},
+					{
+						"name": "Set filenames string",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Uploaded Filenames",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "af",
+							"value": {
+								"value": "@replace(replace(replace(replace(replace(replace(replace(replace(replace(string(activity('Get Uploaded Filenames').output.childItems),'[{',''),'}]',''),'{',''),'}',''),'\"type\":\"Folder\"',''),'\"type\":\"File\"',''),'\"',''),'name:',''),',,',', ')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Remove last comma",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Set filenames string",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "filenames_str",
+							"value": {
+								"value": "@substring(variables('af'), 0, add(length(variables('af')),-1))",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Insert_Log",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Upload-Data-to-DB",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Insert_ADF_Logs]",
+							"storedProcedureParameters": {
+								"CopyActivityRunID": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').ActivityRunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Date": {
+									"value": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"type": "DateTime"
+								},
+								"ErrorMessage": {
+									"value": null,
+									"type": "String"
+								},
+								"Filenames": {
+									"value": {
+										"value": "@variables('filenames_str')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineName": {
+									"value": {
+										"value": "@pipeline().Pipeline",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Rows_skipped": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.rowsSkipped",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"Rows_written": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.rowsCopied",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"StatusMessage": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.executionDetails[0].status",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "datapipeline_dev_db",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Insert_Error_Log",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Upload-Data-to-DB",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Insert_ADF_Logs]",
+							"storedProcedureParameters": {
+								"CopyActivityRunID": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').ActivityRunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Date": {
+									"value": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"type": "DateTime"
+								},
+								"ErrorMessage": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.errors[0].Message",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Filenames": {
+									"value": {
+										"value": "@variables('filenames_str')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineName": {
+									"value": {
+										"value": "@pipeline().Pipeline",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Rows_skipped": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.rowsSkipped",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"Rows_written": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.rowsCopied",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"StatusMessage": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.executionDetails[0].status",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "datapipeline_dev_db",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Raise_Failed",
+						"type": "Fail",
+						"dependsOn": [
+							{
+								"activity": "Insert_Error_Log",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"message": {
+								"value": "@activity('Upload-Data-to-DB').output.errors[0].Message",
+								"type": "Expression"
+							},
+							"errorCode": {
+								"value": "@activity('Upload-Data-to-DB').output.errors[0].Code",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"af": {
+						"type": "String"
+					},
+					"filenames_str": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-07-18T20:44:05Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/geomap-data-loader_2_manual')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -2702,6 +6713,781 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/kra-data-loader_manual')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Knibber Research loader",
+				"activities": [
+					{
+						"name": "Upload-Data-to-DB",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Remove last comma",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"additionalColumns": [
+									{
+										"name": "JsonFilePath",
+										"value": "$$FILEPATH"
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": false,
+									"wildcardFolderPath": "benelux/kra/to_upload",
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings",
+									"compressionProperties": {
+										"type": "ZipDeflateReadSettings"
+									}
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorageLogs",
+										"type": "LinkedServiceReference"
+									},
+									"path": "data-pipeline-input-files/benelux/kra/logs"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['_id']['$oid']"
+										},
+										"sink": {
+											"name": "id",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['source']"
+										},
+										"sink": {
+											"name": "source",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['sourceUrl']"
+										},
+										"sink": {
+											"name": "sourceUrl",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['sourceId']"
+										},
+										"sink": {
+											"name": "sourceId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['referenceDate']"
+										},
+										"sink": {
+											"name": "referenceDate",
+											"type": "DateTime"
+										}
+									},
+									{
+										"source": {
+											"path": "$['isSale']"
+										},
+										"sink": {
+											"name": "isSale",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"path": "$['askingprice']"
+										},
+										"sink": {
+											"name": "askingprice",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['including_purchase_cost']"
+										},
+										"sink": {
+											"name": "including_purchase_cost",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"path": "$['service_charges']"
+										},
+										"sink": {
+											"name": "service_charges",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['services_included']"
+										},
+										"sink": {
+											"name": "services_included",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['property_type']"
+										},
+										"sink": {
+											"name": "property_type",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['broker']"
+										},
+										"sink": {
+											"name": "broker",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['construction_year']"
+										},
+										"sink": {
+											"name": "construction_year",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['renovation_year']"
+										},
+										"sink": {
+											"name": "renovation_year",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['living_area']"
+										},
+										"sink": {
+											"name": "living_area",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['land_area']"
+										},
+										"sink": {
+											"name": "land_area",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['furnishing']"
+										},
+										"sink": {
+											"name": "furnishing",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['floor']"
+										},
+										"sink": {
+											"name": "floor",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['title']"
+										},
+										"sink": {
+											"name": "title",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['number_of_rooms']"
+										},
+										"sink": {
+											"name": "number_of_rooms",
+											"type": "Int32"
+										}
+									},
+									{
+										"source": {
+											"path": "$['particularities']"
+										},
+										"sink": {
+											"name": "particularities",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['construction_type']"
+										},
+										"sink": {
+											"name": "construction_type",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['energy_label']"
+										},
+										"sink": {
+											"name": "energy_label",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['new_construction']"
+										},
+										"sink": {
+											"name": "new_construction",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"path": "$['address']['street']"
+										},
+										"sink": {
+											"name": "street",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['address']['house_number']"
+										},
+										"sink": {
+											"name": "house_number",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['address']['house_number_add']"
+										},
+										"sink": {
+											"name": "house_number_add",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['address']['city']"
+										},
+										"sink": {
+											"name": "city",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['address']['zip_code']"
+										},
+										"sink": {
+											"name": "zip_code",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['address']['country']"
+										},
+										"sink": {
+											"name": "country",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['address']['construction_number']"
+										},
+										"sink": {
+											"name": "construction_number",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['geodata']['latitude']"
+										},
+										"sink": {
+											"name": "latitude",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['geodata']['longitude']"
+										},
+										"sink": {
+											"name": "longitude",
+											"type": "Double"
+										}
+									},
+									{
+										"source": {
+											"path": "$['geodata']['precise']"
+										},
+										"sink": {
+											"name": "geodata_precise",
+											"type": "Boolean"
+										}
+									},
+									{
+										"source": {
+											"path": "$['thumbnail_image_url']"
+										},
+										"sink": {
+											"name": "thumbnail_image_url",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['JsonFilePath']"
+										},
+										"sink": {
+											"name": "JsonFilePath",
+											"type": "String"
+										}
+									}
+								],
+								"collectionReference": "",
+								"mapComplexValuesToString": true
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "kra_to_be_uploader_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSql_KRA_Input_Table",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "move-files-to-archive",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Upload-Data-to-DB",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": false,
+									"wildcardFolderPath": "benelux/kra/to_upload",
+									"wildcardFileName": "*.zip",
+									"deleteFilesAfterCompletion": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "kra_to_be_uploaded_files_zip",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "kra_uploaded_zip_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "Insert_Log",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Upload-Data-to-DB",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Insert_ADF_Logs]",
+							"storedProcedureParameters": {
+								"CopyActivityRunID": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').ActivityRunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Date": {
+									"value": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"type": "DateTime"
+								},
+								"ErrorMessage": {
+									"value": null,
+									"type": "String"
+								},
+								"Filenames": {
+									"value": {
+										"value": "@variables('filenames_str')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineName": {
+									"value": {
+										"value": "@pipeline().Pipeline",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Rows_skipped": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.rowsSkipped",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"Rows_written": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.rowsCopied",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"StatusMessage": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.executionDetails[0].status",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "datapipeline_dev_db",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Insert_Error_Log",
+						"type": "SqlServerStoredProcedure",
+						"dependsOn": [
+							{
+								"activity": "Upload-Data-to-DB",
+								"dependencyConditions": [
+									"Failed"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"storedProcedureName": "[[dbo].[Insert_ADF_Logs]",
+							"storedProcedureParameters": {
+								"CopyActivityRunID": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').ActivityRunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Date": {
+									"value": {
+										"value": "@utcnow()",
+										"type": "Expression"
+									},
+									"type": "DateTime"
+								},
+								"ErrorMessage": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.errors[0].Message",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Filenames": {
+									"value": {
+										"value": "@variables('filenames_str')",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineName": {
+									"value": {
+										"value": "@pipeline().Pipeline",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"PipelineRunID": {
+									"value": {
+										"value": "@pipeline().RunId",
+										"type": "Expression"
+									},
+									"type": "String"
+								},
+								"Rows_skipped": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.rowsSkipped",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"Rows_written": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.rowsCopied",
+										"type": "Expression"
+									},
+									"type": "Int32"
+								},
+								"StatusMessage": {
+									"value": {
+										"value": "@activity('Upload-Data-to-DB').output.executionDetails[0].status",
+										"type": "Expression"
+									},
+									"type": "String"
+								}
+							}
+						},
+						"linkedServiceName": {
+							"referenceName": "datapipeline_dev_db",
+							"type": "LinkedServiceReference"
+						}
+					},
+					{
+						"name": "Get Uploaded Filenames",
+						"type": "GetMetadata",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"dataset": {
+								"referenceName": "kra_to_be_uploader_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							},
+							"fieldList": [
+								"childItems"
+							],
+							"storeSettings": {
+								"type": "AzureBlobStorageReadSettings",
+								"recursive": true,
+								"enablePartitionDiscovery": false
+							},
+							"formatSettings": {
+								"type": "JsonReadSettings"
+							}
+						}
+					},
+					{
+						"name": "Raise_Failed",
+						"type": "Fail",
+						"dependsOn": [
+							{
+								"activity": "Insert_Error_Log",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"message": {
+								"value": "@activity('Upload-Data-to-DB').output.errors[0].Message",
+								"type": "Expression"
+							},
+							"errorCode": {
+								"value": "@activity('Upload-Data-to-DB').output.errors[0].Code",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Set filenames string",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Get Uploaded Filenames",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "af",
+							"value": {
+								"value": "@replace(replace(replace(replace(replace(replace(replace(replace(replace(string(activity('Get Uploaded Filenames').output.childItems),'[{',''),'}]',''),'{',''),'}',''),'\"type\":\"Folder\"',''),'\"type\":\"File\"',''),'\"',''),'name:',''),',,',', ')",
+								"type": "Expression"
+							}
+						}
+					},
+					{
+						"name": "Remove last comma",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Set filenames string",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "filenames_str",
+							"value": {
+								"value": "@substring(variables('af'), 0, add(length(variables('af')),-1))",
+								"type": "Expression"
+							}
+						}
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {},
+					"cancelAfter": {}
+				},
+				"variables": {
+					"af": {
+						"type": "String"
+					},
+					"filenames_str": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-07-18T20:44:05Z"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/move_data_from_sources_to_adress_table')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
@@ -4925,6 +9711,12 @@
 						"typeProperties": {
 							"source": {
 								"type": "DelimitedTextSource",
+								"additionalColumns": [
+									{
+										"name": "CsvFilePath",
+										"value": "$$FILEPATH"
+									}
+								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
@@ -5988,6 +10780,17 @@
 										},
 										"sink": {
 											"name": "WoningType",
+											"type": "String",
+											"physicalType": "nvarchar"
+										}
+									},
+									{
+										"source": {
+											"name": "CsvFilePath",
+											"type": "String"
+										},
+										"sink": {
+											"name": "CsvFilePath",
 											"type": "String",
 											"physicalType": "nvarchar"
 										}
@@ -7059,6 +11862,50 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/GeoMap_dates_trigger')]",
+			"type": "Microsoft.DataFactory/factories/triggers",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"runtimeState": "Started",
+				"pipelines": [
+					{
+						"pipelineReference": {
+							"referenceName": "geomap-data-loader_2",
+							"type": "PipelineReference"
+						},
+						"parameters": {}
+					}
+				],
+				"type": "ScheduleTrigger",
+				"typeProperties": {
+					"recurrence": {
+						"frequency": "Month",
+						"interval": 1,
+						"startTime": "2023-08-02T14:28:00",
+						"timeZone": "W. Europe Standard Time",
+						"schedule": {
+							"minutes": [
+								0
+							],
+							"hours": [
+								4
+							],
+							"monthDays": [
+								2,
+								9,
+								16,
+								23
+							]
+						}
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/geomap-data-loader_2')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/WH_tuesday_trigger')]",
 			"type": "Microsoft.DataFactory/factories/triggers",
 			"apiVersion": "2018-06-01",
@@ -7136,7 +11983,9 @@
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/geomap-data-loader')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/trigger-every-saturday-shedule')]",
@@ -7175,7 +12024,9 @@
 					}
 				}
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/pipelines/geomap-data-loader')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/trigger_when_new_files_added_kadaster_blob')]",
@@ -7206,48 +12057,6 @@
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/pipelines/kadaster-data-loader')]"
 			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GeoMap_dates_trigger')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "geomap-data-loader_2",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Month",
-						"interval": 1,
-						"startTime": "2023-08-02T14:28:00",
-						"timeZone": "W. Europe Standard Time",
-						"schedule": {
-							"minutes": [
-								0
-							],
-							"hours": [
-								4
-							],
-							"monthDays": [
-								2,
-								9,
-								16,
-								23
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": []
 		}
 	]
 }

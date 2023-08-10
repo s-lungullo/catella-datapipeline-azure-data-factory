@@ -1598,6 +1598,10 @@
 					{
 						"name": "WoningType",
 						"type": "nvarchar"
+					},
+					{
+						"name": "CsvFilePath",
+						"type": "nvarchar"
 					}
 				],
 				"typeProperties": {
@@ -2383,6 +2387,183 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/DataPipelineSQLDev')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSql_KRA_Input_Table')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "datapipeline_dev_db",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nvarchar"
+					},
+					{
+						"name": "source",
+						"type": "nvarchar"
+					},
+					{
+						"name": "sourceUrl",
+						"type": "nvarchar"
+					},
+					{
+						"name": "sourceId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "referenceDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "isSale",
+						"type": "bit"
+					},
+					{
+						"name": "askingprice",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "including_purchase_cost",
+						"type": "bit"
+					},
+					{
+						"name": "service_charges",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "services_included",
+						"type": "nvarchar"
+					},
+					{
+						"name": "property_type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "broker",
+						"type": "nvarchar"
+					},
+					{
+						"name": "construction_year",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "renovation_year",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "living_area",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "land_area",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "furnishing",
+						"type": "nvarchar"
+					},
+					{
+						"name": "floor",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "title",
+						"type": "nvarchar"
+					},
+					{
+						"name": "number_of_rooms",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "particularities",
+						"type": "nvarchar"
+					},
+					{
+						"name": "construction_type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "energy_label",
+						"type": "nvarchar"
+					},
+					{
+						"name": "new_construction",
+						"type": "bit"
+					},
+					{
+						"name": "street",
+						"type": "nvarchar"
+					},
+					{
+						"name": "house_number",
+						"type": "nvarchar"
+					},
+					{
+						"name": "house_number_add",
+						"type": "nvarchar"
+					},
+					{
+						"name": "city",
+						"type": "nvarchar"
+					},
+					{
+						"name": "country",
+						"type": "nvarchar"
+					},
+					{
+						"name": "zip_code",
+						"type": "nvarchar"
+					},
+					{
+						"name": "construction_number",
+						"type": "nvarchar"
+					},
+					{
+						"name": "latitude",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "longitude",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "geodata_precise",
+						"type": "bit"
+					},
+					{
+						"name": "thumbnail_image_url",
+						"type": "nvarchar"
+					},
+					{
+						"name": "JsonFilePath",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "KRA_RawInput"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/datapipeline_dev_db')]"
 			]
 		},
 		{
@@ -4494,298 +4675,6 @@
 						}
 					}
 				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/datapipeline_blob_storage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Kadaster2019')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "datapipeline_blob_storage",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "Excel",
-				"typeProperties": {
-					"sheetName": "Sheet1",
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": "Kadaster Helper.xlsx",
-						"folderPath": "nl/kadaster/to_upload/k2019",
-						"container": "data-pipeline-input-files"
-					},
-					"firstRowAsHeader": true
-				},
-				"schema": [
-					{
-						"name": "CADOV_CADOI_ADRESSEERBR_OBJ_ID",
-						"type": "String"
-					},
-					{
-						"name": "DATUM",
-						"type": "String"
-					},
-					{
-						"name": "PTT_K",
-						"type": "String"
-					},
-					{
-						"name": "PLTSNAAM",
-						"type": "String"
-					},
-					{
-						"name": "STRAAT",
-						"type": "String"
-					},
-					{
-						"name": "HUISNR",
-						"type": "String"
-					},
-					{
-						"name": "TOEV",
-						"type": "String"
-					},
-					{
-						"name": "WONINGTYPE",
-						"type": "String"
-					},
-					{
-						"name": "X_COORD",
-						"type": "String"
-					},
-					{
-						"name": "Y_COORD",
-						"type": "String"
-					},
-					{
-						"name": "KULT_GEB_K",
-						"type": "String"
-					},
-					{
-						"name": "GROOTTE",
-						"type": "String"
-					},
-					{
-						"name": "K_SOM",
-						"type": "String"
-					},
-					{
-						"name": "IND_M_O_G",
-						"type": "String"
-					},
-					{
-						"name": "ZAK_R",
-						"type": "String"
-					},
-					{
-						"name": "KULT_TEKST",
-						"type": "String"
-					},
-					{
-						"name": "OBJ_BEL",
-						"type": "String"
-					},
-					{
-						"name": "ERFDIENSTBH",
-						"type": "String"
-					},
-					{
-						"name": "KULT_GEB_K1",
-						"type": "String"
-					},
-					{
-						"name": "KULT_ONGEB_K1",
-						"type": "String"
-					},
-					{
-						"name": "INDEX_LR1",
-						"type": "String"
-					},
-					{
-						"name": "GROOTTE1",
-						"type": "String"
-					},
-					{
-						"name": "PTT_K1",
-						"type": "String"
-					},
-					{
-						"name": "PLTSNAAM1",
-						"type": "String"
-					},
-					{
-						"name": "STRAAT1",
-						"type": "String"
-					},
-					{
-						"name": "HUISNR1",
-						"type": "String"
-					},
-					{
-						"name": "TOEV1",
-						"type": "String"
-					},
-					{
-						"name": "KULT_GEB_K2",
-						"type": "String"
-					},
-					{
-						"name": "KULT_ONGEB_K2",
-						"type": "String"
-					},
-					{
-						"name": "INDEX_LR2",
-						"type": "String"
-					},
-					{
-						"name": "GROOTTE2",
-						"type": "String"
-					},
-					{
-						"name": "PTT_K2",
-						"type": "String"
-					},
-					{
-						"name": "PLTSNAAM2",
-						"type": "String"
-					},
-					{
-						"name": "STRAAT2",
-						"type": "String"
-					},
-					{
-						"name": "HUISNR2",
-						"type": "String"
-					},
-					{
-						"name": "TOEV2",
-						"type": "String"
-					},
-					{
-						"name": "KULT_GEB_K3",
-						"type": "String"
-					},
-					{
-						"name": "KULT_ONGEB_K3",
-						"type": "String"
-					},
-					{
-						"name": "INDEX_LR3",
-						"type": "String"
-					},
-					{
-						"name": "GROOTTE3",
-						"type": "String"
-					},
-					{
-						"name": "PTT_K3",
-						"type": "String"
-					},
-					{
-						"name": "PLTSNAAM3",
-						"type": "String"
-					},
-					{
-						"name": "STRAAT3",
-						"type": "String"
-					},
-					{
-						"name": "HUISNR3",
-						"type": "String"
-					},
-					{
-						"name": "TOEV3",
-						"type": "String"
-					},
-					{
-						"name": "KULT_GEB_K4",
-						"type": "String"
-					},
-					{
-						"name": "KULT_ONGEB_K4",
-						"type": "String"
-					},
-					{
-						"name": "INDEX_LR4",
-						"type": "String"
-					},
-					{
-						"name": "GROOTTE4",
-						"type": "String"
-					},
-					{
-						"name": "PTT_K4",
-						"type": "String"
-					},
-					{
-						"name": "PLTSNAAM4",
-						"type": "String"
-					},
-					{
-						"name": "STRAAT4",
-						"type": "String"
-					},
-					{
-						"name": "HUISNR4",
-						"type": "String"
-					},
-					{
-						"name": "TOEV4",
-						"type": "String"
-					},
-					{
-						"name": "IND_HUURDER",
-						"type": "String"
-					},
-					{
-						"name": "BEWARINGKODE",
-						"type": "String"
-					},
-					{
-						"name": "STUK_ID",
-						"type": "String"
-					},
-					{
-						"name": "MUT_SRT",
-						"type": "String"
-					},
-					{
-						"name": "BURGEM_NR",
-						"type": "String"
-					},
-					{
-						"name": "OBJECT",
-						"type": "String"
-					},
-					{
-						"name": "NNP_1E_VERKR",
-						"type": "String"
-					},
-					{
-						"name": "NNP_1E_VERVR",
-						"type": "String"
-					},
-					{
-						"name": "FAM_TRANS",
-						"type": "String"
-					},
-					{
-						"name": "PHT",
-						"type": "String"
-					},
-					{
-						"name": "KAD_GEM",
-						"type": "String"
-					},
-					{
-						"name": "SECTIE",
-						"type": "String"
-					}
-				]
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/datapipeline_blob_storage')]"
