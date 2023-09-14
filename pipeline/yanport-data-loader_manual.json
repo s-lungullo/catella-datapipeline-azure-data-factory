@@ -39,10 +39,7 @@
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
-							"type": "JsonReadSettings",
-							"compressionProperties": {
-								"type": "ZipDeflateReadSettings"
-							}
+							"type": "JsonReadSettings"
 						}
 					},
 					"sink": {
@@ -401,7 +398,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "kra_to_be_uploader_folder",
+						"referenceName": "yanport_to_be_upload_folder",
 						"type": "DatasetReference"
 					}
 				],
