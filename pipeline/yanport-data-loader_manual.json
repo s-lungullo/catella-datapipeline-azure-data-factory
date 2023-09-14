@@ -61,7 +61,7 @@
 								"referenceName": "AzureBlobStorageLogs",
 								"type": "LinkedServiceReference"
 							},
-							"path": "data-pipeline-input-files/benelux/kra/logs"
+							"path": "data-pipeline-input-files/fr/yanport/logs"
 						}
 					},
 					"translator": {
@@ -404,7 +404,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AzureSql_KRA_Input_Table",
+						"referenceName": "AzureSql_Yanport_Input_Table",
 						"type": "DatasetReference"
 					}
 				]
