@@ -1,0 +1,764 @@
+{
+	"name": "yanport-data-loader_manual",
+	"properties": {
+		"description": "Knibber Research loader",
+		"activities": [
+			{
+				"name": "Upload-Data-to-DB",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Remove last comma",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"additionalColumns": [
+							{
+								"name": "JsonFilePath",
+								"value": "$$FILEPATH"
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": false,
+							"wildcardFolderPath": "benelux/kra/to_upload",
+							"wildcardFileName": "*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings",
+							"compressionProperties": {
+								"type": "ZipDeflateReadSettings"
+							}
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "AzureBlobStorageLogs",
+								"type": "LinkedServiceReference"
+							},
+							"path": "data-pipeline-input-files/benelux/kra/logs"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['_id']['$oid']"
+								},
+								"sink": {
+									"name": "id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['source']"
+								},
+								"sink": {
+									"name": "source",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['sourceUrl']"
+								},
+								"sink": {
+									"name": "sourceUrl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['sourceId']"
+								},
+								"sink": {
+									"name": "sourceId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['referenceDate']"
+								},
+								"sink": {
+									"name": "referenceDate",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['isSale']"
+								},
+								"sink": {
+									"name": "isSale",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['askingprice']"
+								},
+								"sink": {
+									"name": "askingprice",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['including_purchase_cost']"
+								},
+								"sink": {
+									"name": "including_purchase_cost",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['service_charges']"
+								},
+								"sink": {
+									"name": "service_charges",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['services_included']"
+								},
+								"sink": {
+									"name": "services_included",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['property_type']"
+								},
+								"sink": {
+									"name": "property_type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['broker']"
+								},
+								"sink": {
+									"name": "broker",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['construction_year']"
+								},
+								"sink": {
+									"name": "construction_year",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['renovation_year']"
+								},
+								"sink": {
+									"name": "renovation_year",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['living_area']"
+								},
+								"sink": {
+									"name": "living_area",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['land_area']"
+								},
+								"sink": {
+									"name": "land_area",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['furnishing']"
+								},
+								"sink": {
+									"name": "furnishing",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['floor']"
+								},
+								"sink": {
+									"name": "floor",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['title']"
+								},
+								"sink": {
+									"name": "title",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['number_of_rooms']"
+								},
+								"sink": {
+									"name": "number_of_rooms",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['particularities']"
+								},
+								"sink": {
+									"name": "particularities",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['construction_type']"
+								},
+								"sink": {
+									"name": "construction_type",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['energy_label']"
+								},
+								"sink": {
+									"name": "energy_label",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['new_construction']"
+								},
+								"sink": {
+									"name": "new_construction",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['street']"
+								},
+								"sink": {
+									"name": "street",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['house_number']"
+								},
+								"sink": {
+									"name": "house_number",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['house_number_add']"
+								},
+								"sink": {
+									"name": "house_number_add",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['city']"
+								},
+								"sink": {
+									"name": "city",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['zip_code']"
+								},
+								"sink": {
+									"name": "zip_code",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['country']"
+								},
+								"sink": {
+									"name": "country",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['construction_number']"
+								},
+								"sink": {
+									"name": "construction_number",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['geodata']['latitude']"
+								},
+								"sink": {
+									"name": "latitude",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['geodata']['longitude']"
+								},
+								"sink": {
+									"name": "longitude",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['geodata']['precise']"
+								},
+								"sink": {
+									"name": "geodata_precise",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['thumbnail_image_url']"
+								},
+								"sink": {
+									"name": "thumbnail_image_url",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['JsonFilePath']"
+								},
+								"sink": {
+									"name": "JsonFilePath",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "kra_to_be_uploader_folder",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSql_KRA_Input_Table",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "move-files-to-archive",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Upload-Data-to-DB",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": false,
+							"wildcardFolderPath": "benelux/kra/to_upload",
+							"wildcardFileName": "*.zip",
+							"deleteFilesAfterCompletion": true
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "kra_to_be_uploaded_files_zip",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "kra_uploaded_zip_folder",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Insert_Log",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Upload-Data-to-DB",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[Insert_ADF_Logs]",
+					"storedProcedureParameters": {
+						"CopyActivityRunID": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').ActivityRunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Date": {
+							"value": {
+								"value": "@utcnow()",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"ErrorMessage": {
+							"value": null,
+							"type": "String"
+						},
+						"Filenames": {
+							"value": {
+								"value": "@variables('filenames_str')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PipelineName": {
+							"value": {
+								"value": "@pipeline().Pipeline",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PipelineRunID": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Rows_skipped": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').output.rowsSkipped",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"Rows_written": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').output.rowsCopied",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"StatusMessage": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').output.executionDetails[0].status",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "datapipeline_dev_db",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Insert_Error_Log",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Upload-Data-to-DB",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[Insert_ADF_Logs]",
+					"storedProcedureParameters": {
+						"CopyActivityRunID": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').ActivityRunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Date": {
+							"value": {
+								"value": "@utcnow()",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"ErrorMessage": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').output.errors[0].Message",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Filenames": {
+							"value": {
+								"value": "@variables('filenames_str')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PipelineName": {
+							"value": {
+								"value": "@pipeline().Pipeline",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PipelineRunID": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Rows_skipped": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').output.rowsSkipped",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"Rows_written": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').output.rowsCopied",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"StatusMessage": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').output.executionDetails[0].status",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "datapipeline_dev_db",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Get Uploaded Filenames",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "yanport_to_be_upload_folder",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "JsonReadSettings"
+					}
+				}
+			},
+			{
+				"name": "Raise_Failed",
+				"type": "Fail",
+				"dependsOn": [
+					{
+						"activity": "Insert_Error_Log",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"message": {
+						"value": "@activity('Upload-Data-to-DB').output.errors[0].Message",
+						"type": "Expression"
+					},
+					"errorCode": {
+						"value": "@activity('Upload-Data-to-DB').output.errors[0].Code",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set filenames string",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Uploaded Filenames",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "af",
+					"value": {
+						"value": "@replace(replace(replace(replace(replace(replace(replace(replace(replace(string(activity('Get Uploaded Filenames').output.childItems),'[{',''),'}]',''),'{',''),'}',''),'\"type\":\"Folder\"',''),'\"type\":\"File\"',''),'\"',''),'name:',''),',,',', ')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Remove last comma",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set filenames string",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "filenames_str",
+					"value": {
+						"value": "@substring(variables('af'), 0, add(length(variables('af')),-1))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"af": {
+				"type": "String"
+			},
+			"filenames_str": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-18T20:44:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
