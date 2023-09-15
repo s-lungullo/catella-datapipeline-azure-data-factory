@@ -790,15 +790,16 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "JsonSource",
+						"type": "BinarySource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": false,
 							"wildcardFolderPath": "fr/yanport/to_upload",
-							"wildcardFileName": "*.gz"
+							"wildcardFileName": "*.gz",
+							"deleteFilesAfterCompletion": true
 						},
 						"formatSettings": {
-							"type": "JsonReadSettings"
+							"type": "BinaryReadSettings"
 						}
 					},
 					"sink": {
@@ -811,7 +812,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "yanport_to_be_uplod_folder",
+						"referenceName": "yanport_to_be_upload_files_gz",
 						"type": "DatasetReference"
 					}
 				],
@@ -1101,39 +1102,6 @@
 					"value": {
 						"value": "@substring(variables('af'), 0, add(length(variables('af')),-1))",
 						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "delete_from_toUpload_folder",
-				"type": "Delete",
-				"dependsOn": [
-					{
-						"activity": "move-files-to-archive",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"dataset": {
-						"referenceName": "yanport_to_be_uplod_folder",
-						"type": "DatasetReference"
-					},
-					"enableLogging": false,
-					"storeSettings": {
-						"type": "AzureBlobStorageReadSettings",
-						"recursive": true,
-						"wildcardFileName": "*.gz",
-						"enablePartitionDiscovery": false
 					}
 				}
 			}
