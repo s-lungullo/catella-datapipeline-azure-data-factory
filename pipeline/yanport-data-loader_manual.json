@@ -34,12 +34,6 @@
 							"type": "JsonReadSettings"
 						}
 					},
-					"sink": {
-						"type": "AzureSqlSink",
-						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": true,
-						"disableMetricsCollection": false
-					},
 					"enableStaging": false,
 					"enableSkipIncompatibleRow": true,
 					"logSettings": {
@@ -746,13 +740,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "yanport_to_be_upload_folder",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AzureSql_Yanport_Input_Table",
+						"referenceName": "yanport_to_be_uplod_folder",
 						"type": "DatasetReference"
 					}
 				]
