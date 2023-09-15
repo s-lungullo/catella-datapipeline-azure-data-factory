@@ -69,7 +69,7 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$['_id']['$oid']"
+									"path": "$['id']"
 								},
 								"sink": {
 									"name": "id",
@@ -87,97 +87,196 @@
 							},
 							{
 								"source": {
-									"path": "$['sourceUrl']"
+									"path": "$['programId']"
 								},
 								"sink": {
-									"name": "sourceUrl",
+									"name": "programId",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['sourceId']"
+									"path": "$['externalProperties']"
 								},
 								"sink": {
-									"name": "sourceId",
+									"name": "externalProperties",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['referenceDate']"
+									"path": "$['quality']['anomaly']['level']"
 								},
 								"sink": {
-									"name": "referenceDate",
-									"type": "DateTime"
+									"name": "quality_anomaly_level",
+									"type": "Int32"
 								}
 							},
 							{
 								"source": {
-									"path": "$['isSale']"
+									"path": "$['quality']['anomaly']['value']"
 								},
 								"sink": {
-									"name": "isSale",
-									"type": "Boolean"
+									"name": "quality_anomaly_value",
+									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['askingprice']"
+									"path": "$['quality']['anomaly']['causes']"
 								},
 								"sink": {
-									"name": "askingprice",
+									"name": "quality_anomaly_causes",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['investment']['rental']['monthlyPrice']"
+								},
+								"sink": {
+									"name": "investment_rental_monthlyPrice",
 									"type": "Double"
 								}
 							},
 							{
 								"source": {
-									"path": "$['including_purchase_cost']"
+									"path": "$['investment']['rental']['yield']['gross']"
 								},
 								"sink": {
-									"name": "including_purchase_cost",
-									"type": "Boolean"
-								}
-							},
-							{
-								"source": {
-									"path": "$['service_charges']"
-								},
-								"sink": {
-									"name": "service_charges",
+									"name": "investment_rental_yield_gross",
 									"type": "Double"
 								}
 							},
 							{
 								"source": {
-									"path": "$['services_included']"
+									"path": "$['features']['descriptive']['description']"
 								},
 								"sink": {
-									"name": "services_included",
+									"name": "description",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['property_type']"
+									"path": "$['features']['descriptive']['pros']"
 								},
 								"sink": {
-									"name": "property_type",
+									"name": "pros",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['broker']"
+									"path": "$['features']['descriptive']['cons']"
 								},
 								"sink": {
-									"name": "broker",
+									"name": "cons",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['construction_year']"
+									"path": "$['features']['descriptive']['equipments']['FURNITURE']"
+								},
+								"sink": {
+									"name": "equipments_furniture",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['descriptive']['services']"
+								},
+								"sink": {
+									"name": "equipments_services",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['descriptive']['generalState']"
+								},
+								"sink": {
+									"name": "generalState",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['surface']"
+								},
+								"sink": {
+									"name": "surface",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['roomCount']"
+								},
+								"sink": {
+									"name": "roomCount",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['areas']"
+								},
+								"sink": {
+									"name": "areas",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['floors']"
+								},
+								"sink": {
+									"name": "floors",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['areaCount']"
+								},
+								"sink": {
+									"name": "areaCount",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['floorCount']"
+								},
+								"sink": {
+									"name": "floorCount",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['construction']['newBuild']"
+								},
+								"sink": {
+									"name": "construction_newBuild",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['construction']['forBuild']"
+								},
+								"sink": {
+									"name": "construction_forBuild",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['construction']['year']"
 								},
 								"sink": {
 									"name": "construction_year",
@@ -186,101 +285,439 @@
 							},
 							{
 								"source": {
-									"path": "$['renovation_year']"
+									"path": "$['features']['construction']['urbanismRules']"
 								},
 								"sink": {
-									"name": "renovation_year",
+									"name": "construction_urbanismRules",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['heatingMode']"
+								},
+								"sink": {
+									"name": "energy_heatingMode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['heatingTypes']"
+								},
+								"sink": {
+									"name": "energy_heatingTypes",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['waterHeatingTypes']"
+								},
+								"sink": {
+									"name": "energy_waterHeatingTypes",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['diagnosisVersion']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['consumption']"
+								},
+								"sink": {
+									"name": "energy_consumption",
 									"type": "Int32"
 								}
 							},
 							{
 								"source": {
-									"path": "$['living_area']"
+									"path": "$['features']['energy']['consumptionLetter']"
 								},
 								"sink": {
-									"name": "living_area",
+									"name": "energy_consumptionLetter",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['consumptionRange']['lowerEndpoint']"
+								},
+								"sink": {
+									"name": "energy_consumptionRange_lowerEndpoint",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['consumptionRange']['upperEndpoint']"
+								},
+								"sink": {
+									"name": "energy_consumptionRange_upperEndpoint",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['greenhouseGasConsumption']"
+								},
+								"sink": {
+									"name": "energy_greenhouseGasConsumption",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['greenhouseGasConsumptionLetter']"
+								},
+								"sink": {
+									"name": "energy_greenhouseGasConsumptionLetter",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['greenhouseGasConsumptionRange']['lowerEndpoint']"
+								},
+								"sink": {
+									"name": "energy_greenhouseGasConsumptionRange_lowerEndpoint",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['greenhouseGasConsumptionRange']['upperEndpoint']"
+								},
+								"sink": {
+									"name": "energy_greenhouseGasConsumptionRange_upperEndpoint",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['condominium']"
+								},
+								"sink": {
+									"name": "condominium",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures']"
+								},
+								"sink": {
+									"name": "additionalFeatures",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['visual']['images']"
+								},
+								"sink": {
+									"name": "visual_images",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['visual']['orientations']"
+								},
+								"sink": {
+									"name": "visual_orientations",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['visual']['views']"
+								},
+								"sink": {
+									"name": "visual_views",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['price']"
+								},
+								"sink": {
+									"name": "price",
 									"type": "Double"
 								}
 							},
 							{
 								"source": {
-									"path": "$['land_area']"
+									"path": "$['marketing']['publicationStartDate']"
 								},
 								"sink": {
-									"name": "land_area",
-									"type": "Double"
+									"name": "publicationStartDate",
+									"type": "DateTime"
 								}
 							},
 							{
 								"source": {
-									"path": "$['furnishing']"
+									"path": "$['marketing']['publicationEndDate']"
 								},
 								"sink": {
-									"name": "furnishing",
-									"type": "String"
+									"name": "publicationEndDate",
+									"type": "DateTime"
 								}
 							},
 							{
 								"source": {
-									"path": "$['floor']"
+									"path": "$['marketing']['exclusiveMandate']"
 								},
 								"sink": {
-									"name": "floor",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['title']"
-								},
-								"sink": {
-									"name": "title",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['number_of_rooms']"
-								},
-								"sink": {
-									"name": "number_of_rooms",
-									"type": "Int32"
-								}
-							},
-							{
-								"source": {
-									"path": "$['particularities']"
-								},
-								"sink": {
-									"name": "particularities",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['construction_type']"
-								},
-								"sink": {
-									"name": "construction_type",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['energy_label']"
-								},
-								"sink": {
-									"name": "energy_label",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['new_construction']"
-								},
-								"sink": {
-									"name": "new_construction",
+									"name": "exclusiveMandate",
 									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['rentalExpenses']"
+								},
+								"sink": {
+									"name": "rentalExpenses",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['rentalExpensesIncluded']"
+								},
+								"sink": {
+									"name": "rentalExpensesIncluded",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceM2']"
+								},
+								"sink": {
+									"name": "priceM2",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceCC']"
+								},
+								"sink": {
+									"name": "priceCC",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceHC']"
+								},
+								"sink": {
+									"name": "priceHC",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['relevantPrice']"
+								},
+								"sink": {
+									"name": "relevantPrice",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceM2CC']"
+								},
+								"sink": {
+									"name": "priceM2CC",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceM2HC']"
+								},
+								"sink": {
+									"name": "priceM2HC",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['publicationDays']"
+								},
+								"sink": {
+									"name": "publicationDays",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['active']"
+								},
+								"sink": {
+									"name": "active",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['publicationDateRange']['lowerEndpoint']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['publicationDateRange']['lowerBoundType']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['publicationDateRange']['upperEndpoint']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['publicationDateRange']['upperBoundType']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEventsCount']"
+								},
+								"sink": {
+									"name": "priceEventsCount",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEvents'][0]['price']"
+								},
+								"sink": {
+									"name": "price",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEvents'][0]['date']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['dealers'][0]['name']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['dealers'][0]['phoneNumberHash']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['dealers'][0]['email']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['dealers'][0]['bloctel']['status']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['dealers'][0]['agenciesUnwanted']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['dealers'][0]['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['rentalExpensesEvents'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEventsRange'][0]['price']"
+								},
+								"sink": {
+									"name": "price",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEventsRange'][0]['date']['lowerEndpoint']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEventsRange'][0]['date']['lowerBoundType']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEventsRange'][0]['date']['upperEndpoint']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEventsRange'][0]['date']['upperBoundType']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEventsRange'][0]['priceM2']"
+								},
+								"sink": {
+									"name": "priceM2",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['cityId']"
+								},
+								"sink": {
+									"name": "cityId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['quarterId']"
+								},
+								"sink": {
+									"name": "quarterId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['agglomerationId']"
+								},
+								"sink": {
+									"name": "agglomerationId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['streetNumber']"
 								}
 							},
 							{
@@ -289,24 +726,6 @@
 								},
 								"sink": {
 									"name": "street",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['address']['house_number']"
-								},
-								"sink": {
-									"name": "house_number",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['address']['house_number_add']"
-								},
-								"sink": {
-									"name": "house_number_add",
 									"type": "String"
 								}
 							},
@@ -321,74 +740,92 @@
 							},
 							{
 								"source": {
-									"path": "$['address']['zip_code']"
+									"path": "$['address']['zipCode']"
 								},
 								"sink": {
-									"name": "zip_code",
+									"name": "zipCode",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['deptCode']"
+								},
+								"sink": {
+									"name": "deptCode",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['location']['lat']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['location']['lon']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['formatted']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['irisIds'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['parcelIds'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ads'][0]['id']"
+								},
+								"sink": {
+									"name": "id",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['address']['country']"
-								},
-								"sink": {
-									"name": "country",
-									"type": "String"
+									"path": "$['ads'][0]['crawlSource']"
 								}
 							},
 							{
 								"source": {
-									"path": "$['address']['construction_number']"
-								},
-								"sink": {
-									"name": "construction_number",
-									"type": "String"
+									"path": "$['ads'][0]['url']"
 								}
 							},
 							{
 								"source": {
-									"path": "$['geodata']['latitude']"
-								},
-								"sink": {
-									"name": "latitude",
-									"type": "Double"
+									"path": "$['properties'][0]"
 								}
 							},
 							{
 								"source": {
-									"path": "$['geodata']['longitude']"
+									"path": "$['creationDate']"
 								},
 								"sink": {
-									"name": "longitude",
-									"type": "Double"
+									"name": "creationDate",
+									"type": "DateTime"
 								}
 							},
 							{
 								"source": {
-									"path": "$['geodata']['precise']"
+									"path": "$['updateDate']"
 								},
 								"sink": {
-									"name": "geodata_precise",
-									"type": "Boolean"
+									"name": "updateDate",
+									"type": "DateTime"
 								}
 							},
 							{
 								"source": {
-									"path": "$['thumbnail_image_url']"
-								},
-								"sink": {
-									"name": "thumbnail_image_url",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['JsonFilePath']"
-								},
-								"sink": {
-									"name": "JsonFilePath",
-									"type": "String"
+									"path": "$['type']"
 								}
 							}
 						],
