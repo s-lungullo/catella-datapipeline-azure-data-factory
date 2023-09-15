@@ -750,6 +750,14 @@
 									"name": "dwelling_type",
 									"type": "String"
 								}
+							},
+							{
+								"source": {
+									"path": "$['JsonFilePath']"
+								},
+								"sink": {
+									"name": "JsonFilePath"
+								}
 							}
 						],
 						"collectionReference": "",
