@@ -222,6 +222,24 @@
 							},
 							{
 								"source": {
+									"path": "$['features']['geometry']['areas']"
+								},
+								"sink": {
+									"name": "areas",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['floors']"
+								},
+								"sink": {
+									"name": "floors",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"path": "$['features']['geometry']['floorCount']"
 								},
 								"sink": {
@@ -231,107 +249,155 @@
 							},
 							{
 								"source": {
-									"path": "$['features']['geometry']['areaCount']['TERRACE']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['geometry']['areaCount']['BATHROOM']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['geometry']['areaCount']['BALCONY']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['geometry']['areaCount']['BEDROOM']"
+									"path": "$['features']['geometry']['areaCount']"
+								},
+								"sink": {
+									"name": "areaCount",
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"path": "$['features']['construction']['newBuild']"
+								},
+								"sink": {
+									"name": "construction_newBuild",
+									"type": "Boolean"
 								}
 							},
 							{
 								"source": {
 									"path": "$['features']['construction']['forBuild']"
+								},
+								"sink": {
+									"name": "construction_forBuild",
+									"type": "Boolean"
 								}
 							},
 							{
 								"source": {
 									"path": "$['features']['construction']['year']"
+								},
+								"sink": {
+									"name": "construction_year",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['construction']['urbanismRules']"
+								},
+								"sink": {
+									"name": "construction_urbanismRules",
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"path": "$['features']['energy']['heatingMode']"
+								},
+								"sink": {
+									"name": "energy_heatingMode",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['heatingTypes']"
+								},
+								"sink": {
+									"name": "energy_heatingTypes",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['waterHeatingTypes']"
+								},
+								"sink": {
+									"name": "energy_waterHeatingTypes",
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"path": "$['features']['energy']['diagnosisVersion']"
+								},
+								"sink": {
+									"name": "energy_diagnosisVersion",
+									"type": "Int32"
 								}
 							},
 							{
 								"source": {
 									"path": "$['features']['energy']['consumption']"
+								},
+								"sink": {
+									"name": "energy_consumption",
+									"type": "Int32"
 								}
 							},
 							{
 								"source": {
 									"path": "$['features']['energy']['consumptionLetter']"
+								},
+								"sink": {
+									"name": "energy_consumptionLetter",
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"path": "$['features']['energy']['consumptionRange']['lowerEndpoint']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['energy']['consumptionRange']['lowerBoundType']"
+								},
+								"sink": {
+									"name": "energy_consumptionRange_lowerEndpoint",
+									"type": "Int32"
 								}
 							},
 							{
 								"source": {
 									"path": "$['features']['energy']['consumptionRange']['upperEndpoint']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['energy']['consumptionRange']['upperBoundType']"
+								},
+								"sink": {
+									"name": "energy_consumptionRange_upperEndpoint",
+									"type": "Int32"
 								}
 							},
 							{
 								"source": {
 									"path": "$['features']['energy']['greenhouseGasConsumption']"
+								},
+								"sink": {
+									"name": "energy_greenhouseGasConsumption",
+									"type": "Int32"
 								}
 							},
 							{
 								"source": {
 									"path": "$['features']['energy']['greenhouseGasConsumptionLetter']"
+								},
+								"sink": {
+									"name": "energy_greenhouseGasConsumptionLetter",
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"path": "$['features']['energy']['greenhouseGasConsumptionRange']['lowerEndpoint']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['energy']['greenhouseGasConsumptionRange']['lowerBoundType']"
+								},
+								"sink": {
+									"name": "energy_greenhouseGasConsumptionRange_lowerEndpoint",
+									"type": "Int32"
 								}
 							},
 							{
 								"source": {
 									"path": "$['features']['energy']['greenhouseGasConsumptionRange']['upperEndpoint']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['energy']['greenhouseGasConsumptionRange']['upperBoundType']"
+								},
+								"sink": {
+									"name": "energy_greenhouseGasConsumptionRange_upperEndpoint",
+									"type": "Int32"
 								}
 							},
 							{
@@ -345,22 +411,7 @@
 							},
 							{
 								"source": {
-									"path": "$['features']['descriptive']['pros'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['descriptive']['cons'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['visual']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['visual']['images']"
+									"path": "$['features']['visual']['images']"
 								},
 								"sink": {
 									"name": "visual_images",
@@ -369,7 +420,7 @@
 							},
 							{
 								"source": {
-									"path": "$['visual']['orientations']"
+									"path": "$['features']['visual']['orientations']"
 								},
 								"sink": {
 									"name": "visual_orientations",
@@ -378,7 +429,7 @@
 							},
 							{
 								"source": {
-									"path": "$['visual']['views']"
+									"path": "$['features']['visual']['views']"
 								},
 								"sink": {
 									"name": "visual_views",
@@ -387,140 +438,11 @@
 							},
 							{
 								"source": {
-									"path": "$['features']['visual']['images'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['visual']['orientations'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['visual']['views'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['geometry']['areas'][0]['type']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['geometry']['areas'][0]['kitchenEquipments'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['geometry']['floors'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['construction']['urbanismRules'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['energy']['heatingTypes'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['energy']['waterHeatingTypes'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['type']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['features']['descriptive']['pros'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['features']['descriptive']['cons'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['features']['descriptive']['equipments']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['features']['descriptive']['services']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['features']['visual']['images'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['features']['visual']['orientations'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['features']['visual']['views'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['features']['geometry']['areas'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['features']['geometry']['floors'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['features']['geometry']['areaCount']"
+									"path": "$['features']['additionalFeatures']"
 								},
 								"sink": {
-									"name": "areaCount",
+									"name": "additionalFeatures",
 									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['features']['construction']['newBuild']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['features']['construction']['urbanismRules'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['features']['energy']['heatingTypes'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['features']['energy']['waterHeatingTypes'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['features']['condominium']"
-								},
-								"sink": {
-									"name": "condominium",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['features']['additionalFeatures'][0]['features']['additionalFeatures'][0]"
 								}
 							},
 							{
@@ -530,6 +452,15 @@
 								"sink": {
 									"name": "price",
 									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEvents']"
+								},
+								"sink": {
+									"name": "priceEvents",
+									"type": "String"
 								}
 							},
 							{
@@ -580,6 +511,10 @@
 							{
 								"source": {
 									"path": "$['marketing']['type']"
+								},
+								"sink": {
+									"name": "marketing_type",
+									"type": "String"
 								}
 							},
 							{
@@ -656,26 +591,6 @@
 							},
 							{
 								"source": {
-									"path": "$['marketing']['publicationDateRange']['lowerEndpoint']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['publicationDateRange']['lowerBoundType']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['publicationDateRange']['upperEndpoint']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['publicationDateRange']['upperBoundType']"
-								}
-							},
-							{
-								"source": {
 									"path": "$['marketing']['priceEventsCount']"
 								},
 								"sink": {
@@ -685,89 +600,11 @@
 							},
 							{
 								"source": {
-									"path": "$['marketing']['priceEvents'][0]['price']"
+									"path": "$['marketing']['priceEventsRange']"
 								},
 								"sink": {
-									"name": "price",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['priceEvents'][0]['date']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['dealers'][0]['name']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['dealers'][0]['phoneNumberHash']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['dealers'][0]['email']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['dealers'][0]['bloctel']['status']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['dealers'][0]['agenciesUnwanted']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['dealers'][0]['type']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['rentalExpensesEvents'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['priceEventsRange'][0]['price']"
-								},
-								"sink": {
-									"name": "price",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['priceEventsRange'][0]['date']['lowerEndpoint']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['priceEventsRange'][0]['date']['lowerBoundType']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['priceEventsRange'][0]['date']['upperEndpoint']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['priceEventsRange'][0]['date']['upperBoundType']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['priceEventsRange'][0]['priceM2']"
-								},
-								"sink": {
-									"name": "priceM2",
-									"type": "Double"
+									"name": "priceEventsRange",
+									"type": "String"
 								}
 							},
 							{
@@ -790,16 +627,29 @@
 							},
 							{
 								"source": {
-									"path": "$['address']['agglomerationId']"
+									"path": "$['address']['irisIds']"
 								},
 								"sink": {
-									"name": "agglomerationId",
+									"name": "irisIds",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['address']['streetNumber']"
+									"path": "$['address']['parcelIds']"
+								},
+								"sink": {
+									"name": "parcelIds",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['agglomerationId']"
+								},
+								"sink": {
+									"name": "agglomerationId",
+									"type": "String"
 								}
 							},
 							{
@@ -841,50 +691,37 @@
 							{
 								"source": {
 									"path": "$['address']['location']['lat']"
+								},
+								"sink": {
+									"name": "latitude",
+									"type": "Double"
 								}
 							},
 							{
 								"source": {
 									"path": "$['address']['location']['lon']"
+								},
+								"sink": {
+									"name": "longitude",
+									"type": "Double"
 								}
 							},
 							{
 								"source": {
 									"path": "$['address']['formatted']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['address']['irisIds'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['address']['parcelIds'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['ads'][0]['id']"
 								},
 								"sink": {
-									"name": "id",
+									"name": "address_formatted",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['ads'][0]['crawlSource']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['ads'][0]['url']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties'][0]"
+									"path": "$['ads']"
+								},
+								"sink": {
+									"name": "ads",
+									"type": "String"
 								}
 							},
 							{
@@ -908,6 +745,10 @@
 							{
 								"source": {
 									"path": "$['type']"
+								},
+								"sink": {
+									"name": "dwelling_type",
+									"type": "String"
 								}
 							}
 						],
