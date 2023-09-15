@@ -34,7 +34,7 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": false,
-							"wildcardFolderPath": "benelux/kra/to_upload",
+							"wildcardFolderPath": "fr/yanport/to_upload",
 							"wildcardFileName": "*",
 							"enablePartitionDiscovery": false
 						},
