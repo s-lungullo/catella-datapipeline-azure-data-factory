@@ -790,16 +790,15 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "BinarySource",
+						"type": "JsonSource",
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": false,
-							"wildcardFolderPath": "benelux/kra/to_upload",
-							"wildcardFileName": "*.zip",
-							"deleteFilesAfterCompletion": true
+							"wildcardFolderPath": "fr/yanport/to_upload",
+							"wildcardFileName": "*.gz"
 						},
 						"formatSettings": {
-							"type": "BinaryReadSettings"
+							"type": "JsonReadSettings"
 						}
 					},
 					"sink": {
@@ -812,13 +811,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "kra_to_be_uploaded_files_zip",
+						"referenceName": "yanport_to_be_uplod_folder",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "kra_uploaded_zip_folder",
+						"referenceName": "yanport_uploaded_folder",
 						"type": "DatasetReference"
 					}
 				]
@@ -1102,6 +1101,39 @@
 					"value": {
 						"value": "@substring(variables('af'), 0, add(length(variables('af')),-1))",
 						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "delete_from_toUpload_folder",
+				"type": "Delete",
+				"dependsOn": [
+					{
+						"activity": "move-files-to-archive",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "yanport_to_be_uplod_folder",
+						"type": "DatasetReference"
+					},
+					"enableLogging": false,
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
+						"wildcardFileName": "*.gz",
+						"enablePartitionDiscovery": false
 					}
 				}
 			}
