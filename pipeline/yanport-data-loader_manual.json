@@ -69,7 +69,845 @@
 						"mappings": [
 							{
 								"source": {
-									"path": "$"
+									"path": "$['id']"
+								},
+								"sink": {
+									"name": "id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['source']"
+								},
+								"sink": {
+									"name": "source",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['programId']"
+								},
+								"sink": {
+									"name": "programId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['externalProperties']"
+								},
+								"sink": {
+									"name": "externalProperties",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['quality']['anomaly']['level']"
+								},
+								"sink": {
+									"name": "quality_anomaly_level",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['quality']['anomaly']['causes']"
+								},
+								"sink": {
+									"name": "quality_anomaly_causes",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['quality']['anomaly']['value']"
+								},
+								"sink": {
+									"name": "quality_anomaly_value",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['investment']['rental']['monthlyPrice']"
+								},
+								"sink": {
+									"name": "investment_rental_monthlyPrice",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['investment']['rental']['yield']['gross']"
+								},
+								"sink": {
+									"name": "investment_rental_yield_gross",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['descriptive']['description']"
+								},
+								"sink": {
+									"name": "description",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['descriptive']['pros']"
+								},
+								"sink": {
+									"name": "pros",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['descriptive']['cons']"
+								},
+								"sink": {
+									"name": "cons",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['descriptive']['generalState']"
+								},
+								"sink": {
+									"name": "generalState",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['descriptive']['equipments']['FURNITURE']"
+								},
+								"sink": {
+									"name": "equipments_furniture",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['descriptive']['services']"
+								},
+								"sink": {
+									"name": "equipments_services",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['surface']"
+								},
+								"sink": {
+									"name": "surface",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['roomCount']"
+								},
+								"sink": {
+									"name": "roomCount",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['floorCount']"
+								},
+								"sink": {
+									"name": "floorCount",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['areaCount']['TERRACE']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['areaCount']['BATHROOM']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['areaCount']['BALCONY']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['areaCount']['BEDROOM']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['construction']['newBuild']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['construction']['forBuild']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['construction']['year']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['heatingMode']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['diagnosisVersion']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['consumption']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['consumptionLetter']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['consumptionRange']['lowerEndpoint']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['consumptionRange']['lowerBoundType']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['consumptionRange']['upperEndpoint']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['consumptionRange']['upperBoundType']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['greenhouseGasConsumption']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['greenhouseGasConsumptionLetter']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['greenhouseGasConsumptionRange']['lowerEndpoint']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['greenhouseGasConsumptionRange']['lowerBoundType']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['greenhouseGasConsumptionRange']['upperEndpoint']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['greenhouseGasConsumptionRange']['upperBoundType']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['condominium']"
+								},
+								"sink": {
+									"name": "condominium",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['descriptive']['pros'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['descriptive']['cons'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['visual']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['visual']['images']"
+								},
+								"sink": {
+									"name": "visual_images",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['visual']['orientations']"
+								},
+								"sink": {
+									"name": "visual_orientations",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['visual']['views']"
+								},
+								"sink": {
+									"name": "visual_views",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['visual']['images'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['visual']['orientations'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['visual']['views'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['areas'][0]['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['areas'][0]['kitchenEquipments'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['geometry']['floors'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['construction']['urbanismRules'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['heatingTypes'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['energy']['waterHeatingTypes'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['features']['descriptive']['pros'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['features']['descriptive']['cons'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['features']['descriptive']['equipments']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['features']['descriptive']['services']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['features']['visual']['images'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['features']['visual']['orientations'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['features']['visual']['views'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['features']['geometry']['areas'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['features']['geometry']['floors'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['features']['geometry']['areaCount']"
+								},
+								"sink": {
+									"name": "areaCount",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['features']['construction']['newBuild']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['features']['construction']['urbanismRules'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['features']['energy']['heatingTypes'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['features']['energy']['waterHeatingTypes'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['features']['condominium']"
+								},
+								"sink": {
+									"name": "condominium",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['features']['additionalFeatures'][0]['features']['additionalFeatures'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['price']"
+								},
+								"sink": {
+									"name": "price",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['publicationStartDate']"
+								},
+								"sink": {
+									"name": "publicationStartDate",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['publicationEndDate']"
+								},
+								"sink": {
+									"name": "publicationEndDate",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['exclusiveMandate']"
+								},
+								"sink": {
+									"name": "exclusiveMandate",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['rentalExpenses']"
+								},
+								"sink": {
+									"name": "rentalExpenses",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['rentalExpensesIncluded']"
+								},
+								"sink": {
+									"name": "rentalExpensesIncluded",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceM2']"
+								},
+								"sink": {
+									"name": "priceM2",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceCC']"
+								},
+								"sink": {
+									"name": "priceCC",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceHC']"
+								},
+								"sink": {
+									"name": "priceHC",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['relevantPrice']"
+								},
+								"sink": {
+									"name": "relevantPrice",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceM2CC']"
+								},
+								"sink": {
+									"name": "priceM2CC",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceM2HC']"
+								},
+								"sink": {
+									"name": "priceM2HC",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['publicationDays']"
+								},
+								"sink": {
+									"name": "publicationDays",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['active']"
+								},
+								"sink": {
+									"name": "active",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['publicationDateRange']['lowerEndpoint']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['publicationDateRange']['lowerBoundType']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['publicationDateRange']['upperEndpoint']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['publicationDateRange']['upperBoundType']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEventsCount']"
+								},
+								"sink": {
+									"name": "priceEventsCount",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEvents'][0]['price']"
+								},
+								"sink": {
+									"name": "price",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEvents'][0]['date']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['dealers'][0]['name']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['dealers'][0]['phoneNumberHash']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['dealers'][0]['email']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['dealers'][0]['bloctel']['status']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['dealers'][0]['agenciesUnwanted']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['dealers'][0]['type']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['rentalExpensesEvents'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEventsRange'][0]['price']"
+								},
+								"sink": {
+									"name": "price",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEventsRange'][0]['date']['lowerEndpoint']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEventsRange'][0]['date']['lowerBoundType']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEventsRange'][0]['date']['upperEndpoint']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEventsRange'][0]['date']['upperBoundType']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['marketing']['priceEventsRange'][0]['priceM2']"
+								},
+								"sink": {
+									"name": "priceM2",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['cityId']"
+								},
+								"sink": {
+									"name": "cityId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['quarterId']"
+								},
+								"sink": {
+									"name": "quarterId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['agglomerationId']"
+								},
+								"sink": {
+									"name": "agglomerationId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['streetNumber']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['street']"
+								},
+								"sink": {
+									"name": "street",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['city']"
+								},
+								"sink": {
+									"name": "city",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['zipCode']"
+								},
+								"sink": {
+									"name": "zipCode",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['deptCode']"
+								},
+								"sink": {
+									"name": "deptCode",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['location']['lat']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['location']['lon']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['formatted']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['irisIds'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['parcelIds'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ads'][0]['id']"
+								},
+								"sink": {
+									"name": "id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ads'][0]['crawlSource']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['ads'][0]['url']"
+								}
+							},
+							{
+								"source": {
+									"path": "$['properties'][0]"
+								}
+							},
+							{
+								"source": {
+									"path": "$['creationDate']"
+								},
+								"sink": {
+									"name": "creationDate",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['updateDate']"
+								},
+								"sink": {
+									"name": "updateDate",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['type']"
 								}
 							}
 						],
