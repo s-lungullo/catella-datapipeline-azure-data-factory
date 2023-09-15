@@ -1029,7 +1029,9 @@
 						"referenceName": "yanport_to_be_uplod_folder",
 						"type": "DatasetReference"
 					},
-					"fieldList": [],
+					"fieldList": [
+						"childItems"
+					],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
 						"recursive": true,
