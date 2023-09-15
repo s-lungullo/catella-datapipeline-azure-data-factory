@@ -34,6 +34,11 @@
 							"type": "JsonReadSettings"
 						}
 					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
 					"enableStaging": false,
 					"enableSkipIncompatibleRow": true,
 					"logSettings": {
@@ -741,6 +746,12 @@
 				"inputs": [
 					{
 						"referenceName": "yanport_to_be_uplod_folder",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSql_Yanport_Input_Table",
 						"type": "DatasetReference"
 					}
 				]
