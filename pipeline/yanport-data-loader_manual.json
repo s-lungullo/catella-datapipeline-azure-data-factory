@@ -414,8 +414,7 @@
 									"path": "$['features']['visual']['visual_images']"
 								},
 								"sink": {
-									"name": "visual_images",
-									"type": "String"
+									"name": "visual_images"
 								}
 							},
 							{
@@ -423,8 +422,7 @@
 									"path": "$['features']['visual']['visual_orientations']"
 								},
 								"sink": {
-									"name": "visual_orientations",
-									"type": "String"
+									"name": "visual_orientations"
 								}
 							},
 							{
@@ -432,8 +430,7 @@
 									"path": "$['features']['visual']['visual_views']"
 								},
 								"sink": {
-									"name": "visual_views",
-									"type": "String"
+									"name": "visual_views"
 								}
 							},
 							{
