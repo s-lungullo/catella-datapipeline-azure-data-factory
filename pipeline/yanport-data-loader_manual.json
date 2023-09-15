@@ -25,17 +25,9 @@
 				"typeProperties": {
 					"source": {
 						"type": "JsonSource",
-						"additionalColumns": [
-							{
-								"name": "JsonFilePath",
-								"value": "$$FILEPATH"
-							}
-						],
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"recursive": false,
-							"wildcardFolderPath": "benelux/kra/to_upload",
-							"wildcardFileName": "*",
+							"recursive": true,
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
