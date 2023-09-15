@@ -198,7 +198,7 @@
 									"path": "$['features']['descriptive']['services']"
 								},
 								"sink": {
-									"name": "equipments_services",
+									"name": "services",
 									"type": "String"
 								}
 							},
@@ -411,7 +411,7 @@
 							},
 							{
 								"source": {
-									"path": "$['features']['visual']['images']"
+									"path": "$['features']['visual']['visual_images']"
 								},
 								"sink": {
 									"name": "visual_images",
@@ -420,7 +420,7 @@
 							},
 							{
 								"source": {
-									"path": "$['features']['visual']['orientations']"
+									"path": "$['features']['visual']['visual_orientations']"
 								},
 								"sink": {
 									"name": "visual_orientations",
@@ -429,7 +429,7 @@
 							},
 							{
 								"source": {
-									"path": "$['features']['visual']['views']"
+									"path": "$['features']['visual']['visual_views']"
 								},
 								"sink": {
 									"name": "visual_views",
@@ -685,7 +685,7 @@
 								},
 								"sink": {
 									"name": "deptCode",
-									"type": "Int32"
+									"type": "String"
 								}
 							},
 							{
@@ -756,7 +756,8 @@
 									"path": "$['JsonFilePath']"
 								},
 								"sink": {
-									"name": "JsonFilePath"
+									"name": "JsonFilePath",
+									"type": "String"
 								}
 							}
 						],

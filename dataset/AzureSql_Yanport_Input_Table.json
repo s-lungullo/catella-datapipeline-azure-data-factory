@@ -68,7 +68,7 @@
 				"type": "bit"
 			},
 			{
-				"name": "equipments_services",
+				"name": "services",
 				"type": "nvarchar"
 			},
 			{
