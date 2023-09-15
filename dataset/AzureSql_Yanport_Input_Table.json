@@ -309,8 +309,7 @@
 			},
 			{
 				"name": "deptCode",
-				"type": "int",
-				"precision": 10
+				"type": "nvarchar"
 			},
 			{
 				"name": "latitude",
