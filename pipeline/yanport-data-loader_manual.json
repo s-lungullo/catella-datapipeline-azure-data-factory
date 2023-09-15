@@ -452,6 +452,15 @@
 							},
 							{
 								"source": {
+									"path": "$['marketing']['priceEvents']"
+								},
+								"sink": {
+									"name": "priceEvents",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"path": "$['marketing']['publicationStartDate']"
 								},
 								"sink": {
@@ -498,6 +507,10 @@
 							{
 								"source": {
 									"path": "$['marketing']['type']"
+								},
+								"sink": {
+									"name": "marketing_type",
+									"type": "String"
 								}
 							},
 							{
@@ -574,26 +587,6 @@
 							},
 							{
 								"source": {
-									"path": "$['marketing']['publicationDateRange']['lowerEndpoint']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['publicationDateRange']['lowerBoundType']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['publicationDateRange']['upperEndpoint']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['publicationDateRange']['upperBoundType']"
-								}
-							},
-							{
-								"source": {
 									"path": "$['marketing']['priceEventsCount']"
 								},
 								"sink": {
@@ -603,89 +596,11 @@
 							},
 							{
 								"source": {
-									"path": "$['marketing']['priceEvents'][0]['price']"
+									"path": "$['marketing']['priceEventsRange']"
 								},
 								"sink": {
-									"name": "price",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['priceEvents'][0]['date']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['dealers'][0]['name']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['dealers'][0]['phoneNumberHash']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['dealers'][0]['email']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['dealers'][0]['bloctel']['status']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['dealers'][0]['agenciesUnwanted']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['dealers'][0]['type']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['rentalExpensesEvents'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['priceEventsRange'][0]['price']"
-								},
-								"sink": {
-									"name": "price",
-									"type": "Double"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['priceEventsRange'][0]['date']['lowerEndpoint']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['priceEventsRange'][0]['date']['lowerBoundType']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['priceEventsRange'][0]['date']['upperEndpoint']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['priceEventsRange'][0]['date']['upperBoundType']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['marketing']['priceEventsRange'][0]['priceM2']"
-								},
-								"sink": {
-									"name": "priceM2",
-									"type": "Double"
+									"name": "priceEventsRange",
+									"type": "String"
 								}
 							},
 							{
@@ -708,16 +623,29 @@
 							},
 							{
 								"source": {
-									"path": "$['address']['agglomerationId']"
+									"path": "$['address']['irisIds']"
 								},
 								"sink": {
-									"name": "agglomerationId",
+									"name": "irisIds",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['address']['streetNumber']"
+									"path": "$['address']['parcelIds']"
+								},
+								"sink": {
+									"name": "parcelIds",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['address']['agglomerationId']"
+								},
+								"sink": {
+									"name": "agglomerationId",
+									"type": "String"
 								}
 							},
 							{
@@ -759,50 +687,37 @@
 							{
 								"source": {
 									"path": "$['address']['location']['lat']"
+								},
+								"sink": {
+									"name": "latitude",
+									"type": "Double"
 								}
 							},
 							{
 								"source": {
 									"path": "$['address']['location']['lon']"
+								},
+								"sink": {
+									"name": "longitude",
+									"type": "Double"
 								}
 							},
 							{
 								"source": {
 									"path": "$['address']['formatted']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['address']['irisIds'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['address']['parcelIds'][0]"
-								}
-							},
-							{
-								"source": {
-									"path": "$['ads'][0]['id']"
 								},
 								"sink": {
-									"name": "id",
+									"name": "address_formatted",
 									"type": "String"
 								}
 							},
 							{
 								"source": {
-									"path": "$['ads'][0]['crawlSource']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['ads'][0]['url']"
-								}
-							},
-							{
-								"source": {
-									"path": "$['properties'][0]"
+									"path": "$['ads']"
+								},
+								"sink": {
+									"name": "ads",
+									"type": "String"
 								}
 							},
 							{
@@ -826,6 +741,10 @@
 							{
 								"source": {
 									"path": "$['type']"
+								},
+								"sink": {
+									"name": "dwelling_type",
+									"type": "String"
 								}
 							}
 						],
