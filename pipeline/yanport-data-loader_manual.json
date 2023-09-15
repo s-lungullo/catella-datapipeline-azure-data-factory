@@ -411,7 +411,7 @@
 							},
 							{
 								"source": {
-									"path": "$['features']['visual']['visual_images']"
+									"path": "$['features']['visual']['images']"
 								},
 								"sink": {
 									"name": "visual_images"
@@ -419,7 +419,7 @@
 							},
 							{
 								"source": {
-									"path": "$['features']['visual']['visual_orientations']"
+									"path": "$['features']['visual']['orientations']"
 								},
 								"sink": {
 									"name": "visual_orientations"
@@ -427,7 +427,7 @@
 							},
 							{
 								"source": {
-									"path": "$['features']['visual']['visual_views']"
+									"path": "$['features']['visual']['views']"
 								},
 								"sink": {
 									"name": "visual_views"
