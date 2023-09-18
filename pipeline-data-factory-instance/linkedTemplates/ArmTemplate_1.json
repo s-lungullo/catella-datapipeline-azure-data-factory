@@ -3027,6 +3027,367 @@
 			]
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/AzureSql_Yanport_Input_Table')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "datapipeline_dev_db",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "id",
+						"type": "nvarchar"
+					},
+					{
+						"name": "source",
+						"type": "nvarchar"
+					},
+					{
+						"name": "externalProperties",
+						"type": "nvarchar"
+					},
+					{
+						"name": "programId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "quality_anomaly_level",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "quality_anomaly_causes",
+						"type": "nvarchar"
+					},
+					{
+						"name": "quality_anomaly_value",
+						"type": "nvarchar"
+					},
+					{
+						"name": "investment_rental_monthlyPrice",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "investment_rental_yield_gross",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "description",
+						"type": "nvarchar"
+					},
+					{
+						"name": "pros",
+						"type": "nvarchar"
+					},
+					{
+						"name": "cons",
+						"type": "nvarchar"
+					},
+					{
+						"name": "generalState",
+						"type": "nvarchar"
+					},
+					{
+						"name": "equipments_furniture",
+						"type": "bit"
+					},
+					{
+						"name": "services",
+						"type": "nvarchar"
+					},
+					{
+						"name": "visual_images",
+						"type": "nvarchar"
+					},
+					{
+						"name": "visual_orientations",
+						"type": "nvarchar"
+					},
+					{
+						"name": "visual_views",
+						"type": "nvarchar"
+					},
+					{
+						"name": "surface",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "roomCount",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "areas",
+						"type": "nvarchar"
+					},
+					{
+						"name": "floors",
+						"type": "nvarchar"
+					},
+					{
+						"name": "floorCount",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "areaCount",
+						"type": "nvarchar"
+					},
+					{
+						"name": "construction_newBuild",
+						"type": "bit"
+					},
+					{
+						"name": "construction_forBuild",
+						"type": "bit"
+					},
+					{
+						"name": "construction_year",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "construction_urbanismRules",
+						"type": "nvarchar"
+					},
+					{
+						"name": "energy_heatingTypes",
+						"type": "nvarchar"
+					},
+					{
+						"name": "energy_heatingMode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "energy_waterHeatingTypes",
+						"type": "nvarchar"
+					},
+					{
+						"name": "energy_diagnosisVersion",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "energy_consumption",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "energy_consumptionLetter",
+						"type": "nvarchar"
+					},
+					{
+						"name": "energy_consumptionRange_lowerEndpoint",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "energy_consumptionRange_upperEndpoint",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "energy_greenhouseGasConsumption",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "energy_greenhouseGasConsumptionLetter",
+						"type": "nvarchar"
+					},
+					{
+						"name": "energy_greenhouseGasConsumptionRange_lowerEndpoint",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "energy_greenhouseGasConsumptionRange_upperEndpoint",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "condominium",
+						"type": "nvarchar"
+					},
+					{
+						"name": "additionalFeatures",
+						"type": "nvarchar"
+					},
+					{
+						"name": "marketing_type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "publicationStartDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "publicationEndDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "exclusiveMandate",
+						"type": "bit"
+					},
+					{
+						"name": "rentalExpenses",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "rentalExpensesIncluded",
+						"type": "bit"
+					},
+					{
+						"name": "price",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "priceEvents",
+						"type": "nvarchar"
+					},
+					{
+						"name": "priceEventsCount",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "priceM2",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "priceCC",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "priceHC",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "relevantPrice",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "priceM2CC",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "priceM2HC",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "publicationDays",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "active",
+						"type": "bit"
+					},
+					{
+						"name": "priceEventsRange",
+						"type": "nvarchar"
+					},
+					{
+						"name": "cityId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "quarterId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "irisIds",
+						"type": "nvarchar"
+					},
+					{
+						"name": "parcelIds",
+						"type": "nvarchar"
+					},
+					{
+						"name": "agglomerationId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "street",
+						"type": "nvarchar"
+					},
+					{
+						"name": "city",
+						"type": "nvarchar"
+					},
+					{
+						"name": "zipCode",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "deptCode",
+						"type": "nvarchar"
+					},
+					{
+						"name": "latitude",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "longitude",
+						"type": "float",
+						"precision": 15
+					},
+					{
+						"name": "address_formatted",
+						"type": "nvarchar"
+					},
+					{
+						"name": "ads",
+						"type": "nvarchar"
+					},
+					{
+						"name": "creationDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "updateDate",
+						"type": "datetime2",
+						"scale": 7
+					},
+					{
+						"name": "dwelling_type",
+						"type": "nvarchar"
+					},
+					{
+						"name": "JsonFilePath",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Yanport_RawInput"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/datapipeline_dev_db')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/DataPipelineTest_GeomapRawInput')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -3549,589 +3910,6 @@
 						"type": "AzureBlobStorageLocation",
 						"fileName": "*.zip",
 						"container": "geomap-data"
-					},
-					"compression": {
-						"type": "ZipDeflate"
-					}
-				},
-				"schema": {
-					"type": "object",
-					"properties": {
-						"crawlerObject": {
-							"type": "object",
-							"properties": {
-								"kaufMiete": {
-									"type": "string"
-								},
-								"lage": {
-									"type": "object",
-									"properties": {
-										"ort": {
-											"type": "string"
-										},
-										"geoLongitude": {
-											"type": "number"
-										},
-										"geoLatitude": {
-											"type": "number"
-										},
-										"strasse": {
-											"type": "string"
-										},
-										"bundesland": {
-											"type": "string"
-										},
-										"land": {
-											"type": "string"
-										},
-										"stadtteilOrtsteil": {
-											"type": "string"
-										},
-										"plz": {
-											"type": "string"
-										},
-										"bezirk": {
-											"type": "string"
-										}
-									}
-								},
-								"anbieter": {
-									"type": "array",
-									"items": {
-										"type": "object",
-										"properties": {
-											"kontaktEmail": {
-												"type": "string"
-											},
-											"strasse": {
-												"type": "string"
-											},
-											"name": {
-												"type": "string"
-											},
-											"anbieterGewerblich": {
-												"type": "boolean"
-											},
-											"stadt": {
-												"type": "string"
-											},
-											"fax": {
-												"type": "string"
-											},
-											"kontaktUrl": {
-												"type": "string"
-											},
-											"firma": {
-												"type": "string"
-											},
-											"url": {
-												"type": "string"
-											},
-											"telefon1": {
-												"type": "string"
-											},
-											"plz": {
-												"type": "string"
-											}
-										}
-									}
-								},
-								"objektTyp": {
-									"type": "string"
-								},
-								"angebotsInformationen": {
-									"type": "object",
-									"properties": {
-										"titel": {
-											"type": "string"
-										},
-										"verfugbarAbText": {
-											"type": "string"
-										},
-										"portalUrl": {
-											"type": "string"
-										},
-										"medien": {
-											"type": "array",
-											"items": {
-												"type": "object",
-												"properties": {
-													"mediaArt": {
-														"type": "string"
-													},
-													"originUrl": {
-														"type": "string"
-													},
-													"mediaTyp": {
-														"type": "array",
-														"items": {
-															"type": "string"
-														}
-													}
-												}
-											}
-										},
-										"verfugbarAb": {
-											"type": "string"
-										},
-										"anbieterObjektId": {
-											"type": "string"
-										},
-										"onlineSeitLautPortal": {
-											"type": "string"
-										},
-										"beschreibungen": {
-											"type": "object",
-											"properties": {
-												"LAGE": {
-													"type": "string"
-												},
-												"BESCHREIBUNG": {
-													"type": "string"
-												},
-												"AUSSTATTUNG": {
-													"type": "string"
-												},
-												"SONSTIGES": {
-													"type": "string"
-												}
-											}
-										}
-									}
-								},
-								"objektTypText": {
-									"type": "string"
-								},
-								"objektEigenschaften": {
-									"type": "object",
-									"properties": {
-										"heizungsart": {
-											"type": "array",
-											"items": {
-												"type": "string"
-											}
-										},
-										"energieausweis": {
-											"type": "object",
-											"properties": {
-												"ausweisTyp": {
-													"type": "string"
-												},
-												"energieKennwerte": {
-													"type": "object",
-													"properties": {
-														"ENERGIEKENNWERT": {
-															"type": "object",
-															"properties": {
-																"KennwertKlasse": {
-																	"type": "string"
-																},
-																"kennwert": {
-																	"type": "number"
-																},
-																"KennwertKlasseText": {
-																	"type": "string"
-																}
-															}
-														}
-													}
-												},
-												"ausweisInfo": {
-													"type": "string"
-												}
-											}
-										},
-										"anzahlen": {
-											"type": "object",
-											"properties": {
-												"ZIMMER": {
-													"type": "number"
-												},
-												"ETAGEN": {
-													"type": "number"
-												},
-												"BADEZIMMER": {
-													"type": "number"
-												},
-												"STELLPLAETZE": {
-													"type": "number"
-												},
-												"SCHLAFZIMMER": {
-													"type": "number"
-												}
-											}
-										},
-										"boden": {
-											"type": "array",
-											"items": {
-												"type": "string"
-											}
-										},
-										"energieträger": {
-											"type": "array",
-											"items": {
-												"type": "string"
-											}
-										},
-										"denkmalschutz": {
-											"type": "boolean"
-										},
-										"flächen": {
-											"type": "object",
-											"properties": {
-												"flächeValues": {
-													"type": "object",
-													"properties": {
-														"Wohnflaeche": {
-															"type": "number"
-														},
-														"Nutzflaeche": {
-															"type": "number"
-														},
-														"Grundstuecksflaeche": {
-															"type": "number"
-														}
-													}
-												}
-											}
-										},
-										"sonstiges": {
-											"type": "array",
-											"items": {
-												"type": "string"
-											}
-										},
-										"etageText": {
-											"type": "string"
-										},
-										"stellplatz": {
-											"type": "array",
-											"items": {
-												"type": "string"
-											}
-										},
-										"möbliert": {
-											"type": "array",
-											"items": {
-												"type": "string"
-											}
-										},
-										"saniert": {
-											"type": "boolean"
-										},
-										"zustand": {
-											"type": "string"
-										},
-										"ausstattungsQualität": {
-											"type": "string"
-										},
-										"etage": {
-											"type": "number"
-										},
-										"küche": {
-											"type": "array",
-											"items": {
-												"type": "string"
-											}
-										},
-										"balkonTerrasse": {
-											"type": "array",
-											"items": {
-												"type": "string"
-											}
-										},
-										"jahreszahlen": {
-											"type": "object",
-											"properties": {
-												"SANIERUNG": {
-													"type": "integer"
-												},
-												"BAUJAHR": {
-													"type": "integer"
-												}
-											}
-										},
-										"keller": {
-											"type": "array",
-											"items": {
-												"type": "string"
-											}
-										},
-										"aufzug": {
-											"type": "array",
-											"items": {
-												"type": "string"
-											}
-										},
-										"lageEinheit": {
-											"type": "array",
-											"items": {
-												"type": "string"
-											}
-										},
-										"erstbezug": {
-											"type": "boolean"
-										},
-										"sanitär": {
-											"type": "array",
-											"items": {
-												"type": "string"
-											}
-										}
-									}
-								},
-								"objektArt": {
-									"type": "string"
-								},
-								"preise": {
-									"type": "object",
-									"properties": {
-										"preisTexte": {
-											"type": "object",
-											"properties": {
-												"NebenkostenProMonat": {
-													"type": "string"
-												},
-												"MieteProMonatOhneNebenkosten": {
-													"type": "string"
-												},
-												"MieteProMonatMitNebenkosten": {
-													"type": "string"
-												},
-												"MietKaution": {
-													"type": "string"
-												},
-												"HeizkostenProMonat": {
-													"type": "string"
-												},
-												"MieteProMonatProStellplatz": {
-													"type": "string"
-												}
-											}
-										},
-										"currency": {
-											"type": "string"
-										},
-										"preisValues": {
-											"type": "object",
-											"properties": {
-												"NebenkostenProMonat": {
-													"type": "number"
-												},
-												"MietKaution": {
-													"type": "number"
-												},
-												"MieteProMonatOhneNebenkosten": {
-													"type": "number"
-												},
-												"MieteProMonatMitNebenkosten": {
-													"type": "number"
-												},
-												"HeizkostenProMonat": {
-													"type": "number"
-												},
-												"MieteProMonatProStellplatz": {
-													"type": "number"
-												}
-											}
-										},
-										"heizkostenInNebenkostenEnthalten": {
-											"type": "boolean"
-										}
-									}
-								},
-								"addr": {
-									"type": "object",
-									"properties": {
-										"stadtteil": {
-											"type": "string"
-										},
-										"stadtbezirk": {
-											"type": "string"
-										},
-										"strasse": {
-											"type": "string"
-										},
-										"parentIds": {
-											"type": "array",
-											"items": {
-												"type": "string"
-											}
-										},
-										"accuracy": {
-											"type": "string"
-										},
-										"ort": {
-											"type": "string"
-										},
-										"stadtteilId": {
-											"type": "string"
-										},
-										"landId": {
-											"type": "string"
-										},
-										"bundesland": {
-											"type": "string"
-										},
-										"bundeslandId": {
-											"type": "string"
-										},
-										"hausnummer": {
-											"type": "string"
-										},
-										"land": {
-											"type": "string"
-										},
-										"location": {
-											"type": "object",
-											"properties": {
-												"lon": {
-													"type": "number"
-												},
-												"lat": {
-													"type": "number"
-												}
-											}
-										},
-										"ortId": {
-											"type": "string"
-										},
-										"plz": {
-											"type": "string"
-										},
-										"stadtbezirkId": {
-											"type": "string"
-										},
-										"kreisId": {
-											"type": "string"
-										},
-										"kreis": {
-											"type": "string"
-										},
-										"ortsteilId": {
-											"type": "string"
-										},
-										"ortsteil": {
-											"type": "string"
-										}
-									}
-								}
-							}
-						},
-						"firstSeenDay": {
-							"type": "string"
-						},
-						"daysOnline": {
-							"type": "integer"
-						},
-						"preisProQm": {
-							"type": "number"
-						},
-						"onlineRanges": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"lt": {
-										"type": "string"
-									},
-									"gte": {
-										"type": "string"
-									}
-								}
-							}
-						},
-						"crawlerIdsEntryIds": {
-							"type": "array",
-							"items": {
-								"type": "object",
-								"properties": {
-									"firstSeenDay": {
-										"type": "string"
-									},
-									"portalUrl": {
-										"type": "string"
-									},
-									"state": {
-										"type": "string"
-									},
-									"lastUpdatedDay": {
-										"type": "string"
-									}
-								}
-							}
-						},
-						"eventDay": {
-							"type": "string"
-						},
-						"preis": {
-							"type": "number"
-						},
-						"online": {
-							"type": "boolean"
-						},
-						"state": {
-							"type": "string"
-						},
-						"lastSeenDay": {
-							"type": "string"
-						},
-						"nutzflaeche": {
-							"type": "number"
-						},
-						"nebenkosten": {
-							"type": "object",
-							"properties": {
-								"Nebenkosten": {
-									"type": "number"
-								}
-							}
-						},
-						"groupId": {
-							"type": "string"
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/datapipeline_blob_storage')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GeomapJson_Generic')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "datapipeline_blob_storage",
-					"type": "LinkedServiceReference"
-				},
-				"parameters": {
-					"SourceContainer": {
-						"type": "string",
-						"defaultValue": "geomap-data"
-					},
-					"SourceFileName": {
-						"type": "string",
-						"defaultValue": "*.zip"
-					}
-				},
-				"folder": {
-					"name": "Geomap"
-				},
-				"annotations": [],
-				"type": "Json",
-				"typeProperties": {
-					"location": {
-						"type": "AzureBlobStorageLocation",
-						"fileName": {
-							"value": "@dataset().SourceFileName",
-							"type": "Expression"
-						},
-						"container": {
-							"value": "@dataset().SourceContainer",
-							"type": "Expression"
-						}
 					},
 					"compression": {
 						"type": "ZipDeflate"
