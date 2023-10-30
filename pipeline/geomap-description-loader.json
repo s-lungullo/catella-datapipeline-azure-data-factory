@@ -147,8 +147,6 @@
 			{
 				"name": "move-files-to-archive",
 				"type": "Copy",
-				"state": "Inactive",
-				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "Upload_descriptions_to-DB",
@@ -195,7 +193,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "geomap_uploaded_zip_folder",
+						"referenceName": "geomap_uploaded_descr_folder",
 						"type": "DatasetReference"
 					}
 				]
