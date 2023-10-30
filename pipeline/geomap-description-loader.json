@@ -38,12 +38,6 @@
 							}
 						}
 					},
-					"sink": {
-						"type": "AzureSqlSink",
-						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": true,
-						"disableMetricsCollection": false
-					},
 					"enableStaging": false,
 					"enableSkipIncompatibleRow": true,
 					"logSettings": {
@@ -134,12 +128,6 @@
 				"inputs": [
 					{
 						"referenceName": "geomap_to_be_uploaded_folder",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AzureSql_Geomap_descr_table",
 						"type": "DatasetReference"
 					}
 				]
