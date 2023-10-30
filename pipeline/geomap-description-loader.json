@@ -65,6 +65,15 @@
 						"mappings": [
 							{
 								"source": {
+									"path": "$['crawlerObject']['kaufMiete']"
+								},
+								"sink": {
+									"name": "kaufMiete",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
 									"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['LAGE']"
 								},
 								"sink": {
@@ -106,15 +115,6 @@
 								"sink": {
 									"name": "mobliert",
 									"type": "String"
-								}
-							},
-							{
-								"source": {
-									"path": "$['crawlerObject']['kaufMiete']"
-								},
-								"sink": {
-									"name": "kaufMiete",
-									"type": "nvarchar"
 								}
 							},
 							{
