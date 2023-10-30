@@ -174,7 +174,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "geomap_upload_descr_folder_zip",
+						"referenceName": "geomap_to_be_uploaded_files_zip",
 						"type": "DatasetReference"
 					}
 				],
