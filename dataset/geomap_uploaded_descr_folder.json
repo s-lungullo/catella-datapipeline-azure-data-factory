@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
+				"fileName": "*.zip",
 				"folderPath": "de/geomap/uploaded_descr",
 				"container": "data-pipeline-input-files"
 			}
