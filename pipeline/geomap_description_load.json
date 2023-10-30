@@ -132,8 +132,8 @@
 				]
 			},
 			{
-				"name": "delete_from_upload_folde",
-				"type": "Delete",
+				"name": "move_files_to_archive",
+				"type": "Copy",
 				"dependsOn": [
 					{
 						"activity": "Upload-descriptions-to-DB",
@@ -151,18 +151,39 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataset": {
-						"referenceName": "geomap_descr_upload_folder",
-						"type": "DatasetReference"
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": false,
+							"wildcardFolderPath": "de/geomap/to_upload",
+							"wildcardFileName": "*.zip",
+							"deleteFilesAfterCompletion": true
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
 					},
-					"enableLogging": false,
-					"storeSettings": {
-						"type": "AzureBlobStorageReadSettings",
-						"recursive": true,
-						"wildcardFileName": "results_*.zip",
-						"enablePartitionDiscovery": false
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "geomap_upload_descr_folder_zip",
+						"type": "DatasetReference"
 					}
-				}
+				],
+				"outputs": [
+					{
+						"referenceName": "geomap_uploaded_descr_zip_folder",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
