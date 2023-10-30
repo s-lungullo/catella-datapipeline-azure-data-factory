@@ -25,7 +25,7 @@
 						],
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"recursive": true,
+							"recursive": false,
 							"wildcardFolderPath": "de/geomap/to_upload",
 							"wildcardFileName": "*",
 							"enablePartitionDiscovery": false
