@@ -98,7 +98,7 @@
 							},
 							{
 								"source": {
-									"path": "$['crawlerObject']['objektEigenschaften']['mobliert']"
+									"path": "$['crawlerObject']['objektEigenschaften']['möbliert']"
 								},
 								"sink": {
 									"name": "mobliert",
@@ -111,6 +111,15 @@
 								},
 								"sink": {
 									"name": "groupId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['JsonFilePath']"
+								},
+								"sink": {
+									"name": "JsonFilePath",
 									"type": "String"
 								}
 							}
