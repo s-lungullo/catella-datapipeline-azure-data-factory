@@ -1,5 +1,5 @@
 {
-	"name": "geomap_uploaded_descr_folder",
+	"name": "geomap_upload_descr_folder_zip",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "datapipeline_blob_storage",
