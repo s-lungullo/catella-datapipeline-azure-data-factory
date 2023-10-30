@@ -17,17 +17,9 @@
 				"typeProperties": {
 					"source": {
 						"type": "JsonSource",
-						"additionalColumns": [
-							{
-								"name": "JsonFilePath",
-								"value": "$$FILEPATH"
-							}
-						],
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
-							"recursive": false,
-							"wildcardFolderPath": "de/geomap/to_upload",
-							"wildcardFileName": "*",
+							"recursive": true,
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -123,7 +115,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "geomap_to_be_uploaded_folder",
+						"referenceName": "geomap_descr_upload_folder",
 						"type": "DatasetReference"
 					}
 				],
