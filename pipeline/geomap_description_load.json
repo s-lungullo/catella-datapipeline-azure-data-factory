@@ -66,8 +66,7 @@
 									"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['LAGE']"
 								},
 								"sink": {
-									"name": "LAGE",
-									"type": "String"
+									"name": "LAGE"
 								}
 							},
 							{
@@ -75,8 +74,7 @@
 									"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['BESCHREIBUNG']"
 								},
 								"sink": {
-									"name": "BESCHREIBUNG",
-									"type": "String"
+									"name": "BESCHREIBUNG"
 								}
 							},
 							{
@@ -84,8 +82,7 @@
 									"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['SONSTIGES']"
 								},
 								"sink": {
-									"name": "SONSTIGES",
-									"type": "String"
+									"name": "SONSTIGES"
 								}
 							},
 							{
@@ -93,8 +90,7 @@
 									"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['AUSSTATTUNG']"
 								},
 								"sink": {
-									"name": "AUSSTATTUNG",
-									"type": "String"
+									"name": "AUSSTATTUNG"
 								}
 							},
 							{
@@ -102,8 +98,7 @@
 									"path": "$['crawlerObject']['objektEigenschaften']['möbliert']"
 								},
 								"sink": {
-									"name": "mobliert",
-									"type": "String"
+									"name": "mobliert"
 								}
 							},
 							{
@@ -111,8 +106,7 @@
 									"path": "$['groupId']"
 								},
 								"sink": {
-									"name": "groupId",
-									"type": "String"
+									"name": "groupId"
 								}
 							},
 							{
@@ -120,8 +114,7 @@
 									"path": "$['JsonFilePath']"
 								},
 								"sink": {
-									"name": "JsonFilePath",
-									"type": "String"
+									"name": "JsonFilePath"
 								}
 							}
 						],
@@ -130,7 +123,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "geomap_descr_upload_folder",
+						"referenceName": "geomap_to_be_uploaded_folder",
 						"type": "DatasetReference"
 					}
 				],
