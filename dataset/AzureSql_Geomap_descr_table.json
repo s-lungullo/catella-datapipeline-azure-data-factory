@@ -7,7 +7,36 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": [],
+		"schema": [
+			{
+				"name": "groupId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mobliert",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LAGE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BESCHREIBUNG",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SONSTIGES",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AUSSTATTUNG",
+				"type": "nvarchar"
+			},
+			{
+				"name": "JsonFilePath",
+				"type": "nvarchar"
+			}
+		],
 		"typeProperties": {
 			"schema": "dbo",
 			"table": "GeoMap_Descriptions"
