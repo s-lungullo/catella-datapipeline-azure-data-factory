@@ -1,0 +1,1151 @@
+{
+	"name": "geomap-description-loader",
+	"properties": {
+		"description": "Data pipeline to load all geomap files to the database",
+		"activities": [
+			{
+				"name": "Upload-Data-to-DB",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Remove last comma",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "1.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"additionalColumns": [
+							{
+								"name": "JsonFilePath",
+								"value": "$$FILEPATH"
+							}
+						],
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": false,
+							"wildcardFolderPath": "de/geomap/to_upload",
+							"wildcardFileName": "*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings",
+							"compressionProperties": {
+								"type": "ZipDeflateReadSettings"
+							}
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": true,
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"logSettings": {
+						"enableCopyActivityLog": true,
+						"copyActivityLogSettings": {
+							"logLevel": "Warning",
+							"enableReliableLogging": false
+						},
+						"logLocationSettings": {
+							"linkedServiceName": {
+								"referenceName": "AzureBlobStorageLogs",
+								"type": "LinkedServiceReference"
+							},
+							"path": "data-pipeline-input-files/de/geomap/logs"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['crawlerObject']['kaufMiete']"
+								},
+								"sink": {
+									"name": "kaufMiete",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['lage']['geoLongitude']"
+								},
+								"sink": {
+									"name": "geoLongitude",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['lage']['geoLatitude']"
+								},
+								"sink": {
+									"name": "geoLatitude",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['lage']['land']"
+								},
+								"sink": {
+									"name": "land",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektTyp']"
+								},
+								"sink": {
+									"name": "objektTyp",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['anbieter']"
+								},
+								"sink": {
+									"name": "anbieter",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['angebotsInformationen']['titel']"
+								},
+								"sink": {
+									"name": "titel",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['angebotsInformationen']['portalUrl']"
+								},
+								"sink": {
+									"name": "portalUrl",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektTypText']"
+								},
+								"sink": {
+									"name": "objektTypText",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['saniert']"
+								},
+								"sink": {
+									"name": "saniert",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['heizungsart']"
+								},
+								"sink": {
+									"name": "heizungsart",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['sanitär']"
+								},
+								"sink": {
+									"name": "sanitar",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['ausweisTyp']"
+								},
+								"sink": {
+									"name": "ausweisTyp",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['ausweisInfo']"
+								},
+								"sink": {
+									"name": "ausweisInfo",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['energieKennwerte']['ENERGIEKENNWERT']['KennwertKlasse']"
+								},
+								"sink": {
+									"name": "KennwertKlasse",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['energieausweis']['energieKennwerte']['ENERGIEKENNWERT']['kennwert']"
+								},
+								"sink": {
+									"name": "kennwert",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Grundstuecksflaeche']"
+								},
+								"sink": {
+									"name": "Grundstuecksflaeche",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Wohnflaeche']"
+								},
+								"sink": {
+									"name": "Wohnflaeche",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['flächen']['flächeValues']['Nutzflaeche']"
+								},
+								"sink": {
+									"name": "Nutzflaeche",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['zustand']"
+								},
+								"sink": {
+									"name": "zustand",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['ausstattungsQualität']"
+								},
+								"sink": {
+									"name": "ausstattungsQualitat",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['etage']"
+								},
+								"sink": {
+									"name": "etage",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['ZIMMER']"
+								},
+								"sink": {
+									"name": "ZIMMER",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['ETAGEN']"
+								},
+								"sink": {
+									"name": "ETAGEN",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['BADEZIMMER']"
+								},
+								"sink": {
+									"name": "BADEZIMMER",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['SCHLAFZIMMER']"
+								},
+								"sink": {
+									"name": "SCHLAFZIMMER",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['anzahlen']['STELLPLAETZE']"
+								},
+								"sink": {
+									"name": "STELLPLAETZE",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['jahreszahlen']['BAUJAHR']"
+								},
+								"sink": {
+									"name": "BAUJAHR",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['jahreszahlen']['SANIERUNG']"
+								},
+								"sink": {
+									"name": "SANIERUNG",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['küche']"
+								},
+								"sink": {
+									"name": "kuche",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['balkonTerrasse']"
+								},
+								"sink": {
+									"name": "balkonTerrasse",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['keller']"
+								},
+								"sink": {
+									"name": "keller",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['kommunikation']"
+								},
+								"sink": {
+									"name": "kommunikation",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['boden']"
+								},
+								"sink": {
+									"name": "boden",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['energieträger']"
+								},
+								"sink": {
+									"name": "energietrager",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['aufzug']"
+								},
+								"sink": {
+									"name": "aufzug",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['stellplatz']"
+								},
+								"sink": {
+									"name": "stellplatz",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['lageEinheit']"
+								},
+								"sink": {
+									"name": "lageEinheit",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['sonstiges']"
+								},
+								"sink": {
+									"name": "sonstiges",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['objektArt']"
+								},
+								"sink": {
+									"name": "objektArt",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['preise']['provisionsfrei']"
+								},
+								"sink": {
+									"name": "provisionsfrei",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['preise']['heizkostenInNebenkostenEnthalten']"
+								},
+								"sink": {
+									"name": "heizkostenInNebenkostenEnthalten",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['preise']['currency']"
+								},
+								"sink": {
+									"name": "currency",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatOhneNebenkosten']"
+								},
+								"sink": {
+									"name": "MieteProMonatOhneNebenkosten",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatMitNebenkosten']"
+								},
+								"sink": {
+									"name": "MieteProMonatMitNebenkosten",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['preise']['preisValues']['NebenkostenProMonat']"
+								},
+								"sink": {
+									"name": "NebenkostenProMonat",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['preise']['preisValues']['MietKaution']"
+								},
+								"sink": {
+									"name": "MietKaution",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['preise']['preisValues']['HeizkostenProMonat']"
+								},
+								"sink": {
+									"name": "HeizkostenProMonat",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['preise']['preisValues']['MieteProMonatProStellplatz']"
+								},
+								"sink": {
+									"name": "MieteProMonatProStellplatz",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['preise']['preisValues']['Kaufpreis']"
+								},
+								"sink": {
+									"name": "Kaufpreis",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['preise']['preisValues']['HausgeldProMonat']"
+								},
+								"sink": {
+									"name": "HausgeldProMonat",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['addr']['stadtteil']"
+								},
+								"sink": {
+									"name": "stadtteil",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['addr']['stadtbezirk']"
+								},
+								"sink": {
+									"name": "stadtbezirk",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['addr']['kreis']"
+								},
+								"sink": {
+									"name": "kreis",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['addr']['accuracy']"
+								},
+								"sink": {
+									"name": "accuracy",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['addr']['ort']"
+								},
+								"sink": {
+									"name": "ort",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['addr']['bundesland']"
+								},
+								"sink": {
+									"name": "bundesland",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['addr']['plz']"
+								},
+								"sink": {
+									"name": "plz",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['addr']['strasse']"
+								},
+								"sink": {
+									"name": "strasse",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['crawlerObject']['addr']['hausnummer']"
+								},
+								"sink": {
+									"name": "hausnummer",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['firstSeenDay']"
+								},
+								"sink": {
+									"name": "firstSeenDay",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['daysOnline']"
+								},
+								"sink": {
+									"name": "daysOnline",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['preisProQm']"
+								},
+								"sink": {
+									"name": "preisProQm",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['onlineRanges']"
+								},
+								"sink": {
+									"name": "onlineRanges",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['rendite']['marktmieteProQm']"
+								},
+								"sink": {
+									"name": "marktmieteProQm",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['rendite']['marktmieteGebiet']"
+								},
+								"sink": {
+									"name": "marktmieteGebiet",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['rendite']['renditeAvg']"
+								},
+								"sink": {
+									"name": "renditeAvg",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['rendite']['renditeQuelle']"
+								},
+								"sink": {
+									"name": "renditeQuelle",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['rendite']['marktRendite']"
+								},
+								"sink": {
+									"name": "marktRendite",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['rendite']['zeitraumMarktmiete']['lt']"
+								},
+								"sink": {
+									"name": "zeitraumMarktmiete_lt",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['rendite']['zeitraumMarktmiete']['gte']"
+								},
+								"sink": {
+									"name": "zeitraumMarktmiete_gte",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['rendite']['anzahlAngeboteMarktmiete']"
+								},
+								"sink": {
+									"name": "anzahlAngeboteMarktmiete",
+									"type": "Int32"
+								}
+							},
+							{
+								"source": {
+									"path": "$['eventDay']"
+								},
+								"sink": {
+									"name": "eventDay",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['online']"
+								},
+								"sink": {
+									"name": "online",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"path": "$['lastOfflineDay']"
+								},
+								"sink": {
+									"name": "lastOfflineDay",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['lastSeenDay']"
+								},
+								"sink": {
+									"name": "lastSeenDay",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['state']"
+								},
+								"sink": {
+									"name": "state",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['groupId']"
+								},
+								"sink": {
+									"name": "groupId",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['JsonFilePath']"
+								},
+								"sink": {
+									"name": "JsonFilePath",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "",
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "geomap_to_be_uploaded_folder",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AzureSql_Geomap_Input_Table",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "move-files-to-archive",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Upload-Data-to-DB",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "BinarySource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": false,
+							"wildcardFolderPath": "de/geomap/to_upload",
+							"wildcardFileName": "*.zip",
+							"deleteFilesAfterCompletion": true
+						},
+						"formatSettings": {
+							"type": "BinaryReadSettings"
+						}
+					},
+					"sink": {
+						"type": "BinarySink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						}
+					},
+					"enableStaging": false
+				},
+				"inputs": [
+					{
+						"referenceName": "geomap_to_be_uploaded_files_zip",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "geomap_uploaded_zip_folder",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Insert_Log",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Upload-Data-to-DB",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[Insert_ADF_Logs]",
+					"storedProcedureParameters": {
+						"CopyActivityRunID": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').ActivityRunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Date": {
+							"value": {
+								"value": "@utcnow()",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"ErrorMessage": {
+							"value": null,
+							"type": "String"
+						},
+						"Filenames": {
+							"value": {
+								"value": "@variables('filenames_str')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PipelineName": {
+							"value": {
+								"value": "@pipeline().Pipeline",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PipelineRunID": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Rows_skipped": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').output.rowsSkipped",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"Rows_written": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').output.rowsCopied",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"StatusMessage": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').output.executionDetails[0].status",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "datapipeline_dev_db",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Insert_Error_Log",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Upload-Data-to-DB",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[Insert_ADF_Logs]",
+					"storedProcedureParameters": {
+						"CopyActivityRunID": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').ActivityRunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Date": {
+							"value": {
+								"value": "@utcnow()",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"ErrorMessage": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').output.errors[0].Message",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Filenames": {
+							"value": {
+								"value": "@variables('filenames_str')",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PipelineName": {
+							"value": {
+								"value": "@pipeline().Pipeline",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"PipelineRunID": {
+							"value": {
+								"value": "@pipeline().RunId",
+								"type": "Expression"
+							},
+							"type": "String"
+						},
+						"Rows_skipped": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').output.rowsSkipped",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"Rows_written": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').output.rowsCopied",
+								"type": "Expression"
+							},
+							"type": "Int32"
+						},
+						"StatusMessage": {
+							"value": {
+								"value": "@activity('Upload-Data-to-DB').output.executionDetails[0].status",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "datapipeline_dev_db",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "Get Uploaded Filenames",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "geomap_to_be_uploaded_zip_folder",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "BinaryReadSettings"
+					}
+				}
+			},
+			{
+				"name": "Raise_Failed",
+				"type": "Fail",
+				"dependsOn": [
+					{
+						"activity": "Insert_Error_Log",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"message": {
+						"value": "@activity('Upload-Data-to-DB').output.errors[0].Message",
+						"type": "Expression"
+					},
+					"errorCode": {
+						"value": "@activity('Upload-Data-to-DB').output.errors[0].Code",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Set filenames string",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Uploaded Filenames",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "af",
+					"value": {
+						"value": "@replace(replace(replace(replace(replace(replace(replace(replace(replace(string(activity('Get Uploaded Filenames').output.childItems),'[{',''),'}]',''),'{',''),'}',''),'\"type\":\"Folder\"',''),'\"type\":\"File\"',''),'\"',''),'name:',''),',,',', ')",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Remove last comma",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set filenames string",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "filenames_str",
+					"value": {
+						"value": "@substring(variables('af'), 0, add(length(variables('af')),-1))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"af": {
+				"type": "String"
+			},
+			"filenames_str": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2023-07-18T20:44:05Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
