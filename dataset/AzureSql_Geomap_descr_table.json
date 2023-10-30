@@ -1,0 +1,45 @@
+{
+	"name": "AzureSql_Geomap_descr_table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "DataPipelineSQLDev",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "groupId",
+				"type": "nvarchar"
+			},
+			{
+				"name": "mobliert",
+				"type": "nvarchar"
+			},
+			{
+				"name": "LAGE",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BESCHREIBUNG",
+				"type": "nvarchar"
+			},
+			{
+				"name": "SONSTIGES",
+				"type": "nvarchar"
+			},
+			{
+				"name": "AUSSTATTUNG",
+				"type": "nvarchar"
+			},
+			{
+				"name": "JsonFilePath",
+				"type": "nvarchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "GeoMap_Descriptions"
+		}
+	}
+}
