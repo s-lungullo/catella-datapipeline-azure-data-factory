@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Upload-Data-to-DB",
+				"name": "Upload-descriptions-to-DB",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
