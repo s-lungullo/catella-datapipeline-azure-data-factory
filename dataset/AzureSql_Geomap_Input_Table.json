@@ -357,6 +357,10 @@
 			{
 				"name": "JsonFilePath",
 				"type": "nvarchar"
+			},
+			{
+				"name": "mobliert",
+				"type": "nvarchar"
 			}
 		],
 		"typeProperties": {
