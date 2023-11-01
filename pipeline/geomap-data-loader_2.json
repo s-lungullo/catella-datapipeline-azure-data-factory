@@ -647,6 +647,14 @@
 							},
 							{
 								"source": {
+									"path": "$['crawlerObject']['objektEigenschaften']['möbliert']"
+								},
+								"sink": {
+									"name": "mobliert"
+								}
+							},
+							{
+								"source": {
 									"path": "$['crawlerObject']['objektArt']"
 								},
 								"sink": {
