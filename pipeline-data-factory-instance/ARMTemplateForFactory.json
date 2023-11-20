@@ -1134,8 +1134,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"annotations": [],
 				"lastPublishTime": "2023-01-27T16:03:55Z"
@@ -1187,8 +1186,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"annotations": []
 			},
@@ -1308,8 +1306,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"annotations": [],
 				"lastPublishTime": "2023-07-18T20:44:05Z"
@@ -2637,8 +2634,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"af": {
@@ -3642,8 +3638,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"af": {
@@ -4021,8 +4016,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"annotations": [],
 				"lastPublishTime": "2023-02-17T14:49:49Z"
@@ -5327,8 +5321,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"varCleanUpload": {
@@ -6012,6 +6005,15 @@
 									},
 									{
 										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['möbliert']"
+										},
+										"sink": {
+											"name": "mobliert",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"path": "$['crawlerObject']['objektArt']"
 										},
 										"sink": {
@@ -6228,15 +6230,6 @@
 									},
 									{
 										"source": {
-											"path": "$['onlineRanges']"
-										},
-										"sink": {
-											"name": "onlineRanges",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
 											"path": "$['rendite']['marktmieteProQm']"
 										},
 										"sink": {
@@ -6336,20 +6329,20 @@
 									},
 									{
 										"source": {
-											"path": "$['lastSeenDay']"
-										},
-										"sink": {
-											"name": "lastSeenDay",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
 											"path": "$['state']"
 										},
 										"sink": {
 											"name": "state",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['lastSeenDay']"
+										},
+										"sink": {
+											"name": "lastSeenDay",
+											"type": "DateTime"
 										}
 									},
 									{
@@ -6682,8 +6675,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"af": {
@@ -7130,6 +7122,14 @@
 										"sink": {
 											"name": "sonstiges",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['möbliert']"
+										},
+										"sink": {
+											"name": "mobliert"
 										}
 									},
 									{
@@ -7853,8 +7853,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"af": {
@@ -7874,6 +7873,244 @@
 				"[concat(variables('factoryId'), '/datasets/geomap_uploaded_zip_folder')]",
 				"[concat(variables('factoryId'), '/linkedServices/datapipeline_dev_db')]",
 				"[concat(variables('factoryId'), '/datasets/geomap_to_be_uploaded_zip_folder')]",
+				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorageLogs')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/geomap-description-loader')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Data pipeline to load all geomap files to the database",
+				"activities": [
+					{
+						"name": "Upload_descriptions_to-DB",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"additionalColumns": [
+									{
+										"name": "JsonFilePath",
+										"value": "$$FILEPATH"
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": false,
+									"wildcardFolderPath": "de/geomap/to_upload",
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings",
+									"compressionProperties": {
+										"type": "ZipDeflateReadSettings"
+									}
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorageLogs",
+										"type": "LinkedServiceReference"
+									},
+									"path": "data-pipeline-input-files/de/geomap/logs"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['crawlerObject']['kaufMiete']"
+										},
+										"sink": {
+											"name": "kaufMiete",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['LAGE']"
+										},
+										"sink": {
+											"name": "LAGE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['BESCHREIBUNG']"
+										},
+										"sink": {
+											"name": "BESCHREIBUNG",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['SONSTIGES']"
+										},
+										"sink": {
+											"name": "SONSTIGES",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['AUSSTATTUNG']"
+										},
+										"sink": {
+											"name": "AUSSTATTUNG",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['möbliert']"
+										},
+										"sink": {
+											"name": "mobliert",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['groupId']"
+										},
+										"sink": {
+											"name": "groupId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['JsonFilePath']"
+										},
+										"sink": {
+											"name": "JsonFilePath",
+											"type": "String"
+										}
+									}
+								],
+								"collectionReference": "",
+								"mapComplexValuesToString": true
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "geomap_to_be_uploaded_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSql_Geomap_descr_table",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "move-files-to-archive",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Upload_descriptions_to-DB",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": false,
+									"wildcardFolderPath": "de/geomap/to_upload",
+									"wildcardFileName": "*.zip",
+									"deleteFilesAfterCompletion": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "geomap_to_be_uploaded_files_zip",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "geomap_uploaded_descr_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"variables": {
+					"af": {
+						"type": "String"
+					},
+					"filenames_str": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-07-18T20:44:05Z"
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/geomap_to_be_uploaded_folder')]",
+				"[concat(variables('factoryId'), '/datasets/AzureSql_Geomap_descr_table')]",
+				"[concat(variables('factoryId'), '/datasets/geomap_to_be_uploaded_files_zip')]",
+				"[concat(variables('factoryId'), '/datasets/geomap_uploaded_descr_folder')]",
 				"[concat(variables('factoryId'), '/linkedServices/AzureBlobStorageLogs')]"
 			]
 		},
@@ -9386,8 +9623,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"reupload-2019": {
@@ -10166,8 +10402,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"af": {
@@ -11550,8 +11785,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"annotations": [],
 				"lastPublishTime": "2023-02-15T16:54:34Z"
@@ -12379,8 +12613,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"annotations": [],
 				"lastPublishTime": "2023-02-08T12:53:58Z"
@@ -14105,8 +14338,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"af": {
@@ -15250,8 +15482,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"af": {
@@ -16442,11 +16673,69 @@
 					{
 						"name": "JsonFilePath",
 						"type": "nvarchar"
+					},
+					{
+						"name": "mobliert",
+						"type": "nvarchar"
 					}
 				],
 				"typeProperties": {
 					"schema": "dbo",
 					"table": "GeoMapRawImport_2"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DataPipelineSQLDev')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureSql_Geomap_descr_table')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DataPipelineSQLDev",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "kaufMiete",
+						"type": "nvarchar"
+					},
+					{
+						"name": "groupId",
+						"type": "nvarchar"
+					},
+					{
+						"name": "mobliert",
+						"type": "nvarchar"
+					},
+					{
+						"name": "LAGE",
+						"type": "nvarchar"
+					},
+					{
+						"name": "BESCHREIBUNG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "SONSTIGES",
+						"type": "nvarchar"
+					},
+					{
+						"name": "AUSSTATTUNG",
+						"type": "nvarchar"
+					},
+					{
+						"name": "JsonFilePath",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "GeoMap_Descriptions"
 				}
 			},
 			"dependsOn": [
@@ -22214,6 +22503,29 @@
 					"location": {
 						"type": "AzureBlobStorageLocation",
 						"folderPath": "de/geomap/to_upload",
+						"container": "data-pipeline-input-files"
+					}
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/datapipeline_blob_storage')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/geomap_uploaded_descr_folder')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "datapipeline_blob_storage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "de/geomap/uploaded_descr",
 						"container": "data-pipeline-input-files"
 					}
 				}

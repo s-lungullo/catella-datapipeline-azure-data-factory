@@ -13,6 +13,48 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('factoryName'), '/kra_uploaded_zip_folder')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "datapipeline_blob_storage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"folderPath": "benelux/kra/uploaded",
+						"container": "data-pipeline-input-files"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/old_geomap_data_zip')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "datapipeline_blob_storage",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "Binary",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "*.zip",
+						"container": "geomap-data"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/yanport_to_be_upload_files_gz')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -1996,8 +2038,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"af": {
@@ -2993,8 +3034,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"af": {
@@ -3364,13 +3404,14 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"annotations": [],
 				"lastPublishTime": "2023-02-17T14:49:49Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/old_geomap_data_zip')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/geomap-data-loader')]",
@@ -4662,8 +4703,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"varCleanUpload": {
@@ -5337,6 +5377,15 @@
 									},
 									{
 										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['möbliert']"
+										},
+										"sink": {
+											"name": "mobliert",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"path": "$['crawlerObject']['objektArt']"
 										},
 										"sink": {
@@ -5553,15 +5602,6 @@
 									},
 									{
 										"source": {
-											"path": "$['onlineRanges']"
-										},
-										"sink": {
-											"name": "onlineRanges",
-											"type": "String"
-										}
-									},
-									{
-										"source": {
 											"path": "$['rendite']['marktmieteProQm']"
 										},
 										"sink": {
@@ -5661,20 +5701,20 @@
 									},
 									{
 										"source": {
-											"path": "$['lastSeenDay']"
-										},
-										"sink": {
-											"name": "lastSeenDay",
-											"type": "DateTime"
-										}
-									},
-									{
-										"source": {
 											"path": "$['state']"
 										},
 										"sink": {
 											"name": "state",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['lastSeenDay']"
+										},
+										"sink": {
+											"name": "lastSeenDay",
+											"type": "DateTime"
 										}
 									},
 									{
@@ -6007,8 +6047,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"af": {
@@ -6446,6 +6485,14 @@
 										"sink": {
 											"name": "sonstiges",
 											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['möbliert']"
+										},
+										"sink": {
+											"name": "mobliert"
 										}
 									},
 									{
@@ -7169,8 +7216,239 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
+				},
+				"variables": {
+					"af": {
+						"type": "String"
+					},
+					"filenames_str": {
+						"type": "String"
+					}
+				},
+				"annotations": [],
+				"lastPublishTime": "2023-07-18T20:44:05Z"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/geomap-description-loader')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "Data pipeline to load all geomap files to the database",
+				"activities": [
+					{
+						"name": "Upload_descriptions_to-DB",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "1.00:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "JsonSource",
+								"additionalColumns": [
+									{
+										"name": "JsonFilePath",
+										"value": "$$FILEPATH"
+									}
+								],
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": false,
+									"wildcardFolderPath": "de/geomap/to_upload",
+									"wildcardFileName": "*",
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "JsonReadSettings",
+									"compressionProperties": {
+										"type": "ZipDeflateReadSettings"
+									}
+								}
+							},
+							"sink": {
+								"type": "AzureSqlSink",
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": true,
+								"disableMetricsCollection": false
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"logSettings": {
+								"enableCopyActivityLog": true,
+								"copyActivityLogSettings": {
+									"logLevel": "Warning",
+									"enableReliableLogging": false
+								},
+								"logLocationSettings": {
+									"linkedServiceName": {
+										"referenceName": "AzureBlobStorageLogs",
+										"type": "LinkedServiceReference"
+									},
+									"path": "data-pipeline-input-files/de/geomap/logs"
+								}
+							},
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"path": "$['crawlerObject']['kaufMiete']"
+										},
+										"sink": {
+											"name": "kaufMiete",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['LAGE']"
+										},
+										"sink": {
+											"name": "LAGE",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['BESCHREIBUNG']"
+										},
+										"sink": {
+											"name": "BESCHREIBUNG",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['SONSTIGES']"
+										},
+										"sink": {
+											"name": "SONSTIGES",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['angebotsInformationen']['beschreibungen']['AUSSTATTUNG']"
+										},
+										"sink": {
+											"name": "AUSSTATTUNG",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['crawlerObject']['objektEigenschaften']['möbliert']"
+										},
+										"sink": {
+											"name": "mobliert",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['groupId']"
+										},
+										"sink": {
+											"name": "groupId",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
+											"path": "$['JsonFilePath']"
+										},
+										"sink": {
+											"name": "JsonFilePath",
+											"type": "String"
+										}
+									}
+								],
+								"collectionReference": "",
+								"mapComplexValuesToString": true
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "geomap_to_be_uploaded_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AzureSql_Geomap_descr_table",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					},
+					{
+						"name": "move-files-to-archive",
+						"type": "Copy",
+						"dependsOn": [
+							{
+								"activity": "Upload_descriptions_to-DB",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "BinarySource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"recursive": false,
+									"wildcardFolderPath": "de/geomap/to_upload",
+									"wildcardFileName": "*.zip",
+									"deleteFilesAfterCompletion": true
+								},
+								"formatSettings": {
+									"type": "BinaryReadSettings"
+								}
+							},
+							"sink": {
+								"type": "BinarySink",
+								"storeSettings": {
+									"type": "AzureBlobStorageWriteSettings"
+								}
+							},
+							"enableStaging": false
+						},
+						"inputs": [
+							{
+								"referenceName": "geomap_to_be_uploaded_files_zip",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "geomap_uploaded_descr_folder",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"af": {
@@ -8694,8 +8972,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"reupload-2019": {
@@ -9467,8 +9744,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"af": {
@@ -9481,7 +9757,9 @@
 				"annotations": [],
 				"lastPublishTime": "2023-07-18T20:44:05Z"
 			},
-			"dependsOn": []
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/kra_uploaded_zip_folder')]"
+			]
 		},
 		{
 			"name": "[concat(parameters('factoryName'), '/move_data_from_sources_to_adress_table')]",
@@ -10844,8 +11122,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"annotations": [],
 				"lastPublishTime": "2023-02-15T16:54:34Z"
@@ -11671,8 +11948,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"annotations": [],
 				"lastPublishTime": "2023-02-08T12:53:58Z"
@@ -13394,8 +13670,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"af": {
@@ -14532,8 +14807,7 @@
 					}
 				],
 				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
+					"elapsedTimeMetric": {}
 				},
 				"variables": {
 					"af": {
@@ -14876,213 +15150,6 @@
 				}
 			},
 			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Kadaster_data_loader_data_flow')]",
-			"type": "Microsoft.DataFactory/factories/pipelines",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"description": "Loading Kadaster data form Azure blob storage: data-pipeline-input-files/nl/kadaster to Azure database: datapipeline-dev/dbo.KadasterInput",
-				"activities": [
-					{
-						"name": "Upload data",
-						"description": "Processing OV15 and OV20 Kadaster files",
-						"type": "ExecuteDataFlow",
-						"dependsOn": [],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"dataflow": {
-								"referenceName": "OV20",
-								"type": "DataFlowReference",
-								"parameters": {},
-								"datasetParameters": {
-									"ov20csv": {},
-									"ov15csv2": {},
-									"KadasterSQLTable": {}
-								}
-							},
-							"staging": {},
-							"compute": {
-								"coreCount": 8,
-								"computeType": "General"
-							},
-							"traceLevel": "Fine",
-							"continueOnError": true
-						}
-					},
-					{
-						"name": "Copy_files_to_archive",
-						"type": "Copy",
-						"dependsOn": [
-							{
-								"activity": "Upload data",
-								"dependencyConditions": [
-									"Succeeded"
-								]
-							}
-						],
-						"policy": {
-							"timeout": "0.12:00:00",
-							"retry": 0,
-							"retryIntervalInSeconds": 30,
-							"secureOutput": false,
-							"secureInput": false
-						},
-						"userProperties": [],
-						"typeProperties": {
-							"source": {
-								"type": "DelimitedTextSource",
-								"storeSettings": {
-									"type": "AzureBlobStorageReadSettings",
-									"recursive": false,
-									"wildcardFolderPath": "nl/kadaster/to_upload",
-									"wildcardFileName": "Catella_OV*",
-									"enablePartitionDiscovery": false
-								},
-								"formatSettings": {
-									"type": "DelimitedTextReadSettings"
-								}
-							},
-							"sink": {
-								"type": "DelimitedTextSink",
-								"storeSettings": {
-									"type": "AzureBlobStorageWriteSettings",
-									"copyBehavior": "PreserveHierarchy"
-								},
-								"formatSettings": {
-									"type": "DelimitedTextWriteSettings",
-									"quoteAllText": true,
-									"fileExtension": ".csv"
-								}
-							},
-							"enableStaging": false,
-							"translator": {
-								"type": "TabularTranslator",
-								"typeConversion": true,
-								"typeConversionSettings": {
-									"allowDataTruncation": true,
-									"treatBooleanAsNumber": false
-								}
-							}
-						},
-						"inputs": [
-							{
-								"referenceName": "OV20_Input_files",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						],
-						"outputs": [
-							{
-								"referenceName": "Kadaster_archive",
-								"type": "DatasetReference",
-								"parameters": {}
-							}
-						]
-					}
-				],
-				"policy": {
-					"elapsedTimeMetric": {},
-					"cancelAfter": {}
-				},
-				"annotations": [],
-				"lastPublishTime": "2023-07-18T20:44:05Z"
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/dataflows/OV20')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/GeoMap_dates_trigger')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "geomap-data-loader_2",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Month",
-						"interval": 1,
-						"startTime": "2023-08-02T14:28:00",
-						"timeZone": "W. Europe Standard Time",
-						"schedule": {
-							"minutes": [
-								0
-							],
-							"hours": [
-								4
-							],
-							"monthDays": [
-								2,
-								9,
-								16,
-								23
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/geomap-data-loader_2')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/WH_tuesday_trigger')]",
-			"type": "Microsoft.DataFactory/factories/triggers",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"runtimeState": "Started",
-				"pipelines": [
-					{
-						"pipelineReference": {
-							"referenceName": "wh_data_loader",
-							"type": "PipelineReference"
-						},
-						"parameters": {}
-					}
-				],
-				"type": "ScheduleTrigger",
-				"typeProperties": {
-					"recurrence": {
-						"frequency": "Week",
-						"interval": 1,
-						"startTime": "2023-07-28T11:49:00",
-						"timeZone": "W. Europe Standard Time",
-						"schedule": {
-							"minutes": [
-								0
-							],
-							"hours": [
-								6
-							],
-							"weekDays": [
-								"Tuesday"
-							]
-						}
-					}
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/pipelines/wh_data_loader')]"
-			]
 		}
 	]
 }
