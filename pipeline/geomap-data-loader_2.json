@@ -650,7 +650,8 @@
 									"path": "$['crawlerObject']['objektEigenschaften']['möbliert']"
 								},
 								"sink": {
-									"name": "mobliert"
+									"name": "mobliert",
+									"type": "String"
 								}
 							},
 							{
@@ -871,15 +872,6 @@
 							},
 							{
 								"source": {
-									"path": "$['onlineRanges']"
-								},
-								"sink": {
-									"name": "onlineRanges",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"path": "$['rendite']['marktmieteProQm']"
 								},
 								"sink": {
@@ -979,20 +971,20 @@
 							},
 							{
 								"source": {
-									"path": "$['lastSeenDay']"
-								},
-								"sink": {
-									"name": "lastSeenDay",
-									"type": "DateTime"
-								}
-							},
-							{
-								"source": {
 									"path": "$['state']"
 								},
 								"sink": {
 									"name": "state",
 									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['lastSeenDay']"
+								},
+								"sink": {
+									"name": "lastSeenDay",
+									"type": "DateTime"
 								}
 							},
 							{
