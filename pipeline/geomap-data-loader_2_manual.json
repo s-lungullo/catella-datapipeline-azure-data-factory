@@ -426,8 +426,7 @@
 									"path": "$['crawlerObject']['objektEigenschaften']['möbliert']"
 								},
 								"sink": {
-									"name": "mobliert",
-									"type": "String"
+									"name": "mobliert"
 								}
 							},
 							{
@@ -756,20 +755,20 @@
 							},
 							{
 								"source": {
-									"path": "$['state']"
-								},
-								"sink": {
-									"name": "state",
-									"type": "String"
-								}
-							},
-							{
-								"source": {
 									"path": "$['lastSeenDay']"
 								},
 								"sink": {
 									"name": "lastSeenDay",
 									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"path": "$['state']"
+								},
+								"sink": {
+									"name": "state",
+									"type": "String"
 								}
 							},
 							{
