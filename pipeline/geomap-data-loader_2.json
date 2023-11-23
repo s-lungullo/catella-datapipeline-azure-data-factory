@@ -872,6 +872,14 @@
 							},
 							{
 								"source": {
+									"path": "$['onlineRanges']"
+								},
+								"sink": {
+									"name": "onlineRanges"
+								}
+							},
+							{
+								"source": {
 									"path": "$['rendite']['marktmieteProQm']"
 								},
 								"sink": {
