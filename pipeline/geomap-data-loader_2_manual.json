@@ -426,7 +426,8 @@
 									"path": "$['crawlerObject']['objektEigenschaften']['möbliert']"
 								},
 								"sink": {
-									"name": "mobliert"
+									"name": "mobliert",
+									"type": "String"
 								}
 							},
 							{
