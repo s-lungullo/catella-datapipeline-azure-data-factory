@@ -875,7 +875,8 @@
 									"path": "$['onlineRanges']"
 								},
 								"sink": {
-									"name": "onlineRanges"
+									"name": "onlineRanges",
+									"type": "String"
 								}
 							},
 							{
