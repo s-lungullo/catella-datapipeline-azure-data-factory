@@ -6230,6 +6230,15 @@
 									},
 									{
 										"source": {
+											"path": "$['onlineRanges']"
+										},
+										"sink": {
+											"name": "onlineRanges",
+											"type": "String"
+										}
+									},
+									{
+										"source": {
 											"path": "$['rendite']['marktmieteProQm']"
 										},
 										"sink": {
@@ -7129,7 +7138,8 @@
 											"path": "$['crawlerObject']['objektEigenschaften']['möbliert']"
 										},
 										"sink": {
-											"name": "mobliert"
+											"name": "mobliert",
+											"type": "String"
 										}
 									},
 									{
