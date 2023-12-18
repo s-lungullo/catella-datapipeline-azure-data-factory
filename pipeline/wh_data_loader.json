@@ -1232,6 +1232,8 @@
 			{
 				"name": "get-uploaded-filenames",
 				"type": "GetMetadata",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -1262,6 +1264,8 @@
 			{
 				"name": "get-FTP-incoming-filenames",
 				"type": "GetMetadata",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -1293,6 +1297,8 @@
 			{
 				"name": "ForEachIncominFile",
 				"type": "ForEach",
+				"state": "Inactive",
+				"onInactiveMarkAs": "Succeeded",
 				"dependsOn": [
 					{
 						"activity": "get-uploaded-filenames",
